@@ -48,6 +48,7 @@
 import Pagination from '@/components/Pagination'
 import { fetchListDivisi, removeDivisi } from '@/api/divisi'
 import Search from '@/components/Search'
+// import { mapGetters } from 'vuex'
 
 export default {
   name: 'ListDivisi',

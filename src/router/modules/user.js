@@ -21,6 +21,15 @@ const userRouter = {
         title: 'Hero',
         icon: 'user'
       }
+    },
+    {
+      path: '/formUser',
+      component: () => import('@/views/user/formUser'),
+      name: 'formUser',
+      meta: {
+        title: 'Tambah User'
+      },
+      hidden: true
     }
   ]
 }

@@ -2,21 +2,21 @@
   <div class="app-container">
     <el-row>
       <el-col class="tab">
-        <h2 class="title">Tambah Divisi
+        <h2 class="title">Tambah Hero
         </h2>
       </el-col>
     </el-row>
-    <FormDivisi :is-edit="false" />
+    <FormUser />
   </div>
 </template>
 
 <script>
-import FormDivisi from './Form/index'
+import FormUser from './Form/index'
 
 export default {
-  name: 'CreateDivisi',
+  name: 'CreateUser',
   components: {
-    FormDivisi
+    FormUser
   }
 }
 </script>

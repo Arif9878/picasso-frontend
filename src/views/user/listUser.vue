@@ -88,7 +88,7 @@ export default {
       this.getListDivisi()
     },
     handleCreate() {
-      this.$router.push('/hero')
+      this.$router.push('/formUser')
     },
     getTableRowNumbering(index) {
       return ((this.listQuery.page - 1) * this.listQuery.limit) + (index + 1)
