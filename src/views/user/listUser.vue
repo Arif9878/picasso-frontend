@@ -3,7 +3,7 @@
     <div class="filter-container">
       <search
         :value-search="listQuery"
-        :handle-search="getListDivisi"
+        :handle-search="getListUser"
       />
       <el-button class="filter-item" type="primary" @click="handleFilter">
         Cari
@@ -39,7 +39,7 @@
       :total="total"
       :page.sync="listQuery.page"
       :limit.sync="listQuery.limit"
-      @pagination="getListDivisi"
+      @pagination="getListUser"
     />
   </div>
 </template>
@@ -85,7 +85,7 @@ export default {
       this.$router.push('/detailDivisi')
     },
     handleFilter() {
-      this.getListDivisi()
+      this.getListUser()
     },
     handleCreate() {
       this.$router.push('/formUser')

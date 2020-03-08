@@ -54,8 +54,18 @@
             </span>
           </el-form-item>
         </el-tooltip>
-
-        <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleLogin">Masuk</el-button>
+        <el-button
+          :loading="loading"
+          type="primary"
+          @click.native.prevent="handleLogin"
+        >Masuk</el-button>
+        <el-button
+          :loading="loading"
+          type="primary"
+          @click="signInGoogle"
+        >
+          Sign in with Google
+        </el-button>
       </el-form>
 
       <el-dialog title="Or connect with" :visible.sync="showDialog">
@@ -72,14 +82,13 @@
 <script>
 // import { validUsername } from '@/utils/validate'
 import SocialSign from './components/SocialSignin'
+import Vue from 'vue'
 
 export default {
   name: 'Login',
   components: { SocialSign },
   data() {
     const validateUsername = (rule, value, callback) => {
-      // if (!validUsername(value)) {
-      //   callback(new Error('Username harus diisi'))
       if (!value.length > 0) {
         callback(new Error('Username harus diisi'))
       } else {
@@ -122,18 +131,12 @@ export default {
       immediate: true
     }
   },
-  created() {
-    // window.addEventListener('storage', this.afterQRScan)
-  },
   mounted() {
     if (this.loginForm.username === '') {
       this.$refs.username.focus()
     } else if (this.loginForm.password === '') {
       this.$refs.password.focus()
     }
-  },
-  destroyed() {
-    // window.removeEventListener('storage', this.afterQRScan)
   },
   methods: {
     checkCapslock(e) {
@@ -176,25 +179,25 @@ export default {
         }
         return acc
       }, {})
+    },
+    signInGoogle: function() {
+      Vue.googleAuth().signIn(this.onSignInSuccess, this.onSignInError)
+    },
+    onSignInSuccess: function(authorizationCode) {
+      const data = {
+        'access_token': authorizationCode
+      }
+      this.$store.dispatch('user/loginSocialOauth', data).then(() => {
+        this.$router.push({ path: this.redirect || '/', query: this.otherQuery })
+        this.loading = false
+      }).catch(() => {
+        this.$message.error('Login dengan google gagal')
+        this.loading = false
+      })
+    },
+    onSignInError: function() {
+      this.$message.error('Login dengan google gagal')
     }
-    // afterQRScan() {
-    //   if (e.key === 'x-admin-oauth-code') {
-    //     const code = getQueryObject(e.newValue)
-    //     const codeMap = {
-    //       wechat: 'code',
-    //       tencent: 'code'
-    //     }
-    //     const type = codeMap[this.auth_type]
-    //     const codeName = code[type]
-    //     if (codeName) {
-    //       this.$store.dispatch('LoginByThirdparty', codeName).then(() => {
-    //         this.$router.push({ path: this.redirect || '/' })
-    //       })
-    //     } else {
-    //       alert('第三方登录失败')
-    //     }
-    //   }
-    // }
   }
 }
 </script>

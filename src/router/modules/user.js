@@ -14,7 +14,7 @@ const userRouter = {
   },
   children: [
     {
-      path: '/hero',
+      path: '/list',
       component: () => import('@/views/user/listUser'),
       name: 'Hero',
       meta: {
