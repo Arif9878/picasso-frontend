@@ -8,17 +8,25 @@ export function login(data) {
   })
 }
 
+export function loginSocialOauth(data) {
+  return request({
+    url: '/social/google-oauth2/',
+    method: 'post',
+    data
+  })
+}
+
 export function fetchListUser(params) {
   return request({
-    url: '/user-list/',
+    url: '/user/',
     method: 'GET',
     params
   })
 }
 
-export function getInfo() {
+export function getInfo(id) {
   return request({
-    url: '/user-list/',
+    url: '/user/',
     method: 'get'
   })
 }

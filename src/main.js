@@ -19,19 +19,6 @@ import './utils/error-log' // error log
 
 import * as filters from './filters' // global filters
 
-/**
- * If you don't want to use mock-server
- * you want to use MockJs for mock api
- * you can execute: mockXHR()
- *
- * Currently MockJs will be used in the production environment,
- * please remove it before going online ! ! !
- */
-if (process.env.NODE_ENV === 'production') {
-  const { mockXHR } = require('../mock')
-  mockXHR()
-}
-
 Vue.use(Element, {
   size: Cookies.get('size') || 'medium' // set element-ui default size
 })
@@ -42,6 +29,10 @@ Object.keys(filters).forEach((key) => {
 })
 
 Vue.config.productionTip = false
+
+import GoogleAuth from 'vue-google-authenticator'
+Vue.use(GoogleAuth, { client_id: '724643044802-l66d3qf1vh6383n6q1on0558d6rqpv8b.apps.googleusercontent.com' })
+Vue.googleAuth().load()
 
 new Vue({
   el: '#app',

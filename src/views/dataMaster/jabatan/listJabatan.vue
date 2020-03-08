@@ -33,7 +33,13 @@
         </template>
       </el-table-column>
     </el-table>
-    <pagination v-show="total>0" :total="total" :page.sync="listQuery.page" :limit.sync="listQuery.limit" @pagination="getListJabatan" />
+    <pagination
+      v-show="total>0"
+      :total="total"
+      :page.sync="listQuery.page"
+      :limit.sync="listQuery.limit"
+      @pagination="getListJabatan"
+    />
   </div>
 </template>
 
@@ -42,6 +48,7 @@ import Pagination from '@/components/Pagination'
 import { fetchListJabatan, removeJabatan } from '@/api/jabatan'
 import { fetchListDivisi } from '@/api/divisi'
 import Search from '@/components/Search'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'ListJabatan',
@@ -51,7 +58,6 @@ export default {
   },
   data() {
     return {
-      listJabatan: [],
       total: 0,
       listQuery: {
         search: '',
@@ -60,9 +66,13 @@ export default {
       }
     }
   },
+  computed: {
+    ...mapGetters([
+      'listJabatan'
+    ])
+  },
   async mounted() {
     await this.$store.dispatch('jabatan/getListJab', this.listQuery)
-    // this.getListJabatan()
   },
   methods: {
     async getListJabatan() {

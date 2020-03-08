@@ -1,0 +1,17 @@
+version: '3'
+services:
+  app:
+    build:
+      context: .
+    networks:
+      - internal
+    env_file:
+      - .env
+    environment:
+      VUE_APP_BASE_API: ${VUE_APP_BASE_API}
+    ports:
+      - 8080:80
+
+networks:
+  internal:
+    driver: bridge

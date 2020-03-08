@@ -1,4 +1,4 @@
-import { login } from '@/api/user'
+import { login, loginSocialOauth } from '@/api/user'
 import { getToken, setToken, removeToken } from '@/utils/auth'
 import router, { resetRouter } from '@/router'
 
@@ -33,6 +33,19 @@ const actions = {
   login({ commit }, userInfo) {
     return new Promise((resolve, reject) => {
       login(userInfo).then((response) => {
+        const { auth_token } = response
+        commit('SET_TOKEN', auth_token)
+        setToken(auth_token)
+        resolve()
+      }).catch((error) => {
+        reject(error)
+      })
+    })
+  },
+
+  loginSocialOauth({ commit }, data) {
+    return new Promise((resolve, reject) => {
+      loginSocialOauth(data).then((response) => {
         const { auth_token } = response
         commit('SET_TOKEN', auth_token)
         setToken(auth_token)

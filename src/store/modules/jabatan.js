@@ -1,4 +1,4 @@
-import fetchListJabatan from '@/api/jabatan'
+import { fetchListJabatan } from '@/api/jabatan'
 
 const state = {
   listJabatan: null
@@ -13,7 +13,7 @@ const mutations = {
 const actions = {
   async getListJab({ commit }, params) {
     const response = await fetchListJabatan(params)
-    commit('SET_LISTJABATAN', response.data.items)
+    commit('SET_LISTJABATAN', response.results)
   }
 }
 

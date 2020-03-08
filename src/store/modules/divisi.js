@@ -1,4 +1,4 @@
-import fetchListDivisi from '@/api/divisi'
+import { fetchListDivisi } from '@/api/divisi'
 
 const state = {
   listDivisi: null
