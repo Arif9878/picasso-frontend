@@ -12,6 +12,7 @@ const getters = {
   permission_routes: (state) => state.permission.routes,
   errorLogs: (state) => state.errorLog.logs,
   listDivisi: (state) => state.divisi.listDivisi,
-  listJabatan: (state) => state.jabatan.listJabatan
+  listJabatan: (state) => state.jabatan.listJabatan,
+  listProject: (state) => state.project.listProject
 }
 export default getters

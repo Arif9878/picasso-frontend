@@ -85,6 +85,16 @@ const dataMasterRouter = {
         title: 'Detail Jabatan'
       },
       hidden: true
-    }]
+    },
+    {
+      path: '/project',
+      component: () => import('@/views/dataMaster/project/listProject'),
+      name: 'Project',
+      meta: {
+        title: 'Project',
+        icon: 'table'
+      }
+    }
+  ]
 }
 export default dataMasterRouter

@@ -11,7 +11,12 @@
         >
           <el-row>
             <el-col :span="6">
-              <UploadPicture />
+              <div v-if="imageUrl.length">
+                <img src="imageUrl">
+              </div>
+              <div v-else>
+                <UploadPicture />
+              </div>
             </el-col>
             <el-col :span="18">
               <el-form-item label="NIK" class="userForm">
@@ -144,6 +149,7 @@ export default {
   data() {
     return {
       listDivisi: null,
+      imageUrl: '',
       formUser: {
         email: '',
         nama_lengkap: '',

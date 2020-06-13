@@ -31,7 +31,7 @@ Object.keys(filters).forEach((key) => {
 Vue.config.productionTip = false
 
 import GoogleAuth from 'vue-google-authenticator'
-Vue.use(GoogleAuth, { client_id: '724643044802-l66d3qf1vh6383n6q1on0558d6rqpv8b.apps.googleusercontent.com' })
+Vue.use(GoogleAuth, { client_id: process.env.VUE_APP_SECRET_CLIENT_GOOGLE })
 Vue.googleAuth().load()
 
 new Vue({
