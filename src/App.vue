@@ -1,11 +1,12 @@
 <template>
-  <div id="app">
+  <v-app>
+    <toast-notification />
     <router-view />
-  </div>
+  </v-app>
 </template>
 
 <script>
-export default {
-  name: 'App'
-}
+  export default {
+    name: 'App',
+  }
 </script>

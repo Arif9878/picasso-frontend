@@ -1,44 +1,24 @@
-## SAPA-JDS
+# groupware-pwa
 
-## Getting started
-
-```bash
-# clone the project
-git clone https://github.com/NotStops/kepegawaian-frontend.git
-
-# enter the project directory
-cd kepegawaian-frontend
-
-# install dependency
+## Project setup
+```
 npm install
+```
 
-# develop
+### Compiles and hot-reloads for development
+```
 npm run dev
 ```
 
-
-## Build
-
-```bash
-# build for test environment
-npm run build:stage
-
-# build for production environment
-npm run build:prod
+### Compiles and minifies for production
+```
+npm run build
 ```
 
-## Advanced
-
-```bash
-# preview the release environment effect
-npm run preview
-
-# preview the release environment effect + static resource analysis
-npm run preview -- --report
-
-# code format check
+### Lints and fixes files
+```
 npm run lint
-
-# code format check and auto fix
-npm run lint -- --fix
 ```
+
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).

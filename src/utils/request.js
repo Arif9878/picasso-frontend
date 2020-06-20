@@ -1,58 +1,77 @@
 import axios from 'axios'
-import { Message } from 'element-ui'
 import store from '@/store'
-import { getToken } from '@/utils/auth'
+import {
+    ResponseRequest,
+} from './constantVariable'
+import {
+    getToken,
+} from './cookies'
 
+const isSecure = String(process.env.VUE_APP_SECURE) === 'true'
+const method = isSecure ? 'https' : 'http'
+let url
+if (process.env.VUE_APP_BASE_API_PORT !== undefined && process.env.VUE_APP_BASE_API_PORT.length > 0) {
+    url = `${method}://${process.env.VUE_APP_BASE_API}:${process.env.VUE_APP_BASE_API_PORT}`
+} else {
+    url = `${method}://${process.env.VUE_APP_BASE_API}`
+}
 // create an axios instance
 const service = axios.create({
-  baseURL: process.env.VUE_APP_BASE_API, // url = base url + request url
-  withCredentials: false, // send cookies when cross-domain requests
-  timeout: 5000 // request timeout
+    baseURL: url, // api base_url
+    withCredentials: false, // cookies
+    timeout: 300000, // request timeout
 })
 
 // request interceptor
 service.interceptors.request.use(
-  config => {
-    // Do something before request is sent
-    if (store.getters.token) {
-      // 让每个请求携带token-- ['X-Token']为自定义key 请根据实际情况自行修改
-      config.headers['Authorization'] = 'Bearer ' + getToken()
-    }
-    return config
-  },
-  error => {
-    // Do something with request error
-    Promise.reject(error)
-  }
+    config => {
+        // Do something before request is sent
+        if (store.getters['user/token']) {
+            // Set Bearer Token
+            config.headers.Authorization = 'Bearer ' + getToken()
+        }
+        return config
+    },
+    error => {
+        // Do something with request error
+        Promise.reject(error)
+    },
 )
 
 // response interceptor
 service.interceptors.response.use(
-  /**
-   * If you want to get http information such as headers or status
-   * Please return  response => response
-  */
+    /**
+     * If you want to get information such as headers or status
+     * Please return  response => response
+     */
+    response => {
+        const res = response.data
 
-  /**
-   * Determine the request status by custom code
-   * Here is just an example
-   * You can also judge the status by HTTP Status Code
-   */
-  response => {
-    const res = response.data
-
-    return res
-  },
-  error => {
-    if (error.response.status !== 400) {
-      Message({
-        message: error.message,
-        type: 'error',
-        duration: 5 * 1000
-      })
-    }
-    return Promise.reject(error)
-  }
+        return res
+    },
+    async (error) => {
+        if (!error.response.data.errors) {
+            const status = await error.response.status
+            switch (status) {
+                case ResponseRequest.NOTFOUND:
+                    await store.dispatch('toast/errorToast', error.response.data.message)
+                    break
+                case ResponseRequest.SERVERERROR:
+                    await store.dispatch('toast/errorToast', error.response.data.message)
+                    break
+                case ResponseRequest.UNAUTHORIZED:
+                    await store.dispatch('toast/errorToast', error.response.data.message)
+                    break
+                case ResponseRequest.UNPROCESSABLE:
+                    await store.dispatch('toast/errorToast', error.response.data.message)
+                    break
+                default:
+                    await store.dispatch('toast/errorToast', error.message)
+                    break
+            }
+        }
+        return Promise.reject(error)
+    },
 )
 
 export default service
