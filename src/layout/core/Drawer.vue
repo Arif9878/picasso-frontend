@@ -109,27 +109,27 @@
         {
           icon: 'mdi-account',
           title: 'user',
-          to: '/users',
+          to: '/under/construction',
         },
         {
           icon: 'mdi-microsoft',
           title: 'master',
-          to: '/master',
+          group: '/under',
           children: [
             {
               icon: 'mdi-book-open-page-variant',
               title: 'divisi',
-              to: '/users',
+              to: 'construction',
             },
             {
               icon: 'mdi-book-open-variant',
               title: 'jabatan',
-              to: '/users',
+              to: 'construction',
             },
             {
               icon: 'mdi-keyboard',
               title: 'project',
-              to: '/users',
+              to: 'construction',
             },
           ],
         },
