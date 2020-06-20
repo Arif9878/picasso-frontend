@@ -7,7 +7,7 @@
       :headers="headers"
       :items="list"
       :mobile-breakpoint="NaN"
-      :no-data-text="$t('label.data_empty')"
+      :no-data-text="$t('data_empty')"
       :items-per-page="limit"
       hide-default-footer
     />
