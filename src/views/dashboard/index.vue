@@ -1,31 +1,31 @@
 <template>
-  <div class="dashboard-container">
-    <!-- <component :is="currentRole" /> -->
-  </div>
+  <v-container
+    fluid
+    class="py-0 mb-5"
+  >
+    <v-row>
+      <v-col
+        cols="12"
+        class="pb-0"
+      >
+        <h3><strong>{{ dashboard }}</strong></h3>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-// import adminDashboard from './admin'
-// import editorDashboard from './editor'
+  export default {
+    name: 'DashboardDashboard',
 
-export default {
-  name: 'Dashboard',
-  // components: { adminDashboard, editorDashboard },
-  data() {
-    return {
-      currentRole: 'adminDashboard'
-    }
-  },
-  computed: {
-    ...mapGetters([
-      'roles'
-    ])
-  },
-  created() {
-    if (!this.roles.includes('admin')) {
-      this.currentRole = 'editorDashboard'
-    }
+    data () {
+      return {
+        dashboard: 'Dashboard',
+      }
+    },
+
+    methods: {
+      //
+    },
   }
-}
 </script>
