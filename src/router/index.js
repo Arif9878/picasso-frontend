@@ -6,6 +6,7 @@ import Layout from '@/layout'
 
 /* Router Modules */
 import dashboardRouter from './modules/dashboard'
+import underConstructionRouter from './modules/underConstruction'
 
 Vue.use(Router)
 
@@ -42,6 +43,7 @@ export const constantRoutes = [
  */
 export const asyncRoutes = [
   dashboardRouter,
+  underConstructionRouter,
   // 404 page must be placed at the end !!!
   {
     path: '*',

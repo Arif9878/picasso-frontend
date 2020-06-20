@@ -164,7 +164,9 @@
     }),
 
     computed: {
-      ...mapState(['barImage']),
+      ...mapState('app', {
+        barImage: state => state.barImage,
+      }),
     },
 
     watch: {
