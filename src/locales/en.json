@@ -6,5 +6,6 @@
   "divisi": "Divisi",
   "jabatan": "Jabatan",
   "project": "Project",
-  "logout": "Logout"
+  "logout": "Logout",
+  "data_empty": "Data Kosong"
 }

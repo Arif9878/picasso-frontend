@@ -1,4 +1,4 @@
-# groupware-pwa
+# picasso-frontend
 
 ## Project setup
 ```
