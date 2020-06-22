@@ -1,0 +1,12 @@
+version: '2.4'
+services:
+  app: 
+    build: 
+      context: .
+      dockerfile: Dockerfile.staging
+    ports: 
+      - "8080:8080"
+    mem_limit: 1024m
+    mem_reservation: 128m
+    cpus: 1
+    
