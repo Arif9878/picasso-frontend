@@ -11,7 +11,9 @@ services:
     cpus: 1
     networks: 
       - gateway
-      
+    environment: 
+      COMPOSE_PROJECT_NAME: picasso-admin-staging
+
 networks: 
   gateway:
     external: true
