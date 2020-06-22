@@ -1,6 +1,6 @@
 version: '2.4'
 services:
-  app: 
+  picassoadmin: 
     build: 
       context: .
       dockerfile: Dockerfile.staging
@@ -9,4 +9,10 @@ services:
     mem_limit: 1024m
     mem_reservation: 128m
     cpus: 1
+    networks: 
+      - gateway
+      
+networks: 
+  gateway:
+    external: true
     
