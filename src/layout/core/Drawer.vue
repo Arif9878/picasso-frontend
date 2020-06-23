@@ -114,22 +114,22 @@
         {
           icon: 'mdi-microsoft',
           title: 'master',
-          group: '/under',
+          group: '/master',
           children: [
             {
               icon: 'mdi-book-open-page-variant',
               title: 'divisi',
-              to: 'construction',
+              to: 'divisi',
             },
             {
               icon: 'mdi-book-open-variant',
               title: 'jabatan',
-              to: 'construction',
+              to: 'jabatan',
             },
             {
               icon: 'mdi-keyboard',
               title: 'project',
-              to: 'construction',
+              to: 'project',
             },
           ],
         },

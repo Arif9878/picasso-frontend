@@ -6,7 +6,7 @@ const dashboardRouter = {
     redirect: 'dashboard',
     meta: {
         icon: 'dashboard',
-        roles: ['superadmin'],
+        roles: ['admin'],
     },
     active: false,
     children: [{

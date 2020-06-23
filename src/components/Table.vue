@@ -4,11 +4,10 @@
   >
     <v-data-table
       :key="list.length"
-      :headers="headers"
+      :headers="tableHeaders"
       :items="list"
-      :mobile-breakpoint="NaN"
       :no-data-text="$t('data_empty')"
-      :items-per-page="limit"
+      :items-per-page="query.limit"
       hide-default-footer
     />
   </v-col>
@@ -16,5 +15,19 @@
 <script>
   export default {
     name: 'TableComponent',
+    props: {
+      list: {
+        type: Array,
+        default: null,
+      },
+      query: {
+        type: Object,
+        default: null,
+      },
+      tableHeaders: {
+        type: Array,
+        default: null,
+      },
+    },
   }
 </script>

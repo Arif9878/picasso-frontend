@@ -26,7 +26,7 @@ const service = axios.create({
 service.interceptors.request.use(
     config => {
         // Do something before request is sent
-        if (store.getters['user/token']) {
+        if (getToken()) {
             // Set Bearer Token
             config.headers.Authorization = 'Bearer ' + getToken()
         }
@@ -52,6 +52,7 @@ service.interceptors.response.use(
     async (error) => {
         if (!error.response.data.errors) {
             const status = await error.response.status
+            console.log(store)
             switch (status) {
                 case ResponseRequest.NOTFOUND:
                     await store.dispatch('toast/errorToast', error.response.data.message)
