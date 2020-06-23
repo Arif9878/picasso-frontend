@@ -80,6 +80,14 @@ export const actions = {
           resolve(data)
       })
     },
+    async getListUser ({ commit }, params) {
+        try {
+            const response = await requestServer('/user/', 'GET', params)
+            return response
+        } catch (error) {
+            return error.response
+        }
+    },
     logout ({ commit, state, dispatch }) {
         return new Promise((resolve, reject) => {
             // logout(state.token).then(() => {

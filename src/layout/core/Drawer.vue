@@ -109,7 +109,7 @@
         {
           icon: 'mdi-account',
           title: 'user',
-          to: '/under/construction',
+          to: '/user',
         },
         {
           icon: 'mdi-microsoft',

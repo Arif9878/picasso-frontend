@@ -2,7 +2,7 @@
   <div class="ma-3">
     <costume-card
       icon="mdi-clipboard-text"
-      title="User List"
+      title="Jabatan List"
       class="px-5 py-3"
     >
       <table-component
@@ -16,7 +16,7 @@
 
 <script>
   export default {
-    name: 'ListUser',
+    name: 'ListJabatan',
     data () {
       return {
         list: [],
@@ -24,13 +24,13 @@
           limit: 10,
         },
         tableHeader: [
-          { text: 'Email', value: 'email', sortable: false },
-          { text: 'Nama Lengkap', value: 'nama_lengkap' },
+          { text: 'Nama Jabatan', value: 'name_jabatan', sortable: false },
+          { text: 'Deskripsi Jabatan', value: 'description' },
         ],
       }
     },
     async mounted () {
-      const response = await this.$store.dispatch('user/getListUser')
+      const response = await this.$store.dispatch('jabatan/getListJabatan')
       this.list = response.results
     },
   }
