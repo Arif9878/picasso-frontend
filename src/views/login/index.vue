@@ -136,7 +136,6 @@
         Vue.googleAuth().signIn(this.onSignInSuccess, this.onSignInError)
       },
       onSignInSuccess: function (authorizationCode) {
-        console.log(authorizationCode)
         const data = {
           access_token: authorizationCode,
         }
