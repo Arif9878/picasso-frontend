@@ -52,7 +52,6 @@ service.interceptors.response.use(
     async (error) => {
         if (!error.response.data.errors) {
             const status = await error.response.status
-            console.log(store)
             switch (status) {
                 case ResponseRequest.NOTFOUND:
                     await store.dispatch('toast/errorToast', error.response.data.message)
