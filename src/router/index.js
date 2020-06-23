@@ -6,6 +6,7 @@ import Layout from '@/layout'
 
 /* Router Modules */
 import dashboardRouter from './modules/dashboard'
+import userRouter from './modules/user'
 import dataMasterRouter from './modules/dataMaster'
 import underConstructionRouter from './modules/underConstruction'
 
@@ -44,6 +45,7 @@ export const constantRoutes = [
  */
 export const asyncRoutes = [
   dashboardRouter,
+  userRouter,
   underConstructionRouter,
   dataMasterRouter,
   // 404 page must be placed at the end !!!

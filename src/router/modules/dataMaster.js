@@ -11,14 +11,14 @@ const dataMasterRouter = {
     children: [
       {
         path: '/master/divisi',
-        component: () => import('@/views/underConstruction/index'),
+        component: () => import('@/views/masterData/divisi/list'),
         meta: {
             noCache: true,
         },
       },
       {
         path: '/master/jabatan',
-        component: () => import('@/views/underConstruction/index'),
+        component: () => import('@/views/masterData/jabatan/list'),
         meta: {
             noCache: true,
         },
