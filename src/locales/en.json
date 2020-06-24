@@ -1,12 +1,19 @@
 {
   "avatar": "Sapa JDS",
   "dashboard": "Dashboard",
-  "user": "User",
+  "hero_jds": "Hero JDS",
   "master": "Data Master",
   "divisi": "Divisi",
   "jabatan": "Jabatan",
   "project": "Project",
   "logout": "Logout",
   "data_empty": "Data Kosong",
+  "asn": "ASN",
+  "non_asn": "Non Asn",
+  "magang": "Magang",
+  "alumni": "Alumni",
+  "report": "Laporan",
+  "monthly": "Bulanan",
+  "spj": "SPJ",
   "under-construction": "Fitur masih dalam tahan pengembangan"
 }

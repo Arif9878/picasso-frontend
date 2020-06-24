@@ -3,7 +3,6 @@ import Layout from '@/layout'
 const dataMasterRouter = {
     path: '/master',
     component: Layout,
-    redirect: 'dashboard',
     meta: {
         icon: 'dashboard',
         roles: ['admin'],

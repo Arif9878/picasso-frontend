@@ -8,6 +8,7 @@ import Layout from '@/layout'
 import dashboardRouter from './modules/dashboard'
 import userRouter from './modules/user'
 import dataMasterRouter from './modules/dataMaster'
+import reportRouter from './modules/report'
 import underConstructionRouter from './modules/underConstruction'
 
 Vue.use(Router)
@@ -46,6 +47,7 @@ export const constantRoutes = [
 export const asyncRoutes = [
   dashboardRouter,
   userRouter,
+  reportRouter,
   underConstructionRouter,
   dataMasterRouter,
   // 404 page must be placed at the end !!!

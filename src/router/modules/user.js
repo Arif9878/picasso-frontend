@@ -1,14 +1,41 @@
+/* eslint-disable no-tabs */
 import Layout from '@/layout'
 
 const userRouter = {
-    path: '/',
+    path: '/user',
     component: Layout,
-    redirect: 'user',
+    redirect: '',
     active: false,
-    children: [{
-        path: '/user',
-        component: () => import('@/views/user/list'),
-    }],
+    children: [
+		{
+			path: '/user/asn',
+			component: () => import('@/views/underConstruction/index'),
+			meta: {
+				noCache: true,
+			},
+		},
+		{
+			path: '/user/non-asn',
+			component: () => import('@/views/user/list'),
+			meta: {
+				noCache: true,
+			},
+		},
+		{
+			path: '/user/magang',
+			component: () => import('@/views/underConstruction/index'),
+			meta: {
+				noCache: true,
+			},
+		},
+		{
+			path: '/user/alumni',
+			component: () => import('@/views/underConstruction/index'),
+			meta: {
+				noCache: true,
+			},
+		},
+    ],
 }
 
 export default userRouter
