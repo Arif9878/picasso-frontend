@@ -1,0 +1,24 @@
+version: '2.4'
+services:
+  picassoadmin: 
+    build: 
+      context: .
+      args:
+        - VUE_APP_SECURE=$VUE_APP_SECURE
+        - VUE_APP_BASE_API=$VUE_APP_BASE_API
+        - VUE_APP_BASE_API_PORT=$VUE_APP_BASE_API_PORT
+        - VUE_APP_SECRET_CLIENT_GOOGLE=$VUE_APP_SECRET_CLIENT_GOOGLE
+    #ports: 
+    #  - "8080:8080"
+    mem_limit: 1024m
+    mem_reservation: 128m
+    cpus: 1
+    networks: 
+      - gateway
+    environment: 
+      COMPOSE_PROJECT_NAME: picasso-admin-staging
+    env_file: 
+      - .env
+networks: 
+  gateway:
+    external: true

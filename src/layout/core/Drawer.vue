@@ -88,7 +88,9 @@
     mapState,
     mapGetters,
   } from 'vuex'
-
+  import {
+    menuItems,
+  } from '@/utils/constantVariable'
   export default {
     name: 'DashboardCoreDrawer',
 
@@ -100,40 +102,7 @@
     },
 
     data: () => ({
-      items: [
-        {
-          icon: 'mdi-view-dashboard',
-          title: 'dashboard',
-          to: '/',
-        },
-        {
-          icon: 'mdi-account',
-          title: 'user',
-          to: '/user',
-        },
-        {
-          icon: 'mdi-microsoft',
-          title: 'master',
-          group: '/master',
-          children: [
-            {
-              icon: 'mdi-book-open-page-variant',
-              title: 'divisi',
-              to: 'divisi',
-            },
-            {
-              icon: 'mdi-book-open-variant',
-              title: 'jabatan',
-              to: 'jabatan',
-            },
-            {
-              icon: 'mdi-keyboard',
-              title: 'project',
-              to: 'project',
-            },
-          ],
-        },
-      ],
+      menuItems,
     }),
 
     computed: {
@@ -153,7 +122,7 @@
         },
       },
       computedItems () {
-        return this.items.map(this.mapItem)
+        return this.menuItems.map(this.mapItem)
       },
       profile () {
         return {

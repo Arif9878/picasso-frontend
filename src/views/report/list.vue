@@ -2,7 +2,7 @@
   <div class="ma-3">
     <costume-card
       icon="mdi-clipboard-text"
-      title="Non ASN"
+      title="Laporan"
       class="px-5 py-3"
     >
       <table-component
@@ -16,7 +16,7 @@
 
 <script>
   export default {
-    name: 'ListUser',
+    name: 'ListReport',
     data () {
       return {
         list: [],
@@ -24,14 +24,14 @@
           limit: 10,
         },
         tableHeader: [
-          { text: 'Email', value: 'email', sortable: false },
-          { text: 'Nama Lengkap', value: 'nama_lengkap' },
-          { text: 'Aksi', value: 'actions' },
+          { text: 'Nama Task', value: 'nameTask', sortable: false },
+          { text: 'Nama Project', value: 'projectName' },
+          { text: 'Tanggal Task', value: 'dateTask', type: Date },
         ],
       }
     },
     async mounted () {
-      const response = await this.$store.dispatch('user/getListUser')
+      const response = await this.$store.dispatch('report/getListReport')
       this.list = response.results
     },
   }
