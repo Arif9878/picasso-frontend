@@ -19,6 +19,9 @@ services:
       COMPOSE_PROJECT_NAME: picasso-admin-staging
     env_file: 
       - .env
+
+    
+
 networks: 
   gateway:
     external: true
