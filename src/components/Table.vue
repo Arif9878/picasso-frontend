@@ -7,7 +7,7 @@
       :headers="tableHeaders"
       :items="list"
       :no-data-text="$t('data_empty')"
-      :items-per-page="query.limit"
+      :items-per-page="limit"
       hide-default-footer
     >
       <template v-slot:item.actions="props">
@@ -50,6 +50,10 @@
       query: {
         type: Object,
         default: null,
+      },
+      limit: {
+        type: Number,
+        default: 0,
       },
       tableHeaders: {
         type: Array,
