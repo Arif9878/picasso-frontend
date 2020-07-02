@@ -1,5 +1,19 @@
 <template>
   <div class="ma-3">
+    <v-row>
+      <v-col />
+      <v-col>
+        <div class="float-right">
+          <v-btn
+            color="primary"
+            @click="handleAdd"
+          >
+            <v-icon v-text="'mdi-plus'" />
+            {{ $t('add') }}
+          </v-btn>
+        </div>
+      </v-col>
+    </v-row>
     <costume-card
       icon="mdi-clipboard-text"
       title="Project List"
@@ -10,6 +24,8 @@
         :query="listQuery"
         :limit="listQuery.limit"
         :table-headers="tableHeader"
+        :on-delete-click="handleDelete"
+        :on-update-click="handleUpdate"
       />
       <pagination
         :total="totalPage"
@@ -18,25 +34,53 @@
         :on-next="onNext"
       />
     </costume-card>
+    <dialog-form-master-project
+      :show-dialog="showForm"
+      :show.sync="showForm"
+      :refresh-page.sync="isRefresh"
+      :is-edit="isEdit"
+      :form-body="form"
+      :form.sync="form"
+    />
+    <dialog-delete
+      :show-dialog="showDelete"
+      :show.sync="showDelete"
+      :refresh-page.sync="isRefresh"
+      :store-path-delete="'project/deleteProject'"
+      :id-data="idData"
+    />
   </div>
 </template>
 
 <script>
   export default {
     name: 'ListProject',
-    data () {
-      return {
-        list: [],
-        totalPage: 0,
-        listQuery: {
-          limit: 10,
-          page: 1,
-        },
-        tableHeader: [
-          { text: 'Nama Project', value: 'projectName', sortable: false },
-          { text: 'Deskripsi Project', value: 'projectDescription' },
-        ],
-      }
+    data: () => ({
+      list: [],
+      totalPage: 0,
+      showForm: false,
+      showDelete: false,
+      isRefresh: false,
+      isEdit: false,
+      idData: null,
+      form: {},
+      listQuery: {
+        limit: 10,
+        page: 1,
+      },
+      tableHeader: [
+        { text: 'Nama Project', value: 'projectName', sortable: false },
+        { text: 'Deskripsi Project', value: 'projectDescription' },
+        { text: 'Aksi', value: 'actions' },
+      ],
+    }),
+    watch: {
+      isRefresh (value) {
+        if (value) {
+          this.handleSearch()
+          this.isRefresh = false
+        }
+      },
     },
     async mounted () {
       await this.handleSearch()
@@ -49,6 +93,18 @@
       },
       async onNext () {
         await this.handleSearch()
+      },
+      handleAdd () {
+        this.showForm = true
+      },
+      handleUpdate (item) {
+        this.showForm = true
+        this.form = item
+        this.isEdit = true
+      },
+      handleDelete (item) {
+        this.idData = item._id
+        this.showDelete = true
       },
     },
   }

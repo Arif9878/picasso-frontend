@@ -11,7 +11,7 @@
       hide-default-footer
     >
       <template v-slot:item.actions="props">
-        <v-btn
+        <!-- <v-btn
           class="mx-2"
           fab
           dark
@@ -22,17 +22,29 @@
           <v-icon dark>
             mdi-eye
           </v-icon>
-        </v-btn>
+        </v-btn> -->
         <v-btn
           class="mx-2"
           fab
           dark
           small
           color="blue"
-          @click="onButtonClick(props.item)"
+          @click="onUpdateClick(props.item)"
         >
           <v-icon dark>
             mdi-table-edit
+          </v-icon>
+        </v-btn>
+        <v-btn
+          class="mx-2"
+          fab
+          dark
+          small
+          color="red"
+          @click="onDeleteClick(props.item)"
+        >
+          <v-icon dark>
+            mdi-delete-forever
           </v-icon>
         </v-btn>
       </template>
@@ -59,10 +71,13 @@
         type: Array,
         default: null,
       },
-    },
-    methods: {
-      onButtonClick (item) {
-        return item
+      onUpdateClick: {
+        type: Function,
+        default: null,
+      },
+      onDeleteClick: {
+        type: Function,
+        default: null,
       },
     },
   }
