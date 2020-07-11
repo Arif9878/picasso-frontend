@@ -92,7 +92,7 @@
         }
       },
       'listQuery.search' (value) {
-        if ((value === undefined) && (value.length >= 2)) return
+        if ((value === undefined) && (value.length <= 2)) return
         this.handleSearch()
       },
     },

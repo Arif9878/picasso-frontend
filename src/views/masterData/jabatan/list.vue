@@ -76,7 +76,7 @@
       form: {},
       listQuery: {
         limit: 10,
-        page: 1,
+        page: 0,
       },
       tableHeader: [
         { text: 'Divisi', value: 'name_satuan_kerja', sortable: false },
@@ -93,7 +93,7 @@
         }
       },
       'listQuery.search' (value) {
-        if ((value === undefined) && (value.length >= 2)) return
+        if ((value === undefined) && (value.length <= 2)) return
         this.handleSearch()
       },
     },
@@ -107,7 +107,6 @@
         this.list = response.results
       },
       async onNext () {
-        console.log(this.listQuery)
         await this.handleSearch()
       },
       handleAdd () {
