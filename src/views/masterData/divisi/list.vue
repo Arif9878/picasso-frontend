@@ -76,7 +76,7 @@
       form: {},
       listQuery: {
         limit: 10,
-        page: 1,
+        page: 0,
       },
       tableHeader: [
         { text: 'Nama Divisi', value: 'name_satuan_kerja', sortable: false },
@@ -92,7 +92,7 @@
         }
       },
       'listQuery.search' (value) {
-        if ((value === undefined) && (value.length >= 2)) return
+        if ((value === undefined) && (value.length <= 2)) return
         this.handleSearch()
       },
     },
