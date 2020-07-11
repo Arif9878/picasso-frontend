@@ -16,7 +16,7 @@
               sm="12"
               :class="{'center py-4': $vuetify.breakpoint. smAndDown}"
             >
-              <label class="required">Nama Project</label>
+              <label class="required">Induk Divisi</label>
             </v-col>
             <v-col
               cols="12"
@@ -26,11 +26,42 @@
             >
               <validation-provider
                 v-slot="{ errors }"
-                name="Project Name"
+                name="Induk Divisi"
+              >
+                <v-select
+                  v-model="formBody.parent_id"
+                  :items="divisiList"
+                  :error-messages="errors"
+                  item-value="id"
+                  item-text="name_satuan_kerja"
+                  menu-props="auto"
+                  solo
+                />
+              </validation-provider>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col
+              cols="12"
+              md="3"
+              sm="12"
+              :class="{'center py-4': $vuetify.breakpoint. smAndDown}"
+            >
+              <label class="required">Nama Divisi</label>
+            </v-col>
+            <v-col
+              cols="12"
+              md="9"
+              sm="12"
+              :class="{'py-0 pb-3': $vuetify.breakpoint. smAndDown}"
+            >
+              <validation-provider
+                v-slot="{ errors }"
+                name="Nama Divisi"
                 rules="required"
               >
                 <v-text-field
-                  v-model="formBody.projectName"
+                  v-model="formBody.name_satuan_kerja"
                   :error-messages="errors"
                   solo
                 />
@@ -44,7 +75,7 @@
               sm="12"
               :class="{'center py-4': $vuetify.breakpoint. smAndDown}"
             >
-              <label class="required">Deskripsi Project</label>
+              <label class="required">Deskripsi Divisi</label>
             </v-col>
             <v-col
               cols="12"
@@ -57,7 +88,7 @@
                 name="Description"
               >
                 <v-textarea
-                  v-model="formBody.projectDescription"
+                  v-model="formBody.description"
                   :error-messages="errors"
                   solo
                 />
@@ -114,6 +145,7 @@
     data () {
       return {
         show: this.showDialog,
+        divisiList: [],
       }
     },
     computed: {
@@ -134,7 +166,14 @@
         this.$emit('update:show', value)
       },
     },
+    async mounted () {
+      await this.handleGetListDivisi()
+    },
     methods: {
+      async handleGetListDivisi () {
+        const response = await this.$store.dispatch('divisi/getListDivisi')
+        this.divisiList = response.results
+      },
       handleCancel () {
         this.$emit('update:show', false)
         this.$emit('update:form', {})
@@ -146,13 +185,13 @@
           return
         }
         if (!this.isEdit) {
-          await this.$store.dispatch('project/createProject', this.formBody)
+          await this.$store.dispatch('divisi/createDivisi', this.formBody)
         } else {
           const data = {
-            id: this.formBody._id,
+            id: this.formBody.id,
             body: this.formBody,
           }
-          await this.$store.dispatch('project/updateProject', data)
+          await this.$store.dispatch('divisi/updateDivisi', data)
         }
         this.$emit('update:show', false)
         this.$emit('update:refreshPage', true)

@@ -14,6 +14,16 @@
         </div>
       </v-col>
     </v-row>
+    <v-card>
+      <v-row>
+        <v-col class="ma-4">
+          <search
+            :list-query="listQuery"
+            :handle-search="handleSearch"
+          />
+        </v-col>
+      </v-row>
+    </v-card>
     <costume-card
       icon="mdi-clipboard-text"
       title="Project List"
@@ -81,6 +91,10 @@
           this.isRefresh = false
         }
       },
+      'listQuery.search' (value) {
+        if ((value === undefined) && (value.length >= 2)) return
+        this.handleSearch()
+      },
     },
     async mounted () {
       await this.handleSearch()
@@ -95,6 +109,7 @@
         await this.handleSearch()
       },
       handleAdd () {
+        this.isEdit = false
         this.showForm = true
       },
       handleUpdate (item) {

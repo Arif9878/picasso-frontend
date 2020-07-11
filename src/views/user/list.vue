@@ -1,5 +1,15 @@
 <template>
   <div class="ma-3">
+    <v-card>
+      <v-row>
+        <v-col class="ma-4">
+          <search
+            :list-query="listQuery"
+            :handle-search="handleSearch"
+          />
+        </v-col>
+      </v-row>
+    </v-card>
     <costume-card
       icon="mdi-clipboard-text"
       title="Non ASN"
@@ -31,15 +41,22 @@
         listQuery: {
           page_size: 10,
           page: 1,
+          search: '',
         },
         tableHeader: [
           { text: 'Email', value: 'email', sortable: false },
           { text: 'Nama Lengkap', value: 'nama_lengkap' },
           { text: 'Divisi', value: 'divisi' },
           { text: 'Jabatan', value: 'jabatan' },
-          { text: 'Aksi', value: 'actions' },
+          // { text: 'Aksi', value: 'actions' },
         ],
       }
+    },
+    watch: {
+      'listQuery.search' (value) {
+        if ((value === undefined) && (value.length >= 2)) return
+        this.handleSearch()
+      },
     },
     async mounted () {
       await this.handleSearch()
