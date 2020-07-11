@@ -1,6 +1,6 @@
 <template>
   <div class="ma-3">
-    <!-- <v-row>
+    <v-row>
       <v-col />
       <v-col>
         <div class="float-right">
@@ -13,7 +13,17 @@
           </v-btn>
         </div>
       </v-col>
-    </v-row> -->
+    </v-row>
+    <v-card>
+      <v-row>
+        <v-col class="ma-4">
+          <search
+            :list-query="listQuery"
+            :handle-search="handleSearch"
+          />
+        </v-col>
+      </v-row>
+    </v-card>
     <costume-card
       icon="mdi-clipboard-text"
       title="Divisi List"
@@ -24,6 +34,8 @@
         :query="listQuery"
         :limit="listQuery.limit"
         :table-headers="tableHeader"
+        :on-delete-click="handleDelete"
+        :on-update-click="handleUpdate"
       />
       <pagination
         :total="totalPage"
@@ -32,7 +44,7 @@
         :on-next="onNext"
       />
     </costume-card>
-    <dialog-form-master-project
+    <dialog-form-master-divisi
       :show-dialog="showForm"
       :show.sync="showForm"
       :refresh-page.sync="isRefresh"
@@ -44,7 +56,7 @@
       :show-dialog="showDelete"
       :show.sync="showDelete"
       :refresh-page.sync="isRefresh"
-      :store-path-delete="'project/deleteProject'"
+      :store-path-delete="'divisi/deleteDivisi'"
       :id-data="idData"
     />
   </div>
@@ -69,14 +81,27 @@
       tableHeader: [
         { text: 'Nama Divisi', value: 'name_satuan_kerja', sortable: false },
         { text: 'Deskripsi Divisi', value: 'description' },
-        // { text: 'Aksi', value: 'actions' },
+        { text: 'Aksi', value: 'actions' },
       ],
     }),
+    watch: {
+      isRefresh (value) {
+        if (value) {
+          this.handleSearch()
+          this.isRefresh = false
+        }
+      },
+      'listQuery.search' (value) {
+        if ((value === undefined) && (value.length >= 2)) return
+        this.handleSearch()
+      },
+    },
     async mounted () {
       await this.handleSearch()
     },
     methods: {
       async handleSearch () {
+        this.listQuery.page--
         const response = await this.$store.dispatch('divisi/getListDivisi', this.listQuery)
         this.totalPage = response._meta.totalPage
         this.list = response.results
@@ -85,6 +110,7 @@
         await this.handleSearch()
       },
       handleAdd () {
+        this.isEdit = false
         this.showForm = true
       },
       handleUpdate (item) {
@@ -93,7 +119,7 @@
         this.isEdit = true
       },
       handleDelete (item) {
-        this.idData = item._id
+        this.idData = item.id
         this.showDelete = true
       },
     },
