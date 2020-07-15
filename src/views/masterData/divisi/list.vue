@@ -76,7 +76,7 @@
       form: {},
       listQuery: {
         limit: 10,
-        page: 0,
+        page: 1,
       },
       tableHeader: [
         { text: 'Nama Divisi', value: 'name_satuan_kerja', sortable: false },
