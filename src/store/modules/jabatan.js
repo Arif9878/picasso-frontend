@@ -9,6 +9,14 @@ export const actions = {
             return error.response
         }
     },
+    async getListJabatanByDivisi ({ commit }, idDivisi) {
+        try {
+            const response = await requestServer(`/jabatan/list/by-satuan-kerja/${idDivisi}`, 'GET')
+            return response
+        } catch (error) {
+            return error.response
+        }
+    },
     async createJabatan ({ commit }, data) {
         try {
             const response = await requestServer('/jabatan/create', 'POST', data)

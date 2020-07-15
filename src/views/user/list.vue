@@ -1,5 +1,19 @@
 <template>
   <div class="ma-3">
+    <v-row>
+      <v-col />
+      <v-col>
+        <div class="float-right">
+          <v-btn
+            color="primary"
+            @click="handleAdd"
+          >
+            <v-icon v-text="'mdi-plus'" />
+            {{ $t('add') }}
+          </v-btn>
+        </div>
+      </v-col>
+    </v-row>
     <v-card>
       <v-row>
         <v-col class="ma-4">
@@ -20,6 +34,8 @@
         :query="listQuery"
         :limit="listQuery.page_size"
         :table-headers="tableHeader"
+        :on-delete-click="handleDelete"
+        :on-update-click="handleUpdate"
       />
       <pagination
         :total="totalPage"
@@ -28,6 +44,21 @@
         :on-next="onNext"
       />
     </costume-card>
+    <dialog-form-user
+      :show-dialog="showForm"
+      :show.sync="showForm"
+      :refresh-page.sync="isRefresh"
+      :is-edit="isEdit"
+      :form-body="form"
+      :form.sync="form"
+    />
+    <dialog-delete
+      :show-dialog="showDelete"
+      :show.sync="showDelete"
+      :refresh-page.sync="isRefresh"
+      :store-path-delete="'user/deleteUser'"
+      :id-data="idData"
+    />
   </div>
 </template>
 
@@ -38,6 +69,14 @@
       return {
         list: [],
         totalPage: 0,
+        showForm: false,
+        isEdit: false,
+        isRefresh: false,
+        showDelete: false,
+        idData: null,
+        form: {
+          birthDate: '',
+        },
         listQuery: {
           page_size: 10,
           page: 1,
@@ -48,11 +87,17 @@
           { text: 'Nama Lengkap', value: 'nama_lengkap' },
           { text: 'Divisi', value: 'divisi' },
           { text: 'Jabatan', value: 'jabatan' },
-          // { text: 'Aksi', value: 'actions' },
+          { text: 'Aksi', value: 'actions' },
         ],
       }
     },
     watch: {
+      isRefresh (value) {
+        if (value) {
+          this.handleSearch()
+          this.isRefresh = false
+        }
+      },
       'listQuery.search' (value) {
         if ((value === undefined) && (value.length <= 2)) return
         this.handleSearch()
@@ -69,6 +114,19 @@
       },
       async onNext () {
         await this.handleSearch()
+      },
+      handleAdd () {
+        this.isEdit = false
+        this.showForm = true
+      },
+      handleUpdate (item) {
+        this.showForm = true
+        this.form = item
+        this.isEdit = true
+      },
+      handleDelete (item) {
+        this.idData = item.id
+        this.showDelete = true
       },
     },
   }

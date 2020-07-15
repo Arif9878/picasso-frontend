@@ -88,6 +88,30 @@ export const actions = {
             return error.response
         }
     },
+    async createUser ({ commit }, data) {
+        try {
+            const response = await requestServer('/user/', 'POST', data)
+            return response
+        } catch (error) {
+            return error.response
+        }
+    },
+    async updateUser ({ commit }, data) {
+        try {
+            const response = await requestServer(`/user/${data.id}/`, 'PUT', data.body)
+            return response
+        } catch (error) {
+            return error.response
+        }
+    },
+    async deleteUser ({ commit }, id) {
+        try {
+            const response = await requestServer(`/user/${id}/`, 'DELETE')
+            return response
+        } catch (error) {
+            return error.response
+        }
+    },
     logout ({ commit, state, dispatch }) {
         return new Promise((resolve, reject) => {
             // logout(state.token).then(() => {
