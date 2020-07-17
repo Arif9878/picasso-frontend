@@ -100,6 +100,7 @@
       },
       'listQuery.search' (value) {
         if ((value === undefined) && (value.length <= 2)) return
+        this.listQuery.page = 1
         this.handleSearch()
       },
     },

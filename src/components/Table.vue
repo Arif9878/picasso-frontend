@@ -11,18 +11,6 @@
       hide-default-footer
     >
       <template v-slot:item.actions="props">
-        <!-- <v-btn
-          class="mx-2"
-          fab
-          dark
-          small
-          color="primary"
-          @click="onButtonClick(props.item)"
-        >
-          <v-icon dark>
-            mdi-eye
-          </v-icon>
-        </v-btn> -->
         <v-btn
           class="mx-2"
           fab
@@ -45,6 +33,20 @@
         >
           <v-icon dark>
             mdi-delete-forever
+          </v-icon>
+        </v-btn>
+      </template>
+      <template v-slot:item.print="props">
+        <v-btn
+          class="mx-2"
+          fab
+          dark
+          small
+          color="blue"
+          @click="onPrintClick(props.item)"
+        >
+          <v-icon dark>
+            mdi-printer
           </v-icon>
         </v-btn>
       </template>
@@ -76,6 +78,10 @@
         default: null,
       },
       onDeleteClick: {
+        type: Function,
+        default: null,
+      },
+      onPrintClick: {
         type: Function,
         default: null,
       },
