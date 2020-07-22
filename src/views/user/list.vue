@@ -75,7 +75,7 @@
         showDelete: false,
         idData: null,
         form: {
-          birthDate: '',
+          birth_date: '',
         },
         listQuery: {
           page_size: 10,
