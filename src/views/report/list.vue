@@ -39,6 +39,7 @@
 </template>
 
 <script>
+  import FileSaver from 'file-saver'
   export default {
     name: 'ListReport',
     data () {
@@ -79,8 +80,10 @@
         const response = await this.$store.dispatch('user/getListUser', this.listQueryUser)
         this.listUser = response.results
       },
-      handlePrint (item) {
-        alert('on progress')
+      async handlePrint (item) {
+        const response = await this.$store.dispatch('report/printReport', item.id)
+        const fileName = `LaporanPLD_2020_${item.nama_lengkap.split(' ').join('_')}_${item.jabatan.split(' ').join('_')}.pdf`
+        FileSaver.saveAs(response, fileName)
       },
     },
   }

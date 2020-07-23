@@ -87,7 +87,7 @@
                 rules="required"
               >
                 <v-text-field
-                  v-model="formBody.firstName"
+                  v-model="formBody.first_name"
                   placeholder="Nama Depan"
                   type="text"
                   :error-messages="errors"
@@ -107,7 +107,7 @@
                 rules="required"
               >
                 <v-text-field
-                  v-model="formBody.lastName"
+                  v-model="formBody.last_name"
                   placeholder="Nama Belakang"
                   type="text"
                   :error-messages="errors"
@@ -137,7 +137,7 @@
                 rules="required"
               >
                 <v-text-field
-                  v-model="formBody.birthPlace"
+                  v-model="formBody.birth_place"
                   placeholder="Tempat Lahir"
                   type="text"
                   :error-messages="errors"
@@ -154,9 +154,9 @@
               <input-date-picker
                 :format-date="formatDate"
                 :required="true"
-                :date-value="formBody.birthDate"
-                :value-date.sync="formBody.birthDate"
-                @changeDate="formBody.birthDate = $event"
+                :date-value="formBody.birth_date"
+                :value-date.sync="formBody.birth_date"
+                @changeDate="formBody.birth_date = $event"
               />
             </v-col>
           </v-row>
@@ -277,7 +277,7 @@
                 name="Description"
               >
                 <v-textarea
-                  v-model="formBody.projectDescription"
+                  v-model="formBody.address"
                   :error-messages="errors"
                   solo
                 />
@@ -356,14 +356,14 @@
       show (value) {
         this.$emit('update:show', value)
       },
-      'formBody.idDivisi' (value) {
+      'formBody.id_divisi' (value) {
         if (value === undefined) return
         if (value) {
           this.getListJabatanByDivisi(value)
           this.formBody.divisiObject = value
         }
       },
-      'formBody.idJabatan' (value) {
+      'formBody.id_jabatan' (value) {
         if (value === undefined) return
         if (value) {
           this.formBody.jabatanObject = value
@@ -380,11 +380,11 @@
       },
       async handleChangeDivisi (item) {
         this.getListJabatanByDivisi(item.id)
-        this.formBody.idDivisi = item.id
+        this.formBody.id_divisi = item.id
         this.formBody.divisi = item.name_satuan_kerja
       },
       async handleChangeJabatan (item) {
-        this.formBody.idJabatan = item.id
+        this.formBody.id_jabatan = item.id
         this.formBody.jabatan = item.name_jabatan
       },
       async getListJabatanByDivisi (item) {
