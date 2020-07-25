@@ -5,6 +5,9 @@ import {
 } from './constantVariable'
 import {
     getToken,
+    setToken,
+    getRefreshToken,
+    setRefreshToken,
 } from './cookies'
 
 const isSecure = String(process.env.VUE_APP_SECURE) === 'true'
@@ -52,14 +55,48 @@ service.interceptors.response.use(
     async (error) => {
         if (!error.response.data.errors) {
             const status = await error.response.status
+            const originalRequest = error.config
+            if (error.response.status === ResponseRequest.UNAUTHORIZED && !originalRequest._retry) {
+                originalRequest._retry = true
+                return axios.post(`${url}/auth/refresh/`,
+                    {
+                        refreshtoken: getRefreshToken(),
+                    }).then(response => {
+                        if (response.status === 200) {
+                            // 1) put token to LocalStorage
+                            const {
+                                // eslint-disable-next-line camelcase
+                                access_token,
+                                // eslint-disable-next-line camelcase
+                                refresh_token,
+                            } = response.data
+                            setToken(access_token)
+                            setRefreshToken(refresh_token)
+                            // 2) Change Authorization header
+                            service.interceptors.request.use(
+                                config => {
+                                    // Do something before request is sent
+                                    if (getToken()) {
+                                        // Set Bearer Token
+                                        config.headers.Authorization = 'Bearer ' + getToken()
+                                    }
+                                    return config
+                                },
+                                error => {
+                                    // Do something with request error
+                                    Promise.reject(error)
+                                },
+                            )
+                            // 3) return originalRequest object with Axios.
+                            return service(originalRequest)
+                        }
+                })
+            }
             switch (status) {
                 case ResponseRequest.NOTFOUND:
                     await store.dispatch('toast/errorToast', error.response.data.message)
                     break
                 case ResponseRequest.SERVERERROR:
-                    await store.dispatch('toast/errorToast', error.response.data.message)
-                    break
-                case ResponseRequest.UNAUTHORIZED:
                     await store.dispatch('toast/errorToast', error.response.data.message)
                     break
                 case ResponseRequest.UNPROCESSABLE:

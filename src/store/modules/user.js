@@ -5,12 +5,15 @@ import {
 
 import {
     getToken,
+    getRefreshToken,
     setToken,
+    setRefreshToken,
     removeToken,
 } from '@/utils/cookies'
 
 export const state = {
     token: getToken(),
+    refreshToken: getRefreshToken(),
     name: '',
     avatar: '',
     introduction: '',
@@ -29,6 +32,9 @@ export const mutations = {
     SET_TOKEN: (state, token) => {
         state.token = token
     },
+    SET_REFRESH_TOKEN: (state, refreshToken) => {
+        state.refreshToken = refreshToken
+    },
     SET_ROLES: (state, roles) => {
         state.roles = roles
     },
@@ -40,11 +46,15 @@ export const actions = {
             requestServer('auth/login/', 'POST', data).then((response) => {
                 const {
                     // eslint-disable-next-line camelcase
-                    auth_token,
+                    access_token,
+                    // eslint-disable-next-line camelcase
+                    refresh_token,
                 } = response
-                commit('SET_TOKEN', auth_token)
+                commit('SET_TOKEN', access_token)
+                commit('SET_REFRESH_TOKEN', refresh_token)
                 // eslint-disable-next-line no-undef
-                setToken(auth_token)
+                setToken(access_token)
+                setRefreshToken(refresh_token)
                 resolve(response)
             }).catch((error) => {
                 reject(error)
@@ -116,6 +126,7 @@ export const actions = {
         return new Promise((resolve, reject) => {
             // logout(state.token).then(() => {
             commit('SET_TOKEN', '')
+            commit('SET_REFRESH_TOKEN', '')
             commit('SET_ROLES', [])
             removeToken()
             resetRouter()
