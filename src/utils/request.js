@@ -66,11 +66,11 @@ service.interceptors.response.use(
                             // 1) put token to LocalStorage
                             const {
                                 // eslint-disable-next-line camelcase
-                                access_token,
+                                auth_token,
                                 // eslint-disable-next-line camelcase
                                 refresh_token,
                             } = response.data
-                            setToken(access_token)
+                            setToken(auth_token)
                             setRefreshToken(refresh_token)
                             // 2) Change Authorization header
                             service.interceptors.request.use(

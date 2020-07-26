@@ -46,14 +46,14 @@ export const actions = {
             requestServer('auth/login/', 'POST', data).then((response) => {
                 const {
                     // eslint-disable-next-line camelcase
-                    access_token,
+                    auth_token,
                     // eslint-disable-next-line camelcase
                     refresh_token,
                 } = response
-                commit('SET_TOKEN', access_token)
+                commit('SET_TOKEN', auth_token)
                 commit('SET_REFRESH_TOKEN', refresh_token)
                 // eslint-disable-next-line no-undef
-                setToken(access_token)
+                setToken(auth_token)
                 setRefreshToken(refresh_token)
                 resolve(response)
             }).catch((error) => {
@@ -67,10 +67,14 @@ export const actions = {
                 const {
                     // eslint-disable-next-line camelcase
                     auth_token,
+                    // eslint-disable-next-line camelcase
+                    refresh_token,
                 } = response
                 commit('SET_TOKEN', auth_token)
+                commit('SET_REFRESH_TOKEN', refresh_token)
                 // eslint-disable-next-line no-undef
                 setToken(auth_token)
+                setRefreshToken(refresh_token)
                 resolve(response)
             }).catch((error) => {
                 reject(error)
