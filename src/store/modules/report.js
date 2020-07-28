@@ -10,11 +10,16 @@ export const actions = {
             return error.response
         }
     },
-    async printReport ({ commit }, idUser) {
+    async printReport ({ commit }, query) {
+        const {
+            userId,
+            params,
+        } = query
         try {
             const response = await request({
-                url: `/logbook/report-by-user/${idUser}`,
+                url: `/logbook/report-by-user/${userId}`,
                 method: 'GET',
+                params: params,
                 responseType: 'blob',
             })
             return response
