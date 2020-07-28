@@ -8,6 +8,7 @@
       :items="list"
       :no-data-text="$t('data_empty')"
       :items-per-page="limit"
+      :loading="isLoading"
       hide-default-footer
     >
       <template v-slot:item.actions="props">
@@ -60,6 +61,10 @@
       list: {
         type: Array,
         default: null,
+      },
+      isLoading: {
+        type: Boolean,
+        default: false,
       },
       query: {
         type: Object,

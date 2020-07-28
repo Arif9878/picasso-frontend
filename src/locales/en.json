@@ -20,5 +20,8 @@
   "add": "Tambah",
   "canceled": "Batal",
   "deleted": "Hapus",
-  "search": "Cari"
+  "search": "Cari",
+  "please_wait": "Harap Tunggu",
+  "input_date_report": "Masukkan Rentang Laporan",
+  "reset": "Reset"
 }

@@ -1,5 +1,63 @@
 <template>
   <div class="ma-3">
+    <v-card>
+      <v-row class="mb-n14">
+        <v-col class="ma-4">
+          <search
+            :list-query="listQueryUser"
+            :handle-search="handleSearchUser"
+          />
+        </v-col>
+      </v-row>
+      <v-row class="ma-1">
+        <v-col
+          cols="12"
+          sm="6"
+        >
+          <v-label
+            class="title"
+          >
+            {{ $t('input_date_report') }}:
+          </v-label>
+          <date-picker
+            :format-date="formatDate"
+            :label="'Tanggal Awal'"
+            :date-value="listQueryUser.start_date"
+            :value-date.sync="listQueryUser.start_date"
+            @changeDate="listQueryUser.start_date = $event"
+          />
+        </v-col>
+        <v-col
+          cols="12"
+          sm="6"
+        >
+          <br>
+          <date-picker
+            :format-date="formatDate"
+            :label="'Tanggal Akhir'"
+            :date-value="listQueryUser.end_date"
+            :value-date.sync="listQueryUser.end_date"
+            @changeDate="listQueryUser.end_date = $event"
+          />
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col
+          cols="12"
+          sm="8"
+        />
+        <v-col class="pt-0 ma-3 float-right">
+          <v-btn
+            block
+            color="#4f4f4f"
+            class="btn-reset"
+            @click="onReset"
+          >
+            {{ $t('reset') }}
+          </v-btn>
+        </v-col>
+      </v-row>
+    </v-card>
     <costume-card
       icon="mdi-clipboard-text"
       title="Laporan"
@@ -35,6 +93,10 @@
         </v-tab-item>
       </v-tabs-items>
     </costume-card>
+    <loading-bar
+      :loading="isLoading"
+      :loading-modal.sync="isLoading"
+    />
   </div>
 </template>
 
@@ -46,8 +108,13 @@
       return {
         listDivisiTab: [],
         tab: null,
+        isLoading: false,
         listUser: [],
+        formatDate: 'DD-MM-YYYY',
         listQueryUser: {
+          search: '',
+          start_date: '',
+          end_date: '',
           idDivisi: null,
           page_size: 100,
         },
@@ -59,6 +126,12 @@
           { text: 'Print', value: 'print' },
         ],
       }
+    },
+    watch: {
+      'listQueryUser.search' (value) {
+        if ((value === undefined) && (value.length <= 2)) return
+        this.handleSearchUser()
+      },
     },
     async mounted () {
       await this.handleGetDivisi()
@@ -80,8 +153,28 @@
         const response = await this.$store.dispatch('user/getListUser', this.listQueryUser)
         this.listUser = response.results
       },
+      onReset () {
+        this.listQueryUser.search = ''
+        this.listQueryUser.start_date = ''
+        this.listQueryUser.end_date = ''
+        this.handleSearchUser()
+      },
       async handlePrint (item) {
-        const response = await this.$store.dispatch('report/printReport', item.id)
+        this.isLoading = true
+        if ((this.listQueryUser.start_date.length < 1) || (this.listQueryUser.end_date.length < 1)) {
+          this.$store.dispatch('toast/errorToast', 'Masukkan rentang laporan yang akan di print')
+          this.isLoading = false
+          return
+        }
+        const query = {
+          userId: item.id,
+          params: {
+            start_date: this.listQueryUser.start_date,
+            end_date: this.listQueryUser.end_date,
+          },
+        }
+        const response = await this.$store.dispatch('report/printReport', query)
+        if (response) this.isLoading = false
         const fileName = `LaporanPLD_2020_${item.nama_lengkap.split(' ').join('_')}_${item.jabatan.split(' ').join('_')}.pdf`
         FileSaver.saveAs(response, fileName)
       },
