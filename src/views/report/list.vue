@@ -191,7 +191,7 @@
         }
         const response = await this.$store.dispatch('report/printReport', query)
         if (response) this.isLoading = false
-        const fileName = `LaporanPLD_2020_${item.nama_lengkap.split(' ').join('_')}_${item.jabatan.split(' ').join('_')}.pdf`
+        const fileName = `LaporanPLD_2020_${item.fullname.split(' ').join('_')}_${item.jabatan.split(' ').join('_')}.pdf`
         FileSaver.saveAs(response, fileName)
       },
     },
