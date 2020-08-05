@@ -1,15 +1,7 @@
 <template>
   <div class="ma-3">
     <v-card>
-      <v-row class="mb-n14">
-        <v-col class="ma-4">
-          <search
-            :list-query="listQueryUser"
-            :handle-search="handleSearchUser"
-          />
-        </v-col>
-      </v-row>
-      <v-row class="ma-1">
+      <v-row class="mb-n14 ma-1">
         <v-col
           cols="12"
           sm="6"
@@ -42,11 +34,31 @@
         </v-col>
       </v-row>
       <v-row>
+        <v-col class="mb-n10 ma-4">
+          <search
+            :list-query="listQueryUser"
+            :handle-search="handleSearchUser"
+          />
+        </v-col>
+      </v-row>
+      <v-row class="ma-1">
         <v-col
           cols="12"
-          sm="8"
-        />
-        <v-col class="pt-0 ma-3 float-right">
+          sm="6"
+        >
+          <v-btn
+            block
+            color="primary"
+            class="btn-search"
+            @click="onSearch"
+          >
+            {{ $t('search') }}
+          </v-btn>
+        </v-col>
+        <v-col
+          cols="12"
+          sm="6"
+        >
           <v-btn
             block
             color="#4f4f4f"
@@ -115,14 +127,15 @@
           search: '',
           start_date: '',
           end_date: '',
-          idDivisi: null,
+          divisi: null,
           page_size: 100,
         },
         tableHeader: [
-          { text: 'Email', value: 'email', sortable: false },
-          { text: 'Nama Lengkap', value: 'nama_lengkap' },
+          { text: 'Nama Lengkap', value: 'fullname' },
           { text: 'Divisi', value: 'divisi' },
           { text: 'Jabatan', value: 'jabatan' },
+          { text: 'Total Jam Kerja', value: 'total_hours' },
+          { text: 'Total Laporan', value: 'total_report' },
           { text: 'Print', value: 'print' },
         ],
       }
@@ -136,13 +149,13 @@
     async mounted () {
       await this.handleGetDivisi()
       if (this.listDivisiTab.length > 0) {
-        this.listQueryUser.idDivisi = this.listDivisiTab[0].id
+        this.listQueryUser.divisi = this.listDivisiTab[0].id
       }
       await this.handleSearchUser()
     },
     methods: {
       async handleChangeTab (idDivisi) {
-        this.listQueryUser.idDivisi = idDivisi
+        this.listQueryUser.divisi = idDivisi
         await this.handleSearchUser()
       },
       async handleGetDivisi () {
@@ -150,14 +163,17 @@
         this.listDivisiTab = response.results
       },
       async handleSearchUser () {
-        const response = await this.$store.dispatch('user/getListUser', this.listQueryUser)
-        this.listUser = response.results
+        const response = await this.$store.dispatch('report/getListReportByUser', this.listQueryUser)
+        this.listUser = response
       },
-      onReset () {
+      async onSearch () {
+        await this.handleSearchUser()
+      },
+      async onReset () {
         this.listQueryUser.search = ''
         this.listQueryUser.start_date = ''
         this.listQueryUser.end_date = ''
-        this.handleSearchUser()
+        await this.handleSearchUser()
       },
       async handlePrint (item) {
         this.isLoading = true

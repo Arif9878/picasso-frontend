@@ -10,6 +10,14 @@ export const actions = {
             return error.response
         }
     },
+    async getListReportByUser ({ commit }, params) {
+        try {
+            const response = await requestServer('/monthly-report/', 'GET', params)
+            return response
+        } catch (error) {
+            return error.response
+        }
+    },
     async printReport ({ commit }, query) {
         const {
             userId,
