@@ -23,5 +23,6 @@
   "search": "Cari",
   "please_wait": "Harap Tunggu",
   "input_date_report": "Masukkan Rentang Laporan",
-  "reset": "Reset"
+  "reset": "Reset",
+  "export_excel_attendance": "Ekspor Excel Kehadiran"
 }
