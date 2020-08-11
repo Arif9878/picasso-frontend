@@ -35,4 +35,17 @@ export const actions = {
             return error.response
         }
     },
+    async exportExcel ({ commit }, params) {
+        try {
+            const response = await request({
+                url: '/export-excel/',
+                method: 'GET',
+                params: params,
+                responseType: 'blob',
+            })
+            return response
+        } catch (error) {
+            return error.response
+        }
+    },
 }

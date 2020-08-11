@@ -93,6 +93,17 @@
           v-for="item in listDivisiTab"
           :key="item.id"
         >
+          <v-row>
+            <v-col>
+              <v-btn
+                class="float-right"
+                color="primary"
+                @click="handleDownloadExcel(item.id, item.name_satuan_kerja)"
+              >
+                {{ $t('export_excel_attendance') }}
+              </v-btn>
+            </v-col>
+          </v-row>
           <v-card flat>
             <table-component
               :list="listUser"
@@ -192,6 +203,23 @@
         const response = await this.$store.dispatch('report/printReport', query)
         if (response) this.isLoading = false
         const fileName = `LaporanPLD_2020_${item.fullname.split(' ').join('_')}_${item.jabatan.split(' ').join('_')}.pdf`
+        FileSaver.saveAs(response, fileName)
+      },
+      async handleDownloadExcel (idDivisi, nameDivisi) {
+        this.isLoading = true
+        if ((this.listQueryUser.start_date.length < 1) || (this.listQueryUser.end_date.length < 1)) {
+          this.$store.dispatch('toast/errorToast', 'Masukkan rentang laporan yang akan di print')
+          this.isLoading = false
+          return
+        }
+        const params = {
+          divisi: idDivisi,
+          start_date: this.listQueryUser.start_date,
+          end_date: this.listQueryUser.end_date,
+        }
+        const response = await this.$store.dispatch('report/exportExcel', params)
+        if (response) this.isLoading = false
+        const fileName = `${nameDivisi.split(' ').join('_')}.xlsx`
         FileSaver.saveAs(response, fileName)
       },
     },
