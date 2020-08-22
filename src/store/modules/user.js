@@ -43,7 +43,7 @@ export const mutations = {
 export const actions = {
     login ({ commit }, data) {
         return new Promise((resolve, reject) => {
-            requestServer('auth/login/', 'POST', data).then((response) => {
+            requestServer('auth/admin/login/', 'POST', data).then((response) => {
                 const {
                     // eslint-disable-next-line camelcase
                     auth_token,
