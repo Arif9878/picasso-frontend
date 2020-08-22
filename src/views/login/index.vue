@@ -54,9 +54,8 @@
                 </v-form>
               </v-card-text>
               <v-card-actions>
-                <v-spacer />
                 <v-row>
-                  <v-col>
+                  <!--  <v-col>
                     <v-btn
                       color="blue"
                       block
@@ -69,7 +68,7 @@
                       >
                       Login With Google
                     </v-btn>
-                  </v-col>
+                  </v-col> -->
                   <v-col>
                     <v-btn
                       color="primary"

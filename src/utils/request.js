@@ -102,6 +102,9 @@ service.interceptors.response.use(
                 case ResponseRequest.UNPROCESSABLE:
                     await store.dispatch('toast/errorToast', error.response.data.message)
                     break
+                case ResponseRequest.FORBIDDEN:
+                    await store.dispatch('toast/errorToast', 'Pengguna tidak punya hak akses')
+                    break
                 default:
                     await store.dispatch('toast/errorToast', error.message)
                     break
