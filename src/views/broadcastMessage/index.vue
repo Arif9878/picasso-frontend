@@ -8,25 +8,15 @@
             color="primary"
             @click="handleAdd"
           >
-            <v-icon v-text="'mdi-plus'" />
-            {{ $t('add') }}
+            {{ $t('send_broadcast') }}&nbsp;&nbsp;
+            <v-icon v-text="'mdi-send'" />
           </v-btn>
         </div>
       </v-col>
     </v-row>
-    <v-card>
-      <v-row>
-        <v-col class="ma-4">
-          <search
-            :list-query="listQuery"
-            :handle-search="handleSearch"
-          />
-        </v-col>
-      </v-row>
-    </v-card>
     <costume-card
       icon="mdi-clipboard-text"
-      title="Jabatan List"
+      title="Broadcast Message"
       class="px-5 py-3"
     >
       <table-component
@@ -35,7 +25,6 @@
         :limit="listQuery.limit"
         :table-headers="tableHeader"
         :on-delete-click="handleDelete"
-        :on-update-click="handleUpdate"
       />
       <pagination
         :total="totalPage"
@@ -44,7 +33,7 @@
         :on-next="onNext"
       />
     </costume-card>
-    <dialog-form-master-jabatan
+    <dialog-broadcast-message-form
       :show-dialog="showForm"
       :show.sync="showForm"
       :refresh-page.sync="isRefresh"
@@ -56,7 +45,7 @@
       :show-dialog="showDelete"
       :show.sync="showDelete"
       :refresh-page.sync="isRefresh"
-      :store-path-delete="'jabatan/deleteJabatan'"
+      :store-path-delete="'broadcastMessage/deleteNotificationMessage'"
       :id-data="idData"
     />
   </div>
@@ -64,27 +53,31 @@
 
 <script>
   export default {
-    name: 'ListJabatan',
-    data: () => ({
-      list: [],
-      totalPage: 0,
-      showForm: false,
-      showDelete: false,
-      isRefresh: false,
-      isEdit: false,
-      idData: null,
-      form: {},
-      listQuery: {
-        limit: 10,
-        page: 1,
-      },
-      tableHeader: [
-        { text: 'Divisi', value: 'name_satuan_kerja', sortable: false },
-        { text: 'Nama Jabatan', value: 'name_jabatan', sortable: false },
-        { text: 'Deskripsi Jabatan', value: 'description' },
-        { text: 'Aksi', value: 'actions' },
-      ],
-    }),
+    name: 'BroadcastMessage',
+    data () {
+      return {
+        list: [],
+        totalPage: 0,
+        showForm: false,
+        isEdit: false,
+        isRefresh: false,
+        showDelete: false,
+        idData: null,
+        form: {
+          purpose_message: '',
+          message: '',
+        },
+        listQuery: {
+          limit: 10,
+          page: 1,
+        },
+        tableHeader: [
+          { text: 'Tujuan Pesan', value: 'purpose_message', sortable: false },
+          { text: 'Message', value: 'message', sortable: false },
+          { text: 'Aksi', value: 'actions' },
+        ],
+      }
+    },
     watch: {
       isRefresh (value) {
         if (value) {
@@ -103,10 +96,12 @@
     },
     methods: {
       async handleSearch () {
-        const response = await this.$store.dispatch('jabatan/getListJabatan', this.listQuery)
+        const response = await this.$store.dispatch('broadcastMessage/getListNotificationMessage', this.listQuery)
         this.totalPage = response._meta.totalPage
         if (response.results) {
           this.list = response.results
+        } else {
+          this.list = []
         }
       },
       async onNext () {
@@ -116,13 +111,8 @@
         this.isEdit = false
         this.showForm = true
       },
-      handleUpdate (item) {
-        this.showForm = true
-        this.form = item
-        this.isEdit = true
-      },
       handleDelete (item) {
-        this.idData = item.id
+        this.idData = item._id
         this.showDelete = true
       },
     },

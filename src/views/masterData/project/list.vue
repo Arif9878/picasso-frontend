@@ -104,7 +104,9 @@
       async handleSearch () {
         const response = await this.$store.dispatch('project/getListProject', this.listQuery)
         this.totalPage = response._meta.totalPage
-        this.list = response.results
+        if (response.results) {
+          this.list = response.results
+        }
       },
       async onNext () {
         await this.handleSearch()

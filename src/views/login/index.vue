@@ -21,7 +21,7 @@
                 flat
               >
                 <v-toolbar-title class="center">
-                  Login Sapa JDS
+                  Login digiteam
                 </v-toolbar-title>
               </v-toolbar>
               <v-card-text>
