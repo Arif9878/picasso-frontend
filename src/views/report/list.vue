@@ -175,7 +175,9 @@
       },
       async handleSearchUser () {
         const response = await this.$store.dispatch('report/getListReportByUser', this.listQueryUser)
-        this.listUser = response
+        if (response) {
+          this.listUser = response
+        }
       },
       async onSearch () {
         await this.handleSearchUser()

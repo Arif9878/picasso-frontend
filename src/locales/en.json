@@ -1,6 +1,7 @@
 {
-  "avatar": "Sapa JDS",
+  "avatar": "digiteam",
   "dashboard": "Dashboard",
+  "broadcast_message": "Broadcast Message",
   "hero_jds": "Hero JDS",
   "master": "Data Master",
   "divisi": "Divisi",
@@ -8,8 +9,8 @@
   "project": "Project",
   "logout": "Logout",
   "data_empty": "Data Kosong",
-  "asn": "ASN",
-  "non_asn": "Non Asn",
+  "asn": "PNS",
+  "non_asn": "Non PNS",
   "magang": "Magang",
   "alumni": "Alumni",
   "report": "Laporan",
@@ -24,5 +25,6 @@
   "please_wait": "Harap Tunggu",
   "input_date_report": "Masukkan Rentang Laporan",
   "reset": "Reset",
-  "export_excel_attendance": "Ekspor Excel Kehadiran"
+  "export_excel_attendance": "Ekspor Excel Kehadiran",
+  "send_broadcast": "Kirim Broadcast"
 }

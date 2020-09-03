@@ -13,6 +13,7 @@
     >
       <template v-slot:item.actions="props">
         <v-btn
+          v-if="onUpdateClick"
           class="mx-2"
           fab
           dark
@@ -25,6 +26,7 @@
           </v-icon>
         </v-btn>
         <v-btn
+          v-if="onDeleteClick"
           class="mx-2"
           fab
           dark

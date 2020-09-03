@@ -78,4 +78,9 @@ export const menuItems = [
             },
         ],
     },
+    {
+        icon: 'mdi-send',
+        title: 'broadcast_message',
+        to: '/broadcast-message',
+    },
 ]

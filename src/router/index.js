@@ -8,6 +8,7 @@ import Layout from '@/layout'
 import dashboardRouter from './modules/dashboard'
 import userRouter from './modules/user'
 import dataMasterRouter from './modules/dataMaster'
+import broadcastMessageRouter from './modules/broadcastMessage'
 import reportRouter from './modules/report'
 import underConstructionRouter from './modules/underConstruction'
 
@@ -50,6 +51,7 @@ export const asyncRoutes = [
   reportRouter,
   underConstructionRouter,
   dataMasterRouter,
+  broadcastMessageRouter,
   // 404 page must be placed at the end !!!
   {
     path: '*',

@@ -102,10 +102,11 @@
     },
     methods: {
       async handleSearch () {
-        this.listQuery.page--
         const response = await this.$store.dispatch('divisi/getListDivisi', this.listQuery)
         this.totalPage = response._meta.totalPage
-        this.list = response.results
+        if (response.results) {
+          this.list = response.results
+        }
       },
       async onNext () {
         await this.handleSearch()
