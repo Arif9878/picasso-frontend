@@ -11,6 +11,13 @@
         <h3><strong>{{ dashboard }}</strong></h3>
       </v-col>
     </v-row>
+    <costume-card
+      icon="mdi-clipboard-text"
+      title="Dashboard"
+      class="px-5 py-3"
+    >
+      <div id="vizContainer" />
+    </costume-card>
   </v-container>
 </template>
 
@@ -23,9 +30,21 @@
         dashboard: 'Dashboard',
       }
     },
-
+    mounted () {
+      window.addEventListener('load', () => {
+        this.initViz()
+      })
+    },
     methods: {
-      //
+      initViz () {
+        const containerDiv = document.getElementById('vizContainer')
+        const url = 'http://dashboard.jabarprov.go.id/views/DashboardGroupware/DashboardRingkasanKaryawan'
+        const options = {
+          hideTabs: true,
+          onFirstInteractive: () => { },
+        }
+        this.viz = new window.tableau.Viz(containerDiv, url, options)
+      },
     },
   }
 </script>
