@@ -38,7 +38,7 @@
     methods: {
       initViz () {
         const containerDiv = document.getElementById('vizContainer')
-        const url = 'http://dashboard.jabarprov.go.id/views/DashboardGroupware/DashboardRingkasanKaryawan'
+        const url = 'https://dashboard.jabarprov.go.id/views/DashboardGroupware/DashboardRingkasanKaryawan'
         const options = {
           hideTabs: true,
           onFirstInteractive: () => { },
