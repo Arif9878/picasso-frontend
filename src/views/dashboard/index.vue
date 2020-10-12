@@ -16,7 +16,10 @@
       title="Dashboard"
       class="px-5 py-3"
     >
-      <div id="vizContainer" />
+      <v-row
+        id="vizContainer"
+        :style="$vuetify.breakpoint.lg ? 'width:1100px; height:1000px;':''"
+      />
     </costume-card>
   </v-container>
 </template>
@@ -38,7 +41,7 @@
     methods: {
       initViz () {
         const containerDiv = document.getElementById('vizContainer')
-        const url = 'https://dashboard.jabarprov.go.id/views/DashboardGroupware/DashboardRingkasanKaryawan'
+        const url = 'https://dashboard.jabarprov.go.id/views/DashboardGroupware/DashboardRingkasanKaryawan?:showVizHome=no&:embed=true'
         const options = {
           hideTabs: true,
           onFirstInteractive: () => { },
