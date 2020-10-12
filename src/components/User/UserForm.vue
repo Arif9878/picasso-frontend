@@ -264,6 +264,36 @@
               sm="12"
               :class="{'center py-4': $vuetify.breakpoint. smAndDown}"
             >
+              <label class="required">Kategori Pengelola</label>
+            </v-col>
+            <v-col
+              cols="12"
+              md="10"
+              sm="12"
+              :class="{'py-0 pb-3': $vuetify.breakpoint. smAndDown}"
+            >
+              <validation-provider
+                v-slot="{ errors }"
+                name="Kategori Pengelola"
+                rules="required"
+              >
+                <v-select
+                  v-model="formBody.manager_category"
+                  :items="managerCategory"
+                  :error-messages="errors"
+                  menu-props="auto"
+                  solo
+                />
+              </validation-provider>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col
+              cols="12"
+              md="2"
+              sm="12"
+              :class="{'center py-4': $vuetify.breakpoint. smAndDown}"
+            >
               <label class="required">Alamat</label>
             </v-col>
             <v-col
@@ -281,6 +311,90 @@
                   :error-messages="errors"
                   solo
                 />
+              </validation-provider>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col
+              cols="12"
+              md="2"
+              sm="12"
+              :class="{'center py-4': $vuetify.breakpoint. smAndDown}"
+            >
+              <label class="required">Tanggal Bergabung</label>
+            </v-col>
+            <v-col
+              cols="12"
+              md="10"
+              sm="12"
+              :class="{'py-0 pb-3': $vuetify.breakpoint. smAndDown}"
+            >
+              <validation-provider
+                name="Tanggal Bergabung"
+              >
+                <input-date-picker
+                  :format-date="formatDateJoin"
+                  :required="true"
+                  :date-value="formBody.join_date"
+                  :value-date.sync="formBody.join_date"
+                  @changeDate="formBody.join_date = $event"
+                />
+              </validation-provider>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col
+              cols="12"
+              md="2"
+              sm="12"
+              :class="{'center py-4': $vuetify.breakpoint. smAndDown}"
+            >
+              <label class="required">Apakah Admin ?</label>
+            </v-col>
+            <v-col
+              cols="12"
+              md="10"
+              sm="12"
+              :class="{'py-0 pb-3': $vuetify.breakpoint. smAndDown}"
+            >
+              <validation-provider
+                v-slot="{ errors }"
+                name="Apakah Admin ?"
+              >
+                <v-switch
+                  v-model="formBody.is_admin"
+                  :error-messages="errors"
+                  inset
+                  class="ma-0 pa-0"
+                ></v-switch>
+              </validation-provider>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col
+              cols="12"
+              md="2"
+              sm="12"
+              :class="{'center py-4': $vuetify.breakpoint. smAndDown}"
+            >
+              <label class="required">Pegawai Aktif ?</label>
+            </v-col>
+            <v-col
+              cols="12"
+              md="10"
+              sm="12"
+              :class="{'py-0 pb-3': $vuetify.breakpoint. smAndDown}"
+            >
+              <validation-provider
+                v-slot="{ errors }"
+                name="Pegawai Aktif ?"
+              >
+                <v-switch
+                  v-model="formBody.is_active"
+                  :error-messages="errors"
+                  inset
+                  class="ma-0 pa-0"
+                ></v-switch>
               </validation-provider>
             </v-col>
           </v-row>
@@ -311,6 +425,7 @@
 </template>
 <script>
   import { ValidationObserver, ValidationProvider } from 'vee-validate'
+  import { managerCategory } from '@/utils/constantVariable'
   export default {
     name: 'DialogFormUser',
     components: {
@@ -336,7 +451,9 @@
         show: this.showDialog,
         divisiList: [],
         jabatanList: [],
+        managerCategory: managerCategory,
         formatDate: 'YYYY-MM-DD',
+        formatDateJoin: 'YYYY-MM-DD HH:MM:SS',
       }
     },
     computed: {

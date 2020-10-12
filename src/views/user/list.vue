@@ -76,10 +76,12 @@
         idData: null,
         form: {
           birth_date: '',
+          join_date: '',
         },
         listQuery: {
           page_size: 10,
           page: 1,
+          is_active: true,
           search: '',
         },
         tableHeader: [
@@ -102,6 +104,14 @@
         if ((value === undefined) && (value.length <= 2)) return
         this.listQuery.page = 1
         this.handleSearch()
+      },
+      async '$route.params' (value) {
+        if (value.alumni === 'alumni') {
+          this.listQuery.is_active = false
+        } else {
+          this.listQuery.is_active = true
+        }
+        await this.handleSearch()
       },
     },
     async mounted () {
