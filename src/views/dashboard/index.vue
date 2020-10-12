@@ -16,9 +16,9 @@
       title="Dashboard"
       class="px-5 py-3"
     >
-      <v-row
+      <div
         id="vizContainer"
-        :style="$vuetify.breakpoint.lg ? 'width:1100px; height:1000px;':''"
+        style="min-height: 100vh;"
       />
     </costume-card>
   </v-container>
