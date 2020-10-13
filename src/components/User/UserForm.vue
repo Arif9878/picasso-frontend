@@ -294,7 +294,7 @@
               sm="12"
               :class="{'center py-4': $vuetify.breakpoint. smAndDown}"
             >
-              <label class="required">Alamat</label>
+              <label>Alamat</label>
             </v-col>
             <v-col
               cols="12"
@@ -321,7 +321,7 @@
               sm="12"
               :class="{'center py-4': $vuetify.breakpoint. smAndDown}"
             >
-              <label class="required">Tanggal Bergabung</label>
+              <label>Tanggal Bergabung</label>
             </v-col>
             <v-col
               cols="12"
@@ -334,7 +334,6 @@
               >
                 <input-date-picker
                   :format-date="formatDateJoin"
-                  :required="true"
                   :date-value="formBody.join_date"
                   :value-date.sync="formBody.join_date"
                   @changeDate="formBody.join_date = $event"
@@ -366,7 +365,7 @@
                   :error-messages="errors"
                   inset
                   class="ma-0 pa-0"
-                ></v-switch>
+                />
               </validation-provider>
             </v-col>
           </v-row>
@@ -394,7 +393,7 @@
                   :error-messages="errors"
                   inset
                   class="ma-0 pa-0"
-                ></v-switch>
+                />
               </validation-provider>
             </v-col>
           </v-row>

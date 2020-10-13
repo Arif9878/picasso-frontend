@@ -76,7 +76,7 @@
               sm="12"
               :class="{'center py-4': $vuetify.breakpoint. smAndDown}"
             >
-              <label class="required">Deskripsi Jabatan</label>
+              <label>Deskripsi Jabatan</label>
             </v-col>
             <v-col
               cols="12"
