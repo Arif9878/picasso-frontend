@@ -44,7 +44,7 @@
       <v-row class="ma-1">
         <v-col
           cols="12"
-          sm="6"
+          sm="4"
         >
           <v-btn
             block
@@ -57,7 +57,7 @@
         </v-col>
         <v-col
           cols="12"
-          sm="6"
+          sm="4"
         >
           <v-btn
             block
@@ -66,6 +66,18 @@
             @click="onReset"
           >
             {{ $t('reset') }}
+          </v-btn>
+        </v-col>
+        <v-col
+          cols="12"
+          sm="4"
+        >
+          <v-btn
+            block
+            color="primary"
+            @click="handleDialogDownloadExcel"
+          >
+            {{ $t('export_excel_attendance') }}
           </v-btn>
         </v-col>
       </v-row>
@@ -93,17 +105,6 @@
           v-for="item in listDivisiTab"
           :key="item.id"
         >
-          <v-row>
-            <v-col>
-              <v-btn
-                class="float-right"
-                color="primary"
-                @click="handleDownloadExcel(item.id, item.name_satuan_kerja)"
-              >
-                {{ $t('export_excel_attendance') }}
-              </v-btn>
-            </v-col>
-          </v-row>
           <v-card flat>
             <table-component
               :list="listUser"
@@ -120,6 +121,13 @@
       :loading="isLoading"
       :loading-modal.sync="isLoading"
     />
+    <dialog-download-excel
+      :show-dialog="isDownloadExecl"
+      :show.sync="isDownloadExecl"
+      :on-export="onExport"
+      :on-reset="onReset"
+      :list-query="listQueryUser"
+    />
   </div>
 </template>
 
@@ -132,13 +140,17 @@
         listDivisiTab: [],
         tab: null,
         isLoading: false,
-        listUser: [],
         formatDate: 'DD-MM-YYYY',
+        isDownloadExecl: false,
+        listUser: [],
         listQueryUser: {
           search: '',
           start_date: '',
           end_date: '',
+          id_divisi: '',
+          category_export: true,
           divisi: null,
+          manager_category: null,
           page_size: 100,
         },
         tableHeader: [
@@ -184,6 +196,8 @@
       },
       async onReset () {
         this.listQueryUser.search = ''
+        this.listQueryUser.id_divisi = ''
+        this.listQueryUser.manager_category = ''
         this.listQueryUser.start_date = ''
         this.listQueryUser.end_date = ''
         await this.handleSearchUser()
@@ -207,7 +221,18 @@
         const fileName = `LaporanPLD_2020_${item.fullname.split(' ').join('_')}_${item.jabatan.split(' ').join('_')}.pdf`
         FileSaver.saveAs(response, fileName)
       },
-      async handleDownloadExcel (idDivisi, nameDivisi) {
+      handleDialogDownloadExcel () {
+        this.isDownloadExecl = true
+      },
+      onExport () {
+        this.isDownloadExecl = false
+        if (this.listQueryUser.category_export) {
+          this.handleDownloadExcelDivisi(this.listQueryUser.id_divisi.id, this.listQueryUser.id_divisi.name_satuan_kerja)
+        } else {
+          this.handleDownloadExcelManagerCategory(this.listQueryUser.manager_category)
+        }
+      },
+      async handleDownloadExcelDivisi (idDivisi, nameDivisi) {
         this.isLoading = true
         if ((this.listQueryUser.start_date.length < 1) || (this.listQueryUser.end_date.length < 1)) {
           this.$store.dispatch('toast/errorToast', 'Masukkan rentang laporan yang akan di print')
@@ -216,12 +241,33 @@
         }
         const params = {
           divisi: idDivisi,
+          search: this.listQueryUser.search,
           start_date: this.listQueryUser.start_date,
           end_date: this.listQueryUser.end_date,
         }
-        const response = await this.$store.dispatch('report/exportExcel', params)
+        const response = await this.$store.dispatch('report/exportExcelByCategory', params)
+        this.onReset()
         if (response) this.isLoading = false
         const fileName = `${nameDivisi.split(' ').join('_')}.xlsx`
+        FileSaver.saveAs(response, fileName)
+      },
+      async handleDownloadExcelManagerCategory (managerCategory) {
+        this.isLoading = true
+        if ((this.listQueryUser.start_date.length < 1) || (this.listQueryUser.end_date.length < 1)) {
+          this.$store.dispatch('toast/errorToast', 'Masukkan rentang laporan yang akan di print')
+          this.isLoading = false
+          return
+        }
+        const params = {
+          manager_category: managerCategory,
+          search: this.listQueryUser.search,
+          start_date: this.listQueryUser.start_date,
+          end_date: this.listQueryUser.end_date,
+        }
+        const response = await this.$store.dispatch('report/exportExcelByCategory', params)
+        this.onReset()
+        if (response) this.isLoading = false
+        const fileName = `${managerCategory.split(' ').join('_')}.xlsx`
         FileSaver.saveAs(response, fileName)
       },
     },

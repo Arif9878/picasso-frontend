@@ -84,7 +84,8 @@
         if (value === '') {
           value = null
         }
-        this.$emit(type, value)
+        const date = this.$moment(value).format(this.formatDate)
+        this.$emit(type, date)
       },
     },
   }
