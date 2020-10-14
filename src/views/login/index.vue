@@ -112,7 +112,7 @@
         ],
         passwordRules: [
           v => !!v || 'Password harus diisi',
-          v => (v && v.length >= 5) || 'Password harus lebih dari 5 karakter',
+          v => (v && v.length >= 4) || 'Password harus lebih dari 4 karakter',
         ],
       }
     },
