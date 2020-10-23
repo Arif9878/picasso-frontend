@@ -29,8 +29,8 @@ const userRouter = {
 			},
 		},
 		{
-			path: '/user/alumni',
-			component: () => import('@/views/underConstruction/index'),
+			path: '/user/:alumni',
+			component: () => import('@/views/user/list'),
 			meta: {
 				noCache: true,
 			},
