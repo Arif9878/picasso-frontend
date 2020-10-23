@@ -264,7 +264,7 @@
               sm="12"
               :class="{'center py-4': $vuetify.breakpoint. smAndDown}"
             >
-              <label class="required">Kategori Pengelola</label>
+              <label>Kategori Pengelola</label>
             </v-col>
             <v-col
               cols="12"
@@ -275,7 +275,6 @@
               <validation-provider
                 v-slot="{ errors }"
                 name="Kategori Pengelola"
-                rules="required"
               >
                 <v-select
                   v-model="formBody.manager_category"
@@ -333,7 +332,7 @@
                 name="Tanggal Bergabung"
               >
                 <input-date-picker
-                  :format-date="formatDateJoin"
+                  :format-date="formatDateTime"
                   :date-value="formBody.join_date"
                   :value-date.sync="formBody.join_date"
                   @changeDate="formBody.join_date = $event"
@@ -397,6 +396,65 @@
               </validation-provider>
             </v-col>
           </v-row>
+          <v-row
+            v-if="!formBody.is_active"
+          >
+            <v-col
+              cols="12"
+              md="2"
+              sm="12"
+              :class="{'center py-4': $vuetify.breakpoint. smAndDown}"
+            >
+              <label :class="formBody.is_active ? '':'required'">Tanggal Pengunduran Diri</label>
+            </v-col>
+            <v-col
+              cols="12"
+              md="10"
+              sm="12"
+              :class="{'py-0 pb-3': $vuetify.breakpoint. smAndDown}"
+            >
+              <validation-provider
+                name="Tanggal Pengunduran Diri"
+              >
+                <input-date-picker
+                  :format-date="formatDateTime"
+                  :date-value="formBody.resign_date"
+                  :value-date.sync="formBody.resign_date"
+                  :required="formBody.is_active ? false:true"
+                  @changeDate="formBody.resign_date = $event"
+                />
+              </validation-provider>
+            </v-col>
+          </v-row>
+          <v-row
+            v-if="!formBody.is_active"
+          >
+            <v-col
+              cols="12"
+              md="2"
+              sm="12"
+              :class="{'center py-4': $vuetify.breakpoint. smAndDown}"
+            >
+              <label>Alasan Pengunduran Diri</label>
+            </v-col>
+            <v-col
+              cols="12"
+              md="10"
+              sm="12"
+              :class="{'py-0 pb-3': $vuetify.breakpoint. smAndDown}"
+            >
+              <validation-provider
+                v-slot="{ errors }"
+                name="Alasan Pengunduran Diri"
+              >
+                <v-textarea
+                  v-model="formBody.reason_resignation"
+                  :error-messages="errors"
+                  solo
+                />
+              </validation-provider>
+            </v-col>
+          </v-row>
           <v-card-actions>
             <v-col>
               <v-btn
@@ -452,7 +510,7 @@
         jabatanList: [],
         managerCategory: managerCategory,
         formatDate: 'YYYY-MM-DD',
-        formatDateJoin: 'YYYY-MM-DD HH:MM:SS',
+        formatDateTime: 'YYYY-MM-DD HH:MM:SS',
       }
     },
     computed: {
