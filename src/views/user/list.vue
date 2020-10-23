@@ -77,6 +77,7 @@
         form: {
           birth_date: '',
           join_date: '',
+          resign_date: '',
         },
         listQuery: {
           page_size: 10,
@@ -119,6 +120,11 @@
     },
     methods: {
       async handleSearch () {
+        if (this.$route.params.alumni === 'alumni') {
+          this.listQuery.is_active = false
+        } else {
+          this.listQuery.is_active = true
+        }
         const response = await this.$store.dispatch('user/getListUser', this.listQuery)
         this.totalPage = response._meta.totalPage
         if (response.results) {
