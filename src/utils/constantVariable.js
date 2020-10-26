@@ -84,3 +84,9 @@ export const menuItems = [
         to: '/broadcast-message',
     },
 ]
+
+export const managerCategory = [
+    'Gugus Tugas',
+    'Pengelola Layanan Digital',
+    'Tenaga Teknis',
+]

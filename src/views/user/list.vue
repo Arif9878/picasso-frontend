@@ -76,15 +76,18 @@
         idData: null,
         form: {
           birth_date: '',
+          join_date: '',
+          resign_date: '',
         },
         listQuery: {
           page_size: 10,
           page: 1,
+          is_active: true,
           search: '',
         },
         tableHeader: [
           { text: 'Email', value: 'email', sortable: false },
-          { text: 'Nama Lengkap', value: 'nama_lengkap' },
+          { text: 'Nama Lengkap', value: 'fullname' },
           { text: 'Divisi', value: 'divisi' },
           { text: 'Jabatan', value: 'jabatan' },
           { text: 'Aksi', value: 'actions' },
@@ -103,12 +106,25 @@
         this.listQuery.page = 1
         this.handleSearch()
       },
+      async '$route.params' (value) {
+        if (value.alumni === 'alumni') {
+          this.listQuery.is_active = false
+        } else {
+          this.listQuery.is_active = true
+        }
+        await this.handleSearch()
+      },
     },
     async mounted () {
       await this.handleSearch()
     },
     methods: {
       async handleSearch () {
+        if (this.$route.params.alumni === 'alumni') {
+          this.listQuery.is_active = false
+        } else {
+          this.listQuery.is_active = true
+        }
         const response = await this.$store.dispatch('user/getListUser', this.listQuery)
         this.totalPage = response._meta.totalPage
         if (response.results) {

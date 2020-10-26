@@ -35,10 +35,23 @@ export const actions = {
             return error.response
         }
     },
-    async exportExcel ({ commit }, params) {
+    async exportExcelByDivisi ({ commit }, params) {
         try {
             const response = await request({
-                url: '/export-excel/',
+                url: '/export-excel/divisi/',
+                method: 'GET',
+                params: params,
+                responseType: 'blob',
+            })
+            return response
+        } catch (error) {
+            return error.response
+        }
+    },
+    async exportExcelByCategory ({ commit }, params) {
+        try {
+            const response = await request({
+                url: '/export-excel/category/',
                 method: 'GET',
                 params: params,
                 responseType: 'blob',

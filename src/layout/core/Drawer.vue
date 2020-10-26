@@ -38,7 +38,7 @@
 
         <v-list-item-content>
           <v-list-item-title
-            class="display-1"
+            class="display-1 ma-2 py-2"
             v-text="profile.title"
           />
         </v-list-item-content>
