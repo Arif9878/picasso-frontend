@@ -25,10 +25,26 @@ export const actions = {
         } = query
         try {
             const response = await request({
-                url: `/logbook/report-by-user/${userId}`,
+                url: `/logbook/report-by-user/download/${userId}`,
                 method: 'GET',
                 params: params,
                 responseType: 'blob',
+            })
+            return response
+        } catch (error) {
+            return error.response
+        }
+    },
+    async viewReportPdf ({ commit }, query) {
+        const {
+            userId,
+            params,
+        } = query
+        try {
+            const response = await request({
+                url: `/logbook/report-by-user/view/${userId}`,
+                method: 'GET',
+                params: params,
             })
             return response
         } catch (error) {

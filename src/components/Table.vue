@@ -40,18 +40,34 @@
         </v-btn>
       </template>
       <template v-slot:item.print="props">
-        <v-btn
-          class="mx-2"
-          fab
-          dark
-          small
-          color="blue"
-          @click="onPrintClick(props.item)"
-        >
-          <v-icon dark>
-            mdi-printer
-          </v-icon>
-        </v-btn>
+        <v-card-actions>
+          <v-menu
+            :close-on-content-click="false"
+            offset-y
+          >
+            <template v-slot:activator="{ on }">
+              <v-btn
+                fab
+                dark
+                small
+                color="blue"
+                v-on="on"
+              >
+                <v-icon dark>
+                  mdi-printer
+                </v-icon>
+              </v-btn>
+            </template>
+            <v-card class="ma-0">
+              <v-list-item @click="onPreviewPdfClick(props.item)">
+                Preview
+              </v-list-item>
+              <v-list-item @click="onDownloadPdfClick(props.item)">
+                Download
+              </v-list-item>
+            </v-card>
+          </v-menu>
+        </v-card-actions>
       </template>
     </v-data-table>
   </v-col>
@@ -88,7 +104,11 @@
         type: Function,
         default: null,
       },
-      onPrintClick: {
+      onPreviewPdfClick: {
+        type: Function,
+        default: null,
+      },
+      onDownloadPdfClick: {
         type: Function,
         default: null,
       },
