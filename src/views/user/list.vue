@@ -75,9 +75,9 @@
         showDelete: false,
         idData: null,
         form: {
-          birth_date: '',
-          join_date: '',
-          resign_date: '',
+          birth_date: null,
+          join_date: null,
+          resign_date: null,
         },
         listQuery: {
           page_size: 10,
