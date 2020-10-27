@@ -111,7 +111,8 @@
               :query="listQueryUser"
               :limit="listQueryUser.page_size"
               :table-headers="tableHeader"
-              :on-print-click="handlePrint"
+              :on-preview-pdf-click="handlePreviewPdf"
+              :on-download-pdf-click="handleDownloadPdf"
             />
           </v-card>
         </v-tab-item>
@@ -128,6 +129,11 @@
       :on-reset="onReset"
       :list-query="listQueryUser"
     />
+    <dialog-preview-pdf
+      :show-dialog="isPreviewPdf"
+      :show.sync="isPreviewPdf"
+      :pdf-url="previewPdf"
+    />
   </div>
 </template>
 
@@ -142,6 +148,8 @@
         isLoading: false,
         formatDate: 'DD-MM-YYYY',
         isDownloadExecl: false,
+        isPreviewPdf: false,
+        previewPdf: '',
         listUser: [],
         listQueryUser: {
           search: '',
@@ -202,7 +210,7 @@
         this.listQueryUser.end_date = ''
         await this.handleSearchUser()
       },
-      async handlePrint (item) {
+      async handleDownloadPdf (item) {
         this.isLoading = true
         if ((this.listQueryUser.start_date.length < 1) || (this.listQueryUser.end_date.length < 1)) {
           this.$store.dispatch('toast/errorToast', 'Masukkan rentang laporan yang akan di print')
@@ -220,6 +228,27 @@
         if (response) this.isLoading = false
         const fileName = `LaporanPLD_2020_${item.fullname.split(' ').join('_')}_${item.jabatan.split(' ').join('_')}.pdf`
         FileSaver.saveAs(response, fileName)
+      },
+      async handlePreviewPdf (item) {
+        this.isLoading = true
+        if ((this.listQueryUser.start_date.length < 1) || (this.listQueryUser.end_date.length < 1)) {
+          this.$store.dispatch('toast/errorToast', 'Masukkan rentang laporan yang akan di print')
+          this.isLoading = false
+          return
+        }
+        const query = {
+          userId: item.id,
+          params: {
+            start_date: this.listQueryUser.start_date,
+            end_date: this.listQueryUser.end_date,
+          },
+        }
+        const response = await this.$store.dispatch('report/viewReportPdf', query)
+        if (response) {
+          this.isLoading = false
+          this.isPreviewPdf = true
+          this.previewPdf = response
+        }
       },
       handleDialogDownloadExcel () {
         this.isDownloadExecl = true
