@@ -2,6 +2,7 @@
   <v-dialog
     v-model="show"
     max-width="70%"
+    :fullscreen="$vuetify.mobileBreakpoint"
   >
     <v-card class="pa-7">
       <validation-observer ref="observer">
@@ -14,9 +15,9 @@
               cols="12"
               md="3"
               sm="12"
-              :class="{'center py-4': $vuetify.breakpoint. smAndDown}"
+              :class="{'center py-2': $vuetify.breakpoint. smAndDown}"
             >
-              <label class="required">Nama Project</label>
+              <label class="required">Tanggal Hari Libur</label>
             </v-col>
             <v-col
               cols="12"
@@ -25,14 +26,14 @@
               :class="{'py-0 pb-3': $vuetify.breakpoint. smAndDown}"
             >
               <validation-provider
-                v-slot="{ errors }"
-                name="Project Name"
-                rules="required"
+                name="Tanggal Hari Libur"
               >
-                <v-text-field
-                  v-model="formBody.projectName"
-                  :error-messages="errors"
-                  solo
+                <input-date-picker
+                  :format-date="formatDateTime"
+                  :date-value="formBody.holiday_date"
+                  :value-date.sync="formBody.holiday_date"
+                  :required="true"
+                  @changeDate="formBody.holiday_date = $event"
                 />
               </validation-provider>
             </v-col>
@@ -42,9 +43,9 @@
               cols="12"
               md="3"
               sm="12"
-              :class="{'center py-4': $vuetify.breakpoint. smAndDown}"
+              :class="{'center py-2': $vuetify.breakpoint. smAndDown}"
             >
-              <label>Deskripsi Project</label>
+              <label class="required">Jenis Hari Libur</label>
             </v-col>
             <v-col
               cols="12"
@@ -54,10 +55,45 @@
             >
               <validation-provider
                 v-slot="{ errors }"
-                name="Description"
+                name="Jenis Hari Libur"
+                rules="required"
+              >
+                <v-radio-group
+                  v-model="formBody.holiday_type"
+                  :error-messages="errors"
+                >
+                  <v-radio
+                    v-for="n in holidayType"
+                    :key="n"
+                    :label="`${n}`"
+                    :value="n"
+                  />
+                </v-radio-group>
+              </validation-provider>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col
+              cols="12"
+              md="3"
+              sm="12"
+              :class="{'center py-2': $vuetify.breakpoint. smAndDown}"
+            >
+              <label class="required">Nama Hari Libur</label>
+            </v-col>
+            <v-col
+              cols="12"
+              md="9"
+              sm="12"
+              :class="{'py-0 pb-3': $vuetify.breakpoint. smAndDown}"
+            >
+              <validation-provider
+                v-slot="{ errors }"
+                name="Nama Hari Libur"
+                rules="required"
               >
                 <v-textarea
-                  v-model="formBody.projectDescription"
+                  v-model="formBody.holiday_name"
                   :error-messages="errors"
                   solo
                 />
@@ -91,8 +127,9 @@
 </template>
 <script>
   import { ValidationObserver, ValidationProvider } from 'vee-validate'
+  import { holidayType } from '@/utils/constantVariable'
   export default {
-    name: 'DialogFormMasterProject',
+    name: 'DialogFormHoliday',
     components: {
       ValidationObserver,
       ValidationProvider,
@@ -114,6 +151,8 @@
     data () {
       return {
         show: this.showDialog,
+        formatDateTime: 'YYYY-MM-DDTHH:MM:SSZ',
+        holidayType: holidayType,
       }
     },
     computed: {
@@ -146,13 +185,13 @@
           return
         }
         if (!this.isEdit) {
-          await this.$store.dispatch('project/createProject', this.formBody)
+          await this.$store.dispatch('holiday/createHolidayDate', this.formBody)
         } else {
           const data = {
             id: this.formBody._id,
             body: this.formBody,
           }
-          await this.$store.dispatch('project/updateProject', data)
+          await this.$store.dispatch('holiday/updateHolidayDate', data)
         }
         this.$emit('update:show', false)
         this.$emit('update:refreshPage', true)
