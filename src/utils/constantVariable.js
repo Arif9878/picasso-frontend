@@ -76,6 +76,11 @@ export const menuItems = [
                 title: 'project',
                 to: 'project',
             },
+            {
+                icon: '',
+                title: 'holiday',
+                to: 'holiday',
+            },
         ],
     },
     {
@@ -83,6 +88,11 @@ export const menuItems = [
         title: 'broadcast_message',
         to: '/broadcast-message',
     },
+]
+
+export const holidayType = [
+    'Libur Nasional',
+    'Cuti Bersama',
 ]
 
 export const managerCategory = [

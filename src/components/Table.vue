@@ -11,6 +11,9 @@
       :loading="isLoading"
       hide-default-footer
     >
+      <template v-slot:item.holiday_date="{ item }">
+        {{ formatDate(item.holiday_date) }}
+      </template>
       <template v-slot:item.actions="props">
         <v-btn
           v-if="onUpdateClick"
@@ -111,6 +114,12 @@
       onDownloadPdfClick: {
         type: Function,
         default: null,
+      },
+    },
+    methods: {
+      formatDate (date) {
+        date = date ? this.$moment(date).format('DD MMMM YYYY') : '-'
+        return date
       },
     },
   }

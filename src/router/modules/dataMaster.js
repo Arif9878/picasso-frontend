@@ -29,6 +29,13 @@ const dataMasterRouter = {
               noCache: true,
           },
       },
+      {
+          path: '/master/holiday',
+          component: () => import('@/views/masterData/holiday/list'),
+          meta: {
+              noCache: true,
+          },
+      },
     ],
 }
 
