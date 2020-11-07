@@ -112,7 +112,7 @@
                 block
                 @click="handleSave"
               >
-                {{ isEdit ? 'Edit': 'Simpan' }}
+                Simpan
               </v-btn>
             </v-col>
           </v-card-actions>

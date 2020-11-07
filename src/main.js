@@ -10,6 +10,7 @@ import './plugins/vee-validate'
 import vuetify from './plugins/vuetify'
 import i18n from './plugins/i18n'
 import moment from 'moment'
+import 'moment/locale/id'
 
 import './permission' // permission control
 import VueMoment from 'vue-moment'

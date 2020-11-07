@@ -89,7 +89,6 @@
 <script>
   export default {
     name: 'CostumeCard',
-
     props: {
       avatar: {
         type: String,
