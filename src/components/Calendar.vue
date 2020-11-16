@@ -98,6 +98,10 @@
         type: Array,
         default: null,
       },
+      queryYear: {
+        type: Number,
+        default: null,
+      },
     },
     data: () => ({
       focus: '',
@@ -118,6 +122,13 @@
     watch: {
       list (value) {
         this.updateCalender(value)
+      },
+      focus (value) {
+        const d = new Date(value)
+        const n = d.getFullYear()
+        if (this.queryYear !== n) {
+          this.$emit('update:year', n)
+        }
       },
     },
     mounted () {
@@ -211,4 +222,7 @@
             .v-calendar-weekly__day-label
                 .v-btn
                     color: black !important
+    .v-calendar-daily_head-day-label
+      .v-btn
+        color: black !important
 </style>
