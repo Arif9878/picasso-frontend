@@ -51,6 +51,8 @@
           >
             <calendar
               :list="list"
+              :query-year="listQuery.year"
+              :year.sync="listQuery.year"
               :selected-open.sync="selectedCalender"
               :edit-form.sync="form"
             />
@@ -59,6 +61,19 @@
             v-else
             flat
           >
+            <v-row class="mr-0">
+              <v-col class="pa-0 pb-0">
+                <div class="float-right">
+                  <v-select
+                    v-model="listQuery.year"
+                    :items="items"
+                    hide-details
+                    outlined
+                    label="Pilih Tahun"
+                  />
+                </div>
+              </v-col>
+            </v-row>
             <table-component
               :list="list"
               :query="listQuery"
@@ -106,12 +121,11 @@
       isRefresh: false,
       isEdit: false,
       idData: null,
-      form: {
-        holiday_date: '',
-      },
+      form: {},
       tab: null,
       selectedCalender: false,
       listQuery: {
+        year: '',
         limit: 10,
         page: 1,
       },
@@ -122,6 +136,12 @@
         { text: 'Aksi', value: 'actions' },
       ],
     }),
+    computed: {
+      items () {
+        const year = new Date().getFullYear()
+        return Array.from({ length: year - 2000 }, (value, index) => 2018 + index)
+      },
+    },
     watch: {
       isRefresh (value) {
         if (value) {
@@ -134,12 +154,18 @@
         this.listQuery.page = 1
         this.handleSearch()
       },
+      'listQuery.year' (value) {
+        this.listQuery.year = value
+        this.handleSearch()
+      },
       selectedCalender (value) {
         this.showForm = true
         this.isEdit = true
       },
     },
     async mounted () {
+      const d = new Date()
+      this.listQuery.year = d.getFullYear()
       await this.handleSearch()
     },
     methods: {
@@ -149,6 +175,7 @@
         }
         const response = await this.$store.dispatch('holiday/getListHolidayDate', this.listQuery)
         this.totalPage = response._meta.totalPage
+        this.list = []
         if (response.results) {
           this.list = response.results
         }
@@ -158,6 +185,9 @@
       },
       handleAdd () {
         this.isEdit = false
+        this.form = {
+          holiday_date: '',
+        }
         this.showForm = true
       },
       handleUpdate (item) {

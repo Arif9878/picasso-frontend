@@ -92,7 +92,7 @@
                 name="Nama Hari Libur"
                 rules="required"
               >
-                <v-textarea
+                <v-text-field
                   v-model="formBody.holiday_name"
                   :error-messages="errors"
                   solo
@@ -177,7 +177,6 @@
       handleCancel () {
         this.$emit('update:show', false)
         this.$emit('update:form', {})
-        this.$refs.observer.reset()
       },
       async handleSave () {
         const valid = await this.$refs.observer.validate()
@@ -195,7 +194,7 @@
         }
         this.$emit('update:show', false)
         this.$emit('update:refreshPage', true)
-        this.$emit('update:form', {})
+        // this.$emit('update:form', {})
       },
     },
   }
