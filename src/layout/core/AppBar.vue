@@ -92,6 +92,7 @@
       to="/pages/user"
     >
       <v-icon>mdi-account</v-icon>
+      {{ detailUser.fullname }}
     </v-btn>
   </v-app-bar>
 </template>
@@ -152,6 +153,9 @@
     computed: {
       ...mapState('app', {
         drawer: state => state.drawer,
+      }),
+      ...mapState('user', {
+        detailUser: state => state.detailUser,
       }),
     },
 

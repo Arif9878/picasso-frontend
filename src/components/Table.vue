@@ -16,6 +16,19 @@
       </template>
       <template v-slot:item.actions="props">
         <v-btn
+          v-if="onMenuSetupClick"
+          class="mx-2"
+          fab
+          dark
+          small
+          color="primary"
+          @click="onMenuSetupClick(props.item)"
+        >
+          <v-icon dark>
+            mdi-menu
+          </v-icon>
+        </v-btn>
+        <v-btn
           v-if="onUpdateClick"
           class="mx-2"
           fab
@@ -104,6 +117,10 @@
         default: null,
       },
       onDeleteClick: {
+        type: Function,
+        default: null,
+      },
+      onMenuSetupClick: {
         type: Function,
         default: null,
       },

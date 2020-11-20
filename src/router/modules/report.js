@@ -7,7 +7,8 @@ const reportRouter = {
         icon: 'dashboard',
         roles: ['admin'],
     },
-    children: [{
+    children: [
+        {
             path: '/report/monthly',
             component: () => import('@/views/report/list'),
             meta: {
@@ -17,6 +18,13 @@ const reportRouter = {
         {
             path: '/report/spj',
             component: () => import('@/views/underConstruction/index'),
+            meta: {
+                noCache: true,
+            },
+        },
+        {
+            path: '/report/:koorMonthly',
+            component: () => import('@/views/report/list'),
             meta: {
                 noCache: true,
             },
