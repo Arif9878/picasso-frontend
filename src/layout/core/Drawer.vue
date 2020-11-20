@@ -54,7 +54,7 @@
       <div />
       <template v-for="(item, i) in computedItems">
         <item-group
-          v-if="item.children"
+          v-if="item.children && item.group !== null"
           :key="`group-${i}`"
           :item="item"
         />
@@ -88,9 +88,9 @@
     mapState,
     mapGetters,
   } from 'vuex'
-  import {
-    menuItems,
-  } from '@/utils/constantVariable'
+  // import {
+  //   menuItems,
+  // } from '@/utils/constantVariable'
   export default {
     name: 'DashboardCoreDrawer',
 
@@ -101,14 +101,17 @@
       },
     },
 
-    data: () => ({
-      menuItems,
-    }),
+    // data: () => ({
+    //   menuItems,
+    // }),
 
     computed: {
       ...mapState('app', {
         barColor: state => state.barColor,
         barImage: state => state.barImage,
+      }),
+      ...mapState('user', {
+        menuItems: state => state.menuItems,
       }),
       ...mapGetters('permissions', [
         'permission_routes',

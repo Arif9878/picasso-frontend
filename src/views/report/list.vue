@@ -138,6 +138,10 @@
 </template>
 
 <script>
+  import {
+    mapState,
+    mapGetters,
+  } from 'vuex'
   import FileSaver from 'file-saver'
   export default {
     name: 'ListReport',
@@ -161,6 +165,7 @@
           manager_category: null,
           page_size: 100,
         },
+        listQueryDivisi: {},
         tableHeader: [
           { text: 'Nama Lengkap', value: 'fullname' },
           { text: 'Divisi', value: 'divisi' },
@@ -171,10 +176,29 @@
         ],
       }
     },
+    computed: {
+      ...mapState('app', {
+        barColor: state => state.barColor,
+        barImage: state => state.barImage,
+      }),
+      ...mapState('user', {
+        detailUser: state => state.detailUser,
+      }),
+      ...mapGetters('permissions', [
+        'permission_routes',
+      ]),
+    },
     watch: {
       'listQueryUser.search' (value) {
         if ((value === undefined) && (value.length <= 2)) return
         this.handleSearchUser()
+      },
+      async '$route.params' (value) {
+        this.listQueryDivisi.divisi = ''
+        if (value.koorMonthly === 'koorMonthly') {
+          this.listQueryDivisi.search = this.detailUser.divisi
+        }
+        await this.handleGetDivisi()
       },
     },
     async mounted () {
@@ -190,7 +214,10 @@
         await this.handleSearchUser()
       },
       async handleGetDivisi () {
-        const response = await this.$store.dispatch('divisi/getListDivisi')
+        if (this.$route.params.koorMonthly === 'koorMonthly') {
+          this.listQueryDivisi.search = this.detailUser.divisi
+        }
+        const response = await this.$store.dispatch('divisi/getListDivisi', this.listQueryDivisi)
         this.listDivisiTab = response.results
       },
       async handleSearchUser () {

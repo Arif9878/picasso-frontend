@@ -14,9 +14,10 @@ import {
 export const state = {
     token: getToken(),
     refreshToken: getRefreshToken(),
-    name: '',
+    detailUser: '',
     avatar: '',
     introduction: '',
+    menuItems: [],
     roles: [],
     routes: [],
     addRoutes: [],
@@ -26,9 +27,18 @@ export const getters = {
   roles: (state, getters) => {
       return state.roles
   },
+  detailUser: (state, getters) => {
+      return state.detailUser
+  },
+  menuItems: (state, getters) => {
+      return state.menuItems
+  },
 }
 
 export const mutations = {
+    SET_DETAIL_USER: (state, detailUser) => {
+        state.detailUser = detailUser
+    },
     SET_TOKEN: (state, token) => {
         state.token = token
     },
@@ -37,6 +47,9 @@ export const mutations = {
     },
     SET_ROLES: (state, roles) => {
         state.roles = roles
+    },
+    SET_MENU_ITEM: (state, menuItems) => {
+        state.menuItems = menuItems
     },
 }
 
@@ -83,15 +96,30 @@ export const actions = {
     },
     getInfo ({ commit, state }) {
       return new Promise((resolve, reject) => {
-          const data = {
-              roles: ['admin'],
-          }
-          const {
-              roles,
-          } = data
+        requestServer('/user/info', 'GET').then((response) => {
+            const data = {
+                roles: ['admin'],
+            }
+            const {
+                roles,
+            } = data
 
-          commit('SET_ROLES', roles)
-          resolve(data)
+            commit('SET_DETAIL_USER', response.data)
+            commit('SET_ROLES', roles)
+            resolve(data)
+        }).catch((error) => {
+            reject(error)
+        })
+      })
+    },
+    async getListMenuUser ({ commit }, params) {
+      return new Promise((resolve, reject) => {
+        requestServer('/menu/user/list/', 'GET').then((response) => {
+            commit('SET_MENU_ITEM', response)
+            resolve(response)
+        }).catch((error) => {
+            reject(error)
+        })
       })
     },
     async getListUser ({ commit }, params) {
@@ -125,6 +153,17 @@ export const actions = {
         } catch (error) {
             return error.response
         }
+    },
+    resetToken ({ commit, state, dispatch }) {
+        return new Promise((resolve, reject) => {
+            // logout(state.token).then(() => {
+            commit('SET_TOKEN', '')
+            commit('SET_REFRESH_TOKEN', '')
+            commit('SET_ROLES', [])
+            removeToken()
+            resetRouter()
+            resolve()
+        })
     },
     logout ({ commit, state, dispatch }) {
         return new Promise((resolve, reject) => {

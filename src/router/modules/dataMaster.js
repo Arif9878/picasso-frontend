@@ -36,6 +36,13 @@ const dataMasterRouter = {
               noCache: true,
           },
       },
+      {
+          path: '/master/menu',
+          component: () => import('@/views/masterData/menu/list'),
+          meta: {
+              noCache: true,
+          },
+      },
     ],
 }
 

@@ -13,10 +13,13 @@ export const menuItems = [
         icon: 'mdi-view-dashboard',
         title: 'dashboard',
         to: '/',
+        group: null,
+        children: [],
     },
     {
         icon: 'mdi-account',
         title: 'hero_jds',
+        to: null,
         group: '/user',
         children: [
             {
