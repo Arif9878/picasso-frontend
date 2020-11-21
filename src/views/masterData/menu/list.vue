@@ -26,25 +26,26 @@
     </v-card>
     <costume-card
       icon="mdi-clipboard-text"
-      title="Non ASN"
+      title="Tipe Menu List"
       class="px-5 py-3"
     >
       <table-component
         :list="list"
         :query="listQuery"
-        :limit="listQuery.page_size"
+        :limit="listQuery.limit"
         :table-headers="tableHeader"
         :on-delete-click="handleDelete"
         :on-update-click="handleUpdate"
+        :on-menu-setup-click="handleMenuList"
       />
       <pagination
         :total="totalPage"
         :page.sync="listQuery.page"
-        :limit.sync="listQuery.page_size"
+        :limit.sync="listQuery.limit"
         :on-next="onNext"
       />
     </costume-card>
-    <dialog-form-user
+    <dialog-form-master-menu-type
       :show-dialog="showForm"
       :show.sync="showForm"
       :refresh-page.sync="isRefresh"
@@ -56,57 +57,49 @@
       :show-dialog="showDelete"
       :show.sync="showDelete"
       :refresh-page.sync="isRefresh"
-      :store-path-delete="'user/deleteUser'"
+      :store-path-delete="'project/deleteProject'"
       :id-data="idData"
+    />
+    <list-menu
+      :show-dialog="showListMenu"
+      :show.sync="showListMenu"
+      :refresh-page.sync="isRefresh"
+      :menu-type-id="menuTypeId"
+      :list-menu="listMenu"
     />
   </div>
 </template>
 
 <script>
-  import {
-    mapState,
-  } from 'vuex'
   export default {
-    name: 'ListUser',
-    data () {
-      return {
-        list: [],
-        totalPage: 0,
-        showForm: false,
-        isEdit: false,
-        isRefresh: false,
-        showDelete: false,
-        idData: null,
-        form: {
-          birth_date: null,
-          join_date: null,
-          resign_date: null,
-        },
-        listQuery: {
-          page_size: 10,
-          page: 1,
-          is_active: true,
-          struktural: '',
-          search: '',
-        },
-        tableHeader: [
-          { text: 'Email', value: 'email', sortable: false },
-          { text: 'Nama Lengkap', value: 'fullname' },
-          { text: 'Divisi', value: 'divisi' },
-          { text: 'Jabatan', value: 'jabatan' },
-          { text: 'Aksi', value: 'actions' },
-        ],
-      }
-    },
-    computed: {
-      ...mapState('user', {
-        detailUser: state => state.detailUser,
-      }),
-    },
+    name: 'ListProject',
+    data: () => ({
+      list: [],
+      totalPage: 0,
+      showForm: false,
+      showDelete: false,
+      isRefresh: false,
+      isEdit: false,
+      showListMenu: false,
+      idData: null,
+      form: {},
+      listQuery: {
+        limit: 10,
+        page: 1,
+      },
+      listMenu: [],
+      menuTypeId: null,
+      tableHeader: [
+        { text: 'Menu Type', value: 'menu_type', sortable: false },
+        { text: 'Deskripsi Menu', value: 'description' },
+        { text: 'Aksi', value: 'actions' },
+      ],
+    }),
     watch: {
       isRefresh (value) {
         if (value) {
           this.handleSearch()
+          this.handleGetMenu(this.menuTypeId)
           this.isRefresh = false
         }
       },
@@ -115,38 +108,24 @@
         this.listQuery.page = 1
         this.handleSearch()
       },
-      async '$route.params' (value) {
-        this.listQuery.struktural = ''
-        if (value.asn === 'asn') {
-          this.listQuery.struktural = true
-          this.listQuery.is_active = true
-        } else if (value.asn === 'alumni') {
-          this.listQuery.is_active = false
-        } else {
-          this.listQuery.is_active = true
-        }
-        await this.handleSearch()
-      },
     },
     async mounted () {
       await this.handleSearch()
     },
     methods: {
       async handleSearch () {
-        this.listQuery.struktural = ''
-        if (this.$route.params.asn === 'asn') {
-          this.listQuery.struktural = true
-          this.listQuery.is_active = true
-        } else if (this.$route.params.asn === 'alumni') {
-          this.listQuery.is_active = false
-        } else {
-          this.listQuery.is_active = true
-        }
-        const response = await this.$store.dispatch('user/getListUser', this.listQuery)
+        const response = await this.$store.dispatch('menu/getListMenuType', this.listQuery)
         this.totalPage = response._meta.totalPage
         if (response.results) {
           this.list = response.results
         }
+      },
+      async handleGetMenu (menuTypeId) {
+        const params = {
+          menu_type: menuTypeId,
+        }
+        const response = await this.$store.dispatch('menu/getListMenu', params)
+        this.listMenu = response
       },
       async onNext () {
         await this.handleSearch()
@@ -154,6 +133,11 @@
       handleAdd () {
         this.isEdit = false
         this.showForm = true
+      },
+      handleMenuList (item) {
+        this.handleGetMenu(item.id)
+        this.menuTypeId = item.id
+        this.showListMenu = true
       },
       handleUpdate (item) {
         this.showForm = true

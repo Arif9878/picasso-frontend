@@ -293,6 +293,38 @@
               sm="12"
               :class="{'center py-4': $vuetify.breakpoint. smAndDown}"
             >
+              <label>Tipe Menu</label>
+            </v-col>
+            <v-col
+              cols="12"
+              md="10"
+              sm="12"
+              :class="{'py-0 pb-3': $vuetify.breakpoint. smAndDown}"
+            >
+              <validation-provider
+                v-slot="{ errors }"
+                name="Tipe Menu"
+              >
+                <v-select
+                  v-model="formBody.menu"
+                  :items="typeMenuList"
+                  :error-messages="errors"
+                  :return-object="false"
+                  item-value="id"
+                  item-text="menu_type"
+                  menu-props="auto"
+                  solo
+                />
+              </validation-provider>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col
+              cols="12"
+              md="2"
+              sm="12"
+              :class="{'center py-4': $vuetify.breakpoint. smAndDown}"
+            >
               <label>Alamat</label>
             </v-col>
             <v-col
@@ -508,6 +540,7 @@
         show: this.showDialog,
         divisiList: [],
         jabatanList: [],
+        typeMenuList: [],
         managerCategory: managerCategory,
         formatDate: 'YYYY-MM-DD',
         formatDateTime: 'YYYY-MM-DD HH:MM:SS',
@@ -546,6 +579,7 @@
     },
     async mounted () {
       await this.handleGetListDivisi()
+      await this.getListMenuType()
     },
     methods: {
       async handleGetListDivisi () {
@@ -564,6 +598,10 @@
       async getListJabatanByDivisi (item) {
         const response = await this.$store.dispatch('jabatan/getListJabatanByDivisi', item)
         this.jabatanList = response.results
+      },
+      async getListMenuType () {
+        const response = await this.$store.dispatch('menu/getListMenuType')
+        this.typeMenuList = response.results
       },
       handleCancel () {
         this.$emit('update:show', false)

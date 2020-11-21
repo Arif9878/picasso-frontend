@@ -8,7 +8,7 @@ const userRouter = {
     active: false,
     children: [
 		{
-			path: '/user/asn',
+			path: '/user/magang',
 			component: () => import('@/views/underConstruction/index'),
 			meta: {
 				noCache: true,
@@ -22,8 +22,8 @@ const userRouter = {
 			},
 		},
 		{
-			path: '/user/magang',
-			component: () => import('@/views/underConstruction/index'),
+			path: '/user/:asn',
+			component: () => import('@/views/user/list'),
 			meta: {
 				noCache: true,
 			},
