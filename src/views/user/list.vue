@@ -117,11 +117,11 @@
       },
       async '$route.params' (value) {
         this.listQuery.struktural = ''
-        if (value.alumni === 'alumni') {
-          this.listQuery.is_active = false
-        } else if (value.alumni === 'asn') {
+        if (value.asn === 'asn') {
           this.listQuery.struktural = true
           this.listQuery.is_active = true
+        } else if (value.asn === 'alumni') {
+          this.listQuery.is_active = false
         } else {
           this.listQuery.is_active = true
         }
@@ -134,11 +134,11 @@
     methods: {
       async handleSearch () {
         this.listQuery.struktural = ''
-        if (this.$route.params.alumni === 'alumni') {
-          this.listQuery.is_active = false
-        } else if (this.$route.params.asn === 'asn') {
+        if (this.$route.params.asn === 'asn') {
           this.listQuery.struktural = true
           this.listQuery.is_active = true
+        } else if (this.$route.params.asn === 'alumni') {
+          this.listQuery.is_active = false
         } else {
           this.listQuery.is_active = true
         }
