@@ -41,7 +41,7 @@
       <v-icon>mdi-view-dashboard</v-icon>
     </v-btn>
 
-    <v-menu
+    <!--     <v-menu
       bottom
       left
       offset-y
@@ -83,7 +83,7 @@
           </app-bar-item>
         </div>
       </v-list>
-    </v-menu>
+    </v-menu> -->
 
     <v-btn
       class="ml-2"
@@ -99,7 +99,7 @@
 
 <script>
   // Components
-  import { VHover, VListItem } from 'vuetify/lib'
+  // import { VHover, VListItem } from 'vuetify/lib'
 
   // Utilities
   import { mapState, mapMutations } from 'vuex'
@@ -108,29 +108,29 @@
     name: 'DashboardCoreAppBar',
 
     components: {
-      AppBarItem: {
-        render (h) {
-          return h(VHover, {
-            scopedSlots: {
-              default: ({ hover }) => {
-                return h(VListItem, {
-                  attrs: this.$attrs,
-                  class: {
-                    'black--text': !hover,
-                    'white--text secondary elevation-12': hover,
-                  },
-                  props: {
-                    activeClass: '',
-                    dark: hover,
-                    link: true,
-                    ...this.$attrs,
-                  },
-                }, this.$slots.default)
-              },
-            },
-          })
-        },
-      },
+      // AppBarItem: {
+      //   render (h) {
+      //     return h(VHover, {
+      //       scopedSlots: {
+      //         default: ({ hover }) => {
+      //           return h(VListItem, {
+      //             attrs: this.$attrs,
+      //             class: {
+      //               'black--text': !hover,
+      //               'white--text secondary elevation-12': hover,
+      //             },
+      //             props: {
+      //               activeClass: '',
+      //               dark: hover,
+      //               link: true,
+      //               ...this.$attrs,
+      //             },
+      //           }, this.$slots.default)
+      //         },
+      //       },
+      //     })
+      //   },
+      // },
     },
 
     props: {
