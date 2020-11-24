@@ -107,7 +107,7 @@
             })
             .catch((e) => {
               this.loading = false
-              this.$refs.form.reset()
+              // this.$refs.form.reset()
             })
         }
       },
