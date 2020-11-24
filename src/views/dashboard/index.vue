@@ -34,9 +34,7 @@
       }
     },
     mounted () {
-      window.addEventListener('load', () => {
-        this.initViz()
-      })
+      this.initViz()
     },
     methods: {
       initViz () {
