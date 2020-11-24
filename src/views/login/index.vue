@@ -38,7 +38,7 @@
                 @keyup.enter.native="handleLogin"
               />
               <v-btn
-                color="primary"
+                color="#16A75C"
                 class="btn solid"
                 @click="handleLogin"
               >
