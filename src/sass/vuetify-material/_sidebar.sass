@@ -24,6 +24,12 @@
 .v-application--is-ltr .v-list-item__icon:last-of-type:not(:only-child)
   margin-right: 2px
 
+.v-list-group--active > .v-list-group__header > .v-list-group__header__append-icon .v-icon
+  transform: rotate(90deg)
+
+.v-list-group--active > .v-list-group__header.v-list-group__header--sub-group > .v-list-group__header__prepend-icon .v-icon
+  transform: rotate(90deg)
+
 .v-list--nav.v-list--dense .v-list-item:not(:last-child):not(:only-child),
 .v-list--nav .v-list-item--dense:not(:last-child):not(:only-child),
 .v-list--rounded.v-list--dense .v-list-item:not(:last-child):not(:only-child),
@@ -57,6 +63,12 @@
   .v-list-item__content
     transition: all 0.3s linear 0s
 
+// .theme--light.v-list-item--active
+//   color: #fff!important
+
+.theme--light.v-list-item__icon
+  color: #fff !important
+
 .v-list--nav
   padding-left: 15px
   padding-right: 15px
@@ -66,3 +78,24 @@
   border-color: rgba(181, 181, 181, 0.1)
   width: calc(100% - 30px)
   margin-left: 15px
+
+.v-list-group--active.theme--light
+  background: #16a75c
+
+.theme--light.v-navigation-drawer
+  background-color: #1FB767
+  // background-image: linear-gradient(-45deg, #16A75C 0%, #42A5F5 100%)
+
+.primary_dark.white--text.v-list-item--active
+  width: 250px
+  top: 0
+
+.child-sub-group
+  width: 100% !important
+
+.child-sub-group.primary_dark
+  background-color: white
+
+.v-list-item--link:before
+  right: -20px
+  top: 0
