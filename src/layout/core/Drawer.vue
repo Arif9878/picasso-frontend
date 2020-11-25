@@ -2,13 +2,13 @@
   <v-navigation-drawer
     id="core-navigation-drawer"
     v-model="drawer"
-    :dark="barColor !== '#525252, #525252'"
+    :dark="barColor !== '#16A75C, #A1D5AB'"
     :expand-on-hover="expandOnHover"
     :right="$vuetify.rtl"
     :src="barImage"
     mobile-breakpoint="960"
     app
-    width="260"
+    width="250"
     v-bind="$attrs"
   >
     <template v-slot:img="props">
@@ -56,6 +56,7 @@
         <item-group
           v-if="item.children && item.group !== null"
           :key="`group-${i}`"
+          :class="$vuetify.theme.dark ? 'theme--dark':'theme--light'"
           :item="item"
         />
         <item

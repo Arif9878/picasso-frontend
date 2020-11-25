@@ -3,7 +3,7 @@
     :group="group"
     :prepend-icon="item.icon"
     :sub-group="subGroup"
-    append-icon="mdi-menu-down"
+    append-icon="mdi-chevron-right"
     :color="barColor !== 'rgba(255, 255, 255, 1), rgba(255, 255, 255, 0.7)' ? 'white' : 'grey darken-1'"
   >
     <template v-slot:activator>
@@ -37,6 +37,7 @@
       <item
         v-else
         :key="`item-${i}`"
+        class="child-sub-group"
         :item="child"
         text
       />

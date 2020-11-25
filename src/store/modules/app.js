@@ -1,6 +1,6 @@
 
 export const state = {
-  barColor: 'rgba(0, 0, 0, .8), rgba(0, 0, 0, .8)',
+  barColor: '#16A75C, #A1D5AB',
   barImage: '',
   drawer: null,
 }
