@@ -136,12 +136,6 @@
       },
     },
 
-    watch: {
-      '$vuetify' (value) {
-        console.log(value)
-      },
-    },
-
     methods: {
       mapItem (item) {
         return {
