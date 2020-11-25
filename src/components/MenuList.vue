@@ -124,9 +124,6 @@
       show (value) {
         this.$emit('update:show', value)
       },
-      menuTypeId (val) {
-        console.log(val)
-      },
       isRefresh (value) {
         if (value) {
           this.$emit('update:refreshPage', true)
