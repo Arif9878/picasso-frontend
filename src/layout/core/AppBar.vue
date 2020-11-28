@@ -3,7 +3,7 @@
     id="app-bar"
     absolute
     app
-    color="white"
+    :class="$vuetify.theme.themes"
     style="left: 0px;"
     flat
     height="75"

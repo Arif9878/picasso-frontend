@@ -1,33 +1,18 @@
 <template>
   <div class="ma-3">
     <v-row>
-      <v-col />
-      <v-col>
-        <div class="float-right">
-          <v-btn
-            color="primary"
-            @click="handleAdd"
-          >
-            <v-icon v-text="'mdi-plus'" />
-            {{ $t('add') }}
-          </v-btn>
-        </div>
+      <v-col class="ma-4">
+        <search
+          :list-query="listQuery"
+          :handle-search="handleSearch"
+        />
       </v-col>
     </v-row>
-    <v-card>
-      <v-row>
-        <v-col class="ma-4">
-          <search
-            :list-query="listQuery"
-            :handle-search="handleSearch"
-          />
-        </v-col>
-      </v-row>
-    </v-card>
     <costume-card
       icon="mdi-clipboard-text"
       title="Project List"
-      class="px-5 py-3"
+      class="px-5 py-0"
+      :on-add="handleAdd"
     >
       <table-component
         :list="list"
