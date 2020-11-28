@@ -8,49 +8,13 @@
     :src="barImage"
     mobile-breakpoint="960"
     cla
-    style="border-radius: 5px;top:25px;"
     app
     absolute
     rounded="lg"
     width="200"
     v-bind="$attrs"
+    style="border-radius: 5px;left:15px;top:100px;height:80vh;position:fixed;"
   >
-    <!-- <template v-slot:img="props">
-      <v-img
-        :gradient="`to bottom, ${barColor}`"
-        v-bind="props"
-      />
-    </template>
-
-    <v-divider class="mb-1" /> -->
-    <!--
-    <v-list
-      dense
-      nav
-    >
-      <v-list-item>
-        <v-list-item-avatar
-          class="align-self-center"
-          color="white"
-          contain
-        >
-          <v-img
-            src="favicon.ico"
-            max-height="30"
-          />
-        </v-list-item-avatar>
-
-        <v-list-item-content>
-          <v-list-item-title
-            class="display-1 ma-2 py-2"
-            v-text="profile.title"
-          />
-        </v-list-item-content>
-      </v-list-item>
-    </v-list>
-
-    <v-divider class="mb-2" /> -->
-
     <v-list
       expand
       nav
