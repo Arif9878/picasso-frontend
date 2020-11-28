@@ -3,12 +3,14 @@
     id="app-bar"
     absolute
     app
-    color="transparent"
+    color="white"
+    style="left: 0px;"
     flat
     height="75"
   >
     <v-btn
-      class="mr-3"
+      v-if="$vuetify.breakpoint.xs"
+      class="mr-3 d-xl-none"
       elevation="1"
       fab
       small
@@ -22,6 +24,20 @@
         mdi-dots-vertical
       </v-icon>
     </v-btn>
+
+    <div>
+      <v-avatar
+        class="mr-10"
+        color="white darken-1"
+        size="32"
+      >
+        <img
+          src="favicon.ico"
+          alt="digiteam"
+        >
+      </v-avatar>
+      {{ detailUser.fullname }}
+    </div>
 
     <v-toolbar-title
       class="hidden-sm-and-down font-weight-light"
@@ -41,7 +57,7 @@
       <v-icon>mdi-view-dashboard</v-icon>
     </v-btn>
 
-    <!--     <v-menu
+    <!-- <v-menu
       bottom
       left
       offset-y
@@ -69,7 +85,6 @@
           </v-badge>
         </v-btn>
       </template>
-
       <v-list
         :tile="false"
         nav
@@ -89,10 +104,10 @@
       class="ml-2"
       min-width="0"
       text
-      to="/pages/user"
+      @click="handleLogout"
     >
-      <v-icon>mdi-account</v-icon>
-      {{ detailUser.fullname }}
+      <v-icon>mdi-logout</v-icon>
+      {{ this.$t('logout') }}
     </v-btn>
   </v-app-bar>
 </template>
@@ -163,6 +178,10 @@
       ...mapMutations('app', {
         setDrawer: 'SET_DRAWER',
       }),
+      handleLogout () {
+        this.$store.dispatch('user/logout')
+        this.$router.push(`/login?redirect=${this.$route.fullPath}`)
+      },
     },
   }
 </script>

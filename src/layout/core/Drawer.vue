@@ -7,51 +7,19 @@
     :right="$vuetify.rtl"
     :src="barImage"
     mobile-breakpoint="960"
+    cla
     app
-    width="250"
+    absolute
+    rounded="lg"
+    width="200"
     v-bind="$attrs"
+    style="border-radius: 5px;left:15px;top:100px;height:80vh;position:fixed;"
   >
-    <template v-slot:img="props">
-      <v-img
-        :gradient="`to bottom, ${barColor}`"
-        v-bind="props"
-      />
-    </template>
-
-    <v-divider class="mb-1" />
-
-    <v-list
-      dense
-      nav
-    >
-      <v-list-item>
-        <v-list-item-avatar
-          class="align-self-center"
-          color="white"
-          contain
-        >
-          <v-img
-            src="favicon.ico"
-            max-height="30"
-          />
-        </v-list-item-avatar>
-
-        <v-list-item-content>
-          <v-list-item-title
-            class="display-1 ma-2 py-2"
-            v-text="profile.title"
-          />
-        </v-list-item-content>
-      </v-list-item>
-    </v-list>
-
-    <v-divider class="mb-2" />
-
     <v-list
       expand
       nav
+      class="pl-0"
     >
-      <div />
       <template v-for="(item, i) in computedItems">
         <item-group
           v-if="item.children && item.group !== null"
@@ -67,19 +35,6 @@
       </template>
       <div />
     </v-list>
-    <template v-slot:append>
-      <v-list-item
-        @click="handleLogout"
-      >
-        <v-list-item-icon>
-          <v-icon v-text="'mdi-logout'" />
-        </v-list-item-icon>
-
-        <v-list-item-content>
-          <v-list-item-title v-text="$t('logout')" />
-        </v-list-item-content>
-      </v-list-item>
-    </template>
   </v-navigation-drawer>
 </template>
 
@@ -143,10 +98,6 @@
           children: item.children ? item.children.map(this.mapItem) : undefined,
           title: this.$t(item.title),
         }
-      },
-      handleLogout () {
-        this.$store.dispatch('user/logout')
-        this.$router.push(`/login?redirect=${this.$route.fullPath}`)
       },
     },
   }

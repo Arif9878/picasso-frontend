@@ -1,91 +1,89 @@
 <template>
   <div class="ma-3">
-    <v-card>
-      <v-row class="mb-n14 ma-1">
-        <v-col
-          cols="12"
-          sm="6"
+    <v-row class="mb-n14 ma-1">
+      <v-col
+        cols="12"
+        sm="6"
+      >
+        <v-label
+          class="title"
         >
-          <v-label
-            class="title"
-          >
-            {{ $t('input_date_report') }}:
-          </v-label>
-          <date-picker
-            :format-date="formatDate"
-            :label="'Tanggal Awal'"
-            :date-value="listQueryUser.start_date"
-            :value-date.sync="listQueryUser.start_date"
-            @changeDate="listQueryUser.start_date = $event"
-          />
-        </v-col>
-        <v-col
-          cols="12"
-          sm="6"
+          {{ $t('input_date_report') }}:
+        </v-label>
+        <date-picker
+          :format-date="formatDate"
+          :label="'Tanggal Awal'"
+          :date-value="listQueryUser.start_date"
+          :value-date.sync="listQueryUser.start_date"
+          @changeDate="listQueryUser.start_date = $event"
+        />
+      </v-col>
+      <v-col
+        cols="12"
+        sm="6"
+      >
+        <br>
+        <date-picker
+          :format-date="formatDate"
+          :label="'Tanggal Akhir'"
+          :date-value="listQueryUser.end_date"
+          :value-date.sync="listQueryUser.end_date"
+          @changeDate="listQueryUser.end_date = $event"
+        />
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col class="mb-n10 ma-4">
+        <search
+          :list-query="listQueryUser"
+          :handle-search="handleSearchUser"
+        />
+      </v-col>
+    </v-row>
+    <v-row class="ma-1">
+      <v-col
+        cols="12"
+        sm="4"
+      >
+        <v-btn
+          block
+          color="primary"
+          class="btn-search"
+          @click="onSearch"
         >
-          <br>
-          <date-picker
-            :format-date="formatDate"
-            :label="'Tanggal Akhir'"
-            :date-value="listQueryUser.end_date"
-            :value-date.sync="listQueryUser.end_date"
-            @changeDate="listQueryUser.end_date = $event"
-          />
-        </v-col>
-      </v-row>
-      <v-row>
-        <v-col class="mb-n10 ma-4">
-          <search
-            :list-query="listQueryUser"
-            :handle-search="handleSearchUser"
-          />
-        </v-col>
-      </v-row>
-      <v-row class="ma-1">
-        <v-col
-          cols="12"
-          sm="4"
+          {{ $t('search') }}
+        </v-btn>
+      </v-col>
+      <v-col
+        cols="12"
+        sm="4"
+      >
+        <v-btn
+          block
+          color="#4f4f4f"
+          class="btn-reset"
+          @click="onReset"
         >
-          <v-btn
-            block
-            color="primary"
-            class="btn-search"
-            @click="onSearch"
-          >
-            {{ $t('search') }}
-          </v-btn>
-        </v-col>
-        <v-col
-          cols="12"
-          sm="4"
+          {{ $t('reset') }}
+        </v-btn>
+      </v-col>
+      <v-col
+        cols="12"
+        sm="4"
+      >
+        <v-btn
+          block
+          color="primary"
+          @click="handleDialogDownloadExcel"
         >
-          <v-btn
-            block
-            color="#4f4f4f"
-            class="btn-reset"
-            @click="onReset"
-          >
-            {{ $t('reset') }}
-          </v-btn>
-        </v-col>
-        <v-col
-          cols="12"
-          sm="4"
-        >
-          <v-btn
-            block
-            color="primary"
-            @click="handleDialogDownloadExcel"
-          >
-            {{ $t('export_excel_attendance') }}
-          </v-btn>
-        </v-col>
-      </v-row>
-    </v-card>
+          {{ $t('export_excel_attendance') }}
+        </v-btn>
+      </v-col>
+    </v-row>
     <costume-card
       icon="mdi-clipboard-text"
       title="Laporan"
-      class="px-5 py-3"
+      class="px-5"
     >
       <v-tabs
         v-model="tab"

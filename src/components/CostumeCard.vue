@@ -143,5 +143,5 @@
       position: relative
       top: -40px
       transition: .3s ease
-      z-index: 1
+      z-index: 0
 </style>

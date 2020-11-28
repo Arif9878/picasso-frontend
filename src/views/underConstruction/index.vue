@@ -1,7 +1,6 @@
 <template>
-  <v-container
-    fluid
-    class="py-0 mb-5"
+  <div
+    class="ma-3"
   >
     <v-row
       align="center"
@@ -15,7 +14,7 @@
         <h3><strong>{{ $t('under-construction') }}</strong></h3>
       </v-col>
     </v-row>
-  </v-container>
+  </div>
 </template>
 
 <script>
