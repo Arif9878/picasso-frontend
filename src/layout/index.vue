@@ -2,7 +2,7 @@
   <div>
     <dashboard-core-app-bar />
 
-    <dashboard-core-drawer />
+    <!-- <dashboard-core-drawer /> -->
 
     <dashboard-core-view />
 
@@ -16,7 +16,7 @@
 
     components: {
       DashboardCoreAppBar: () => import('./core/AppBar'),
-      DashboardCoreDrawer: () => import('./core/Drawer'),
+      // DashboardCoreDrawer: () => import('./core/Drawer'),
       DashboardCoreSettings: () => import('./core/Settings'),
       DashboardCoreView: () => import('./core/View'),
     },

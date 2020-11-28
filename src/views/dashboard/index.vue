@@ -1,8 +1,5 @@
 <template>
-  <v-container
-    fluid
-    class="py-0 mb-5"
-  >
+  <div class="ma-3">
     <v-row>
       <v-col
         cols="12"
@@ -21,7 +18,7 @@
         style="min-height: 100vh;"
       />
     </costume-card>
-  </v-container>
+  </div>
 </template>
 
 <script>
