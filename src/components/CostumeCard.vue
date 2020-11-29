@@ -4,6 +4,18 @@
     :class="classes"
     class="v-card--material pa-3"
   >
+    <v-avatar
+      v-if="onAdd"
+      color="primary"
+      size="55"
+      class="float-right mr-8 flex-wrap"
+      style="margin: -30px auto 0;border-radius: 50%;"
+      @click="onAdd"
+    >
+      <v-icon dark>
+        mdi-plus
+      </v-icon>
+    </v-avatar>
     <div class="d-flex grow flex-wrap">
       <v-avatar
         v-if="avatar"
@@ -78,7 +90,6 @@
 
     <template v-if="$slots.actions">
       <v-divider class="mt-2" />
-
       <v-card-actions class="pb-0">
         <slot name="actions" />
       </v-card-actions>
@@ -113,6 +124,10 @@
       title: {
         type: String,
         default: '',
+      },
+      onAdd: {
+        type: Function,
+        default: null,
       },
     },
 

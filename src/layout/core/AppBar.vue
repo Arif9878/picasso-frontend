@@ -3,13 +3,13 @@
     id="app-bar"
     absolute
     app
-    color="white"
+    :class="$vuetify.theme.themes"
     style="left: 0px;"
     flat
     height="75"
   >
     <v-btn
-      v-if="$vuetify.breakpoint.xs"
+      v-if="$vuetify.breakpoint.xs || $vuetify.breakpoint.sm"
       class="mr-3 d-xl-none"
       elevation="1"
       fab

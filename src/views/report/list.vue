@@ -83,7 +83,7 @@
     <costume-card
       icon="mdi-clipboard-text"
       title="Laporan"
-      class="px-5"
+      class="px-5 py-0"
     >
       <v-tabs
         v-model="tab"

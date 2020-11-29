@@ -1,23 +1,10 @@
 <template>
   <div class="ma-3">
-    <v-row>
-      <v-col />
-      <v-col>
-        <div class="float-right">
-          <v-btn
-            color="primary"
-            @click="handleAdd"
-          >
-            {{ $t('send_broadcast') }}&nbsp;&nbsp;
-            <v-icon v-text="'mdi-send'" />
-          </v-btn>
-        </div>
-      </v-col>
-    </v-row>
     <costume-card
       icon="mdi-clipboard-text"
       title="Broadcast Message"
       class="px-5 py-3"
+      :on-add="handleAdd"
     >
       <table-component
         :list="list"
