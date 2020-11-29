@@ -1,17 +1,9 @@
 <template>
-  <div class="ma-3">
-    <v-row>
-      <v-col
-        cols="12"
-        class="pb-0"
-      >
-        <h3><strong>{{ dashboard }}</strong></h3>
-      </v-col>
-    </v-row>
+  <div>
     <costume-card
       icon="mdi-clipboard-text"
       title="Dashboard"
-      class="px-5 py-3"
+      class="pa-0 px-5 py-0"
     >
       <div
         id="vizContainer"
