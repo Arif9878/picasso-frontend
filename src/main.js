@@ -15,11 +15,24 @@ import 'moment/locale/id'
 import './permission' // permission control
 import VueMoment from 'vue-moment'
 import GoogleAuth from 'vue-google-authenticator'
+import * as Sentry from '@sentry/browser';
+import { Vue as VueIntegration } from '@sentry/integrations';
+
 moment.locale('id')
 
 Vue.use(GoogleAuth, {
   client_id: process.env.VUE_APP_SECRET_CLIENT_GOOGLE,
 })
+
+if (process.env.NODE_ENV === 'production') {
+  Sentry.init({
+    environment: process.env.VUE_APP_ERROR_ENVIRONMENT,
+    dsn: process.env.VUE_APP_SENTRY_DSN,
+    release: process.env.VUE_APP_VERSION,
+    integrations: [new VueIntegration({ Vue, attachProps: true })],
+  })
+}
+
 Vue.googleAuth().load()
 Vue.use(VueMoment, {
   moment,
