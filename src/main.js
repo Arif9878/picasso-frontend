@@ -15,8 +15,8 @@ import 'moment/locale/id'
 import './permission' // permission control
 import VueMoment from 'vue-moment'
 import GoogleAuth from 'vue-google-authenticator'
-import * as Sentry from '@sentry/browser';
-import { Vue as VueIntegration } from '@sentry/integrations';
+import * as Sentry from '@sentry/browser'
+import { Vue as VueIntegration } from '@sentry/integrations'
 
 moment.locale('id')
 
