@@ -25,7 +25,7 @@ export const actions = {
         } = query
         try {
             const response = await request({
-                url: `/logbook/report-by-user/download/${userId}`,
+                url: `/export-pdf/report-by-user/download/${userId}`,
                 method: 'GET',
                 params: params,
                 responseType: 'blob',
@@ -42,7 +42,7 @@ export const actions = {
         } = query
         try {
             const response = await request({
-                url: `/logbook/report-by-user/view/${userId}`,
+                url: `/export-pdf/report-by-user/view/${userId}`,
                 method: 'GET',
                 params: params,
             })
