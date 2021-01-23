@@ -16,7 +16,7 @@
               sm="12"
               :class="{'center py-4': $vuetify.breakpoint. smAndDown}"
             >
-              <label class="required">Nama Project</label>
+              <label class="required">Urutan Tupoksi Jabatan</label>
             </v-col>
             <v-col
               cols="12"
@@ -26,11 +26,12 @@
             >
               <validation-provider
                 v-slot="{ errors }"
-                name="Project Name"
+                name="Urutan Tupoksi Jabatan"
                 rules="required"
               >
                 <v-text-field
-                  v-model="formBody.projectName"
+                  v-model="formBody.sequence"
+                  type="number"
                   :error-messages="errors"
                   solo
                 />
@@ -44,7 +45,7 @@
               sm="12"
               :class="{'center py-4': $vuetify.breakpoint. smAndDown}"
             >
-              <label>Deskripsi Project</label>
+              <label class="required">Nama Tupoksi Jabatan</label>
             </v-col>
             <v-col
               cols="12"
@@ -54,10 +55,40 @@
             >
               <validation-provider
                 v-slot="{ errors }"
-                name="Description"
+                name="Nama Tupoksi Jabatan"
+                rules="required"
               >
-                <v-textarea
-                  v-model="formBody.projectDescription"
+                <v-text-field
+                  v-model="formBody.name_tupoksi"
+                  :error-messages="errors"
+                  solo
+                />
+              </validation-provider>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col
+              cols="12"
+              md="3"
+              sm="12"
+              :class="{'center py-4': $vuetify.breakpoint. smAndDown}"
+            >
+              <label class="required">Target Tupoksi Jabatan</label>
+            </v-col>
+            <v-col
+              cols="12"
+              md="9"
+              sm="12"
+              :class="{'py-0 pb-3': $vuetify.breakpoint. smAndDown}"
+            >
+              <validation-provider
+                v-slot="{ errors }"
+                name="Target Tupoksi Jabatan"
+                rules="required"
+              >
+                <v-text-field
+                  v-model="formBody.target_tupoksi"
+                  type="number"
                   :error-messages="errors"
                   solo
                 />
@@ -92,7 +123,7 @@
 <script>
   import { ValidationObserver, ValidationProvider } from 'vee-validate'
   export default {
-    name: 'DialogFormMasterProject',
+    name: 'DialogFormTupoksiJabatan',
     components: {
       ValidationObserver,
       ValidationProvider,
@@ -114,6 +145,7 @@
     data () {
       return {
         show: this.showDialog,
+        divisiList: [],
       }
     },
     watch: {
@@ -122,6 +154,13 @@
       },
       show (value) {
         this.$emit('update:show', value)
+        if (!value) this.$emit('update:form', {})
+      },
+      'formBody.sequence' (value) {
+        this.formBody.sequence = parseInt(value)
+      },
+      'formBody.target_tupoksi' (value) {
+        this.formBody.target_tupoksi = parseInt(value)
       },
     },
     methods: {
@@ -136,13 +175,13 @@
           return
         }
         if (!this.isEdit) {
-          await this.$store.dispatch('project/createProject', this.formBody)
+          await this.$store.dispatch('tupoksiJabatan/createTupoksiJabatan', this.formBody)
         } else {
           const data = {
-            id: this.formBody._id,
+            id: this.formBody.id,
             body: this.formBody,
           }
-          await this.$store.dispatch('project/updateProject', data)
+          await this.$store.dispatch('tupoksiJabatan/updateTupoksiJabatan', data)
         }
         this.$emit('update:show', false)
         this.$emit('update:refreshPage', true)

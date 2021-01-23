@@ -16,6 +16,16 @@
       </template>
       <template v-slot:item.actions="props">
         <v-btn
+          v-if="onMainDuties"
+          class="mx-2"
+          dark
+          small
+          color="primary"
+          @click="onMainDuties(props.item)"
+        >
+          Tambah Tupoksi Jabatan
+        </v-btn>
+        <v-btn
           v-if="onMenuSetupClick"
           class="mx-2"
           fab
@@ -129,6 +139,10 @@
         default: null,
       },
       onDownloadPdfClick: {
+        type: Function,
+        default: null,
+      },
+      onMainDuties: {
         type: Function,
         default: null,
       },
