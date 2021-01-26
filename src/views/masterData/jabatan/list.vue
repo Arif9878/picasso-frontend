@@ -21,6 +21,7 @@
         :table-headers="tableHeader"
         :on-delete-click="handleDelete"
         :on-update-click="handleUpdate"
+        :on-main-duties="handleMainDuties"
       />
       <pagination
         :total="totalPage"
@@ -44,6 +45,12 @@
       :store-path-delete="'jabatan/deleteJabatan'"
       :id-data="idData"
     />
+    <dialog-list-tupoksi-jabatan
+      :show-dialog="showDialogTupoksi"
+      :show.sync="showDialogTupoksi"
+      :detail-jabatan="detailJabatan"
+      :jabatan-detail.sync="detailJabatan"
+    />
   </div>
 </template>
 
@@ -57,6 +64,8 @@
       showDelete: false,
       isRefresh: false,
       isEdit: false,
+      showDialogTupoksi: false,
+      detailJabatan: {},
       idData: null,
       form: {},
       listQuery: {
@@ -67,7 +76,7 @@
         { text: 'Divisi', value: 'name_satuan_kerja', sortable: false },
         { text: 'Nama Jabatan', value: 'name_jabatan', sortable: false },
         { text: 'Deskripsi Jabatan', value: 'description' },
-        { text: 'Aksi', width: 150, value: 'actions' },
+        { text: 'Aksi', width: 300, value: 'actions' },
       ],
     }),
     watch: {
@@ -96,6 +105,10 @@
       },
       async onNext () {
         await this.handleSearch()
+      },
+      handleMainDuties (item) {
+        this.showDialogTupoksi = true
+        this.detailJabatan = item
       },
       handleAdd () {
         this.isEdit = false

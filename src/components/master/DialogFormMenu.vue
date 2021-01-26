@@ -200,16 +200,6 @@
         show: this.showDialog,
       }
     },
-    computed: {
-      dialshowgPopup: {
-        get () {
-          return this.showDialog
-        },
-        set (val) {
-          this.$emit('update:show', val)
-        },
-      },
-    },
     watch: {
       showDialog (value) {
         this.show = value
