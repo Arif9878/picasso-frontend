@@ -15,14 +15,14 @@ pipeline {
 
         stage('Run Docker on production jabarcloud') {
                        
-            environment {
-                SSH_COMMAND = "ssh-agent bash -c 'ssh-add ~/.ssh/id_rsa; git pull origin master'"     
-            }
+            // environment {
+            //    SSH_COMMAND = "ssh-agent bash -c 'ssh-add ~/.ssh/id_rsa; git pull origin master'"     
+            // }
 
             steps{
                     sshagent (['']){
                         // ssh block
-                    sh 'ssh -o StrictHostKeyChecking=no $USER_PIKOBAR@$HOST_GROUPWARE_PRODUCTION "cd /home/ubuntu/app/picasso-frontend/ && $SSH_COMMAND \
+                    sh 'ssh -o StrictHostKeyChecking=no $USER_PIKOBAR@$HOST_GROUPWARE_PRODUCTION "cd /home/ubuntu/app/picasso-frontend/ && git pull origin master \
                                                                                     && docker-compose up -d --build"'
                                                                                         
                     }
