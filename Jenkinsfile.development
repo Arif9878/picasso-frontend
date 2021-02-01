@@ -32,12 +32,12 @@ pipeline {
             }      
         }
         
-        stage('Test staging jabarcloud') {
+        stage('Cleanshing docker staging jabarcloud') {
             
             steps{
                    sshagent (['']){
                        // ssh block
-                       sh 'ssh -o StrictHostKeyChecking=no $USER_PIKOBAR@$HOST_GROUPWARE_STAGING "echo ok"'
+                       sh 'ssh -o StrictHostKeyChecking=no $USER_PIKOBAR@$HOST_GROUPWARE_STAGING "$SSH_COMMAND && docker system prune"'
                     }
             }    
         }        
