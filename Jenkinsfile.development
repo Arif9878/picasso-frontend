@@ -37,7 +37,7 @@ pipeline {
             steps{
                    sshagent (['']){
                        // ssh block
-                       sh 'ssh -o StrictHostKeyChecking=no $USER_PIKOBAR@$HOST_GROUPWARE_STAGING "docker system prune"'
+                       sh 'ssh -o StrictHostKeyChecking=no $USER_PIKOBAR@$HOST_GROUPWARE_STAGING "docker images -q -f dangling=true | xargs --no-run-if-empty docker rmi"'
                     }
             }    
         }        
