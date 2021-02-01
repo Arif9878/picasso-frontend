@@ -4,7 +4,6 @@ pipeline {
     environment {
         USER_PIKOBAR = "${env.USER_PIKOBAR}"
         HOST_GROUPWARE_STAGING = "${env.HOST_GROUPWARE_STAGING}"
-        
     }
 
     options {
