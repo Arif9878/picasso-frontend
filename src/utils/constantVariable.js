@@ -100,6 +100,6 @@ export const holidayType = [
 
 export const managerCategory = [
     'Gugus Tugas',
-    'Pengelola Layanan Digital',
+    'Tim Pengelola Layanan Digital',
     'Tenaga Teknis',
 ]

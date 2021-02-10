@@ -1,0 +1,44 @@
+pipeline {
+
+    agent any
+    environment {
+        USER_PIKOBAR = "${env.USER_PIKOBAR}"
+        HOST_GROUPWARE_PRODUCTION = "${env.HOST_GROUPWARE_PRODUCTION}"
+        
+    }
+
+    options {
+        timeout(time: 1, unit: 'HOURS')
+    }
+
+    stages {
+
+        stage('Run Docker on production jabarcloud') {
+                       
+            environment {
+               SSH_COMMAND = "ssh-agent bash -c 'ssh-add ~/.ssh/id_rsa; git pull origin master'"     
+            }
+
+            steps{
+                    sshagent (['']){
+                        // ssh block
+                    sh 'ssh -o StrictHostKeyChecking=no $USER_PIKOBAR@$HOST_GROUPWARE_PRODUCTION "cd /home/ubuntu/app/picasso-frontend/ && $SSH_COMMAND \
+                                                                                    && docker-compose up -d --build"'
+                                                                                        
+                    }
+                
+            }      
+        }
+        
+        stage('Cleanshing docker production jabarcloud') {
+            
+            steps{
+                   sshagent (['']){
+                       // ssh block
+                       sh 'ssh -o StrictHostKeyChecking=no $USER_PIKOBAR@$HOST_GROUPWARE_PRODUCTION "docker images -q -f dangling=true | xargs --no-run-if-empty docker rmi"'
+                    }
+            }    
+        }        
+    
+    }
+} 
