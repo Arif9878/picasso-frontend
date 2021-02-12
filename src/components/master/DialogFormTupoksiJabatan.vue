@@ -155,12 +155,6 @@
         this.$emit('update:show', value)
         if (!value) this.$emit('update:form', {})
       },
-      'formBody.sequence' (value) {
-        this.formBody.sequence = parseInt(value)
-      },
-      'formBody.target_tupoksi' (value) {
-        this.formBody.target_tupoksi = parseInt(value)
-      },
     },
     methods: {
       handleCancel () {
@@ -173,6 +167,8 @@
         if (!valid) {
           return
         }
+        this.formBody.sequence = parseInt(this.formBody.sequence)
+        this.formBody.target_tupoksi = parseInt(this.formBody.target_tupoksi)
         if (!this.isEdit) {
           await this.$store.dispatch('tupoksiJabatan/createTupoksiJabatan', this.formBody)
         } else {
