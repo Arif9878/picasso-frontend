@@ -121,6 +121,7 @@
         }
       },
       handleAdd () {
+        this.form.jabatan_id = this.detailJabatan.id
         this.isEdit = false
         this.showForm = true
       },
