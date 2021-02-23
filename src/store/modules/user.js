@@ -146,6 +146,14 @@ export const actions = {
             return error.response
         }
     },
+    async changePasswordUser ({ commit }, data) {
+        try {
+            const response = await requestServer(`/user/change-password/${data.id}`, 'POST', data.body)
+            return response
+        } catch (error) {
+            return error.response
+        }
+    },
     async deleteUser ({ commit }, id) {
         try {
             const response = await requestServer(`/user/${id}/`, 'DELETE')
