@@ -249,7 +249,7 @@
             end_date: this.listQueryUser.end_date,
           },
         }
-        const response = await this.$store.dispatch('report/printReport', query)
+        const response = await this.$store.dispatch('report/printDailyReport', query)
         if (response) this.isLoading = false
         const fileName = `LaporanPLD_2020_${item.fullname.split(' ').join('_')}_${item.jabatan.split(' ').join('_')}.pdf`
         FileSaver.saveAs(response, fileName)
@@ -268,7 +268,7 @@
             end_date: this.listQueryUser.end_date,
           },
         }
-        const response = await this.$store.dispatch('report/viewReportPdf', query)
+        const response = await this.$store.dispatch('report/viewDailyReportPdf', query)
         if (response) {
           this.isLoading = false
           this.isPreviewPdf = true

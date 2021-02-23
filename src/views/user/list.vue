@@ -21,6 +21,7 @@
         :table-headers="tableHeader"
         :on-delete-click="handleDelete"
         :on-update-click="handleUpdate"
+        :on-password-click="handlePassword"
       />
       <pagination
         :total="totalPage"
@@ -44,6 +45,13 @@
       :store-path-delete="'user/deleteUser'"
       :id-data="idData"
     />
+    <change-password-form
+      :show-dialog="showChangePassword"
+      :show.sync="showChangePassword"
+      :id-data="idData"
+      :form-body="formPassword"
+      :form.sync="formPassword"
+    />
   </div>
 </template>
 
@@ -61,12 +69,14 @@
         isEdit: false,
         isRefresh: false,
         showDelete: false,
+        showChangePassword: false,
         idData: null,
         form: {
           birth_date: null,
           join_date: null,
           resign_date: null,
         },
+        formPassword: {},
         listQuery: {
           page_size: 10,
           page: 1,
@@ -79,7 +89,7 @@
           { text: 'Nama Lengkap', value: 'fullname' },
           { text: 'Divisi', value: 'divisi' },
           { text: 'Jabatan', value: 'jabatan' },
-          { text: 'Aksi', width: 150, value: 'actions' },
+          { text: 'Aksi', width: 200, value: 'actions' },
         ],
       }
     },
@@ -138,12 +148,26 @@
       },
       handleAdd () {
         this.isEdit = false
+        this.form = {
+          birth_date: null,
+          join_date: null,
+          resign_date: null,
+          photo: '',
+        }
         this.showForm = true
       },
       handleUpdate (item) {
         this.showForm = true
         this.form = item
         this.isEdit = true
+      },
+      handlePassword (item) {
+        this.showChangePassword = true
+        this.idData = item.id
+        this.formPassword = {
+          password: null,
+          repeat_password: null,
+        }
       },
       handleDelete (item) {
         this.idData = item.id
