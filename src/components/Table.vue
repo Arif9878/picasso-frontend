@@ -51,6 +51,26 @@
             mdi-table-edit
           </v-icon>
         </v-btn>
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn
+              v-if="detailUser.is_admin && onPasswordClick"
+              class="mx-2"
+              fab
+              dark
+              small
+              color="green"
+              v-bind="attrs"
+              v-on="on"
+              @click="onPasswordClick(props.item)"
+            >
+              <v-icon dark>
+                mdi-eye
+              </v-icon>
+            </v-btn>
+          </template>
+          <span>Password</span>
+        </v-tooltip>
         <v-btn
           v-if="onDeleteClick"
           class="mx-2"
@@ -99,6 +119,9 @@
   </v-col>
 </template>
 <script>
+  import {
+    mapState,
+  } from 'vuex'
   export default {
     name: 'TableComponent',
     props: {
@@ -142,10 +165,19 @@
         type: Function,
         default: null,
       },
+      onPasswordClick: {
+        type: Function,
+        default: null,
+      },
       onMainDuties: {
         type: Function,
         default: null,
       },
+    },
+    computed: {
+      ...mapState('user', {
+        detailUser: state => state.detailUser,
+      }),
     },
     methods: {
       formatDate (date) {

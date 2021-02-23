@@ -51,6 +51,39 @@ export const actions = {
             return error.response
         }
     },
+    async printDailyReport ({ commit }, query) {
+        const {
+            userId,
+            params,
+        } = query
+        try {
+            const response = await request({
+                url: `/export-pdf/report-by-user/daily/download/${userId}`,
+                method: 'GET',
+                params: params,
+                responseType: 'blob',
+            })
+            return response
+        } catch (error) {
+            return error.response
+        }
+    },
+    async viewDailyReportPdf ({ commit }, query) {
+        const {
+            userId,
+            params,
+        } = query
+        try {
+            const response = await request({
+                url: `/export-pdf/report-by-user/daily/view/${userId}`,
+                method: 'GET',
+                params: params,
+            })
+            return response
+        } catch (error) {
+            return error.response
+        }
+    },
     async exportExcelByDivisi ({ commit }, params) {
         try {
             const response = await request({

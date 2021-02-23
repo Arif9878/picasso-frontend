@@ -60,6 +60,7 @@
               >
                 <v-text-field
                   v-model="formBody.username"
+                  :rules="allowSpaces"
                   :error-messages="errors"
                   solo
                 />
@@ -379,6 +380,33 @@
               sm="12"
               :class="{'center py-4': $vuetify.breakpoint. smAndDown}"
             >
+              <label>G-Drive Photo</label>
+            </v-col>
+            <v-col
+              cols="12"
+              md="10"
+              sm="12"
+              :class="{'py-0 pb-3': $vuetify.breakpoint. smAndDown}"
+            >
+              <validation-provider
+                name="photo"
+              >
+                <v-text-field
+                  v-model="formBody.photo"
+                  :rules="urlRules"
+                  placeholder="https://"
+                  solo
+                />
+              </validation-provider>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col
+              cols="12"
+              md="2"
+              sm="12"
+              :class="{'center py-4': $vuetify.breakpoint. smAndDown}"
+            >
               <label class="required">Apakah Admin ?</label>
             </v-col>
             <v-col
@@ -544,6 +572,12 @@
         managerCategory: managerCategory,
         formatDate: 'YYYY-MM-DD',
         formatDateTime: 'YYYY-MM-DD HH:MM:SS',
+        allowSpaces: [
+          v => (v || '').indexOf(' ') < 0 || 'No spaces are allowed',
+        ],
+        urlRules: [
+          v => (v !== undefined && this.isURL(v)) || 'URL is not valid',
+        ],
       }
     },
     computed: {
@@ -602,6 +636,16 @@
       async getListMenuType () {
         const response = await this.$store.dispatch('menu/getListMenuType')
         this.typeMenuList = response.results
+      },
+      isURL (str) {
+        let url
+        if (str.length === 0) return true
+        try {
+          url = new URL(str)
+        } catch (_) {
+          return false
+        }
+        return url.protocol === 'http:' || url.protocol === 'https:'
       },
       handleCancel () {
         this.$emit('update:show', false)
