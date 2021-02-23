@@ -137,7 +137,7 @@
               this.$emit('update:form', {})
             })
             .catch((e) => {
-              this.$store.dispatch('toast/successToast', e.message)
+              this.$store.dispatch('toast/errorToast', 'Ganti password gagal')
             })
         }
       },
