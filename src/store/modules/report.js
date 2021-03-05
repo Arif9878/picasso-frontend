@@ -18,7 +18,7 @@ export const actions = {
             return error.response
         }
     },
-    async printReport ({ commit }, query) {
+    async downloadReportPdf ({ commit }, query) {
         const {
             userId,
             params,
@@ -51,7 +51,7 @@ export const actions = {
             return error.response
         }
     },
-    async printDailyReport ({ commit }, query) {
+    async downloadDailyReportPdf ({ commit }, query) {
         const {
             userId,
             params,
