@@ -44,9 +44,6 @@
     mapState,
     mapGetters,
   } from 'vuex'
-  // import {
-  //   menuItems,
-  // } from '@/utils/constantVariable'
   export default {
     name: 'DashboardCoreDrawer',
 
@@ -56,10 +53,6 @@
         default: false,
       },
     },
-
-    // data: () => ({
-    //   menuItems,
-    // }),
 
     computed: {
       ...mapState('app', {
