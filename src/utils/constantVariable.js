@@ -17,5 +17,5 @@ export const managerCategory = [
     'Gugus Tugas',
     'Tim Pengelola Layanan Digital',
     'Tenaga Teknis',
-    'Tim DPRD Jawa Barat'
+    'Tim DPRD Jawa Barat',
 ]
