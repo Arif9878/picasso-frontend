@@ -111,6 +111,7 @@
               :table-headers="tableHeader"
               :on-preview-pdf-click="handlePreviewPdf"
               :on-download-pdf-click="handleDownloadPdf"
+              :on-preview-empty-days="onPreviewEmptyDays"
             />
           </v-card>
         </v-tab-item>
@@ -132,6 +133,11 @@
       :show.sync="isPreviewPdf"
       :pdf-url="previewPdf"
     />
+    <dialog-preview-report-empty-day
+      :show-dialog="isPreviewEmptyDays"
+      :show.sync="isPreviewEmptyDays"
+      :list-empty-days="listReportEmptyDays"
+    />
   </div>
 </template>
 
@@ -151,8 +157,10 @@
         formatDate: 'DD-MM-YYYY',
         isDownloadExecl: false,
         isPreviewPdf: false,
+        isPreviewEmptyDays: false,
         previewPdf: '',
         listUser: [],
+        listReportEmptyDays: [],
         listQueryUser: {
           search: '',
           start_date: '',
@@ -220,9 +228,11 @@
       },
       async handleSearchUser () {
         const response = await this.$store.dispatch('report/getListReportByUser', this.listQueryUser)
-        if (response) {
-          this.listUser = response
+        if (!response) return
+        if (this.listQueryUser.end_date.length > 1 && this.tableHeader.length === 6) {
+          this.tableHeader.push({ text: 'Keterisian Laporan', value: 'precentage_logbook_data_filling' })
         }
+        this.listUser = response
       },
       async onSearch () {
         await this.handleSearchUser()
@@ -234,6 +244,9 @@
         this.listQueryUser.start_date = ''
         this.listQueryUser.end_date = ''
         await this.handleSearchUser()
+        if (this.tableHeader.length === 7) {
+          this.tableHeader.pop()
+        }
       },
       async handleDownloadPdf (item) {
         this.isLoading = true
@@ -324,6 +337,12 @@
         if (response) this.isLoading = false
         const fileName = `${managerCategory.split(' ').join('_')}.xlsx`
         FileSaver.saveAs(response, fileName)
+      },
+      onPreviewEmptyDays (value) {
+        const blackListPrecentage = [0, 100]
+        if (blackListPrecentage.includes(value.precentage_logbook_data_filling)) return
+        this.isPreviewEmptyDays = !this.isPreviewEmptyDays
+        this.listReportEmptyDays = value.logbook_list_empty_days
       },
     },
   }
