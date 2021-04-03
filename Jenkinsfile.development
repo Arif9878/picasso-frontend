@@ -22,9 +22,7 @@ pipeline {
                     sshagent (['']){
                         // ssh block
                     sh 'ssh -o StrictHostKeyChecking=no $USER_PIKOBAR@$HOST_GROUPWARE_STAGING "cd /home/ubuntu/app/picasso-frontend/ && $SSH_COMMAND \
-                                                                                    && docker-compose down \
-                                                                                    && docker-compose build --no-cache \
-                                                                                    && docker-compose up -d"'                                                                  
+                                                                                    && docker-compose up -d --build"'                                                                  
                     }
                 
             }      
