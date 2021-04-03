@@ -38,7 +38,7 @@
       async initViz () {
         const containerDiv = document.getElementById('vizContainer')
         const token = await this.getTokenTableu()
-        if (!token && token !== -1) return
+        if (!token || token !== -1) return
         const url = `${process.env.VUE_APP_TABLEU_API}/trusted/${token}/views/DashboardGroupware/DashboardRingkasanKaryawan?:showVizHome=no&:embed=true`
         const options = {
           hideTabs: true,
