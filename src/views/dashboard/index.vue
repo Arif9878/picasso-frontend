@@ -14,6 +14,10 @@
 </template>
 
 <script>
+  import request from '@/utils/request'
+  import {
+    mapState,
+  } from 'vuex'
   export default {
     name: 'DashboardDashboard',
 
@@ -22,18 +26,37 @@
         dashboard: 'Dashboard',
       }
     },
+    computed: {
+      ...mapState('user', {
+        detailUser: state => state.detailUser,
+      }),
+    },
     mounted () {
       this.initViz()
     },
     methods: {
-      initViz () {
+      async initViz () {
         const containerDiv = document.getElementById('vizContainer')
-        const url = 'https://dashboard.jabarprov.go.id/views/DashboardGroupware/DashboardRingkasanKaryawan?:showVizHome=no&:embed=true'
+        const token = await this.getTokenTableu()
+        if (!token || token !== -1) return
+        const url = `${process.env.VUE_APP_TABLEU_API}/trusted/${token}/views/DashboardGroupware/DashboardRingkasanKaryawan?:showVizHome=no&:embed=true`
         const options = {
           hideTabs: true,
           onFirstInteractive: () => { },
         }
         this.viz = new window.tableau.Viz(containerDiv, url, options)
+      },
+      async getTokenTableu () {
+        let typeTableuDashboard
+        if (this.detailUser.menu === 2) {
+          typeTableuDashboard = process.env.VUE_APP_TABLEU_TYPE_HR
+        } else if (this.detailUser.menu === 3) {
+          typeTableuDashboard = process.env.VUE_APP_TABLEU_TYPE_KOOR
+        } else if (this.detailUser.menu === 4) {
+          typeTableuDashboard = process.env.VUE_APP_TABLEU_TYPE_STRUKTURAL
+        }
+        const resp = await request(process.env.VUE_APP_TABLEU_TOKEN_API + typeTableuDashboard)
+        return resp?.data?.token || null
       },
     },
   }
