@@ -85,6 +85,15 @@
           </v-icon>
         </v-btn>
       </template>
+      <template v-slot:item.precentage_logbook_data_filling="props">
+        <v-avatar
+          :color="colorPrecentage(props.item.precentage_logbook_data_filling)"
+          size="48"
+          @click="onPreviewEmptyDays(props.item)"
+        >
+          <strong class="white--text">{{ Math.ceil(props.item.precentage_logbook_data_filling) }}%</strong>
+        </v-avatar>
+      </template>
       <template v-slot:item.print="props">
         <v-card-actions>
           <v-menu
@@ -173,6 +182,10 @@
         type: Function,
         default: null,
       },
+      onPreviewEmptyDays: {
+        type: Function,
+        default: null,
+      },
     },
     computed: {
       ...mapState('user', {
@@ -183,6 +196,15 @@
       formatDate (date) {
         date = date ? this.$moment(date).format('DD MMMM YYYY') : '-'
         return date
+      },
+      colorPrecentage (value) {
+        if (value < 50) {
+          return 'red'
+        } else if (value < 75) {
+          return 'warning'
+        } else {
+          return 'green'
+        }
       },
     },
   }
