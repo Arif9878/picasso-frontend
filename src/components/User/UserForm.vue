@@ -164,6 +164,198 @@
           <v-row>
             <v-col
               cols="12"
+              md="6"
+              sm="12"
+            >
+              <v-row>
+                <v-col
+                  cols="12"
+                  md="4"
+                  sm="12"
+                  :class="{'center py-4': $vuetify.breakpoint. smAndDown}"
+                >
+                  <label class="required">Jenis Kelamin</label>
+                </v-col>
+                <v-col
+                  cols="12"
+                  md="6"
+                  sm="12"
+                  :class="{'py-0 pb-3': $vuetify.breakpoint. smAndDown}"
+                >
+                  <validation-provider
+                    v-slot="{ errors }"
+                    name="Jenis Kelamin"
+                    rules="required"
+                  >
+                    <v-radio-group
+                      v-model="formBody.gender"
+                      :error-messages="errors"
+                      row
+                      class="mt-0"
+                    >
+                      <v-radio
+                        label="Pria"
+                        value="Pria"
+                      />
+                      <v-radio
+                        label="Wanita"
+                        value="Wanita"
+                      />
+                    </v-radio-group>
+                  </validation-provider>
+                </v-col>
+              </v-row>
+            </v-col>
+            <v-col
+              cols="12"
+              md="6"
+              sm="12"
+            >
+              <v-row>
+                <v-col
+                  cols="12"
+                  md="4"
+                  sm="12"
+                  :class="{'center py-4': $vuetify.breakpoint. smAndDown}"
+                >
+                  <label>Golongan Darah</label>
+                </v-col>
+                <v-col
+                  cols="12"
+                  md="6"
+                  sm="12"
+                  :class="{'py-0 pb-3': $vuetify.breakpoint. smAndDown}"
+                >
+                  <validation-provider
+                    v-slot="{ errors }"
+                    name="Golongan Darah"
+                  >
+                    <v-select
+                      v-model="formBody.blood_type"
+                      :items="listBloodType"
+                      :error-messages="errors"
+                      menu-props="auto"
+                      solo
+                    />
+                  </validation-provider>
+                </v-col>
+              </v-row>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col
+              cols="12"
+              md="6"
+              sm="12"
+            >
+              <v-row>
+                <v-col
+                  cols="12"
+                  md="4"
+                  sm="12"
+                  :class="{'center py-4': $vuetify.breakpoint. smAndDown}"
+                >
+                  <label class="required">Status Pernikahan</label>
+                </v-col>
+                <v-col
+                  cols="12"
+                  md="8"
+                  sm="12"
+                  :class="{'py-0 pb-3': $vuetify.breakpoint. smAndDown}"
+                >
+                  <validation-provider
+                    v-slot="{ errors }"
+                    name="Status Pernikahan"
+                    rules="required"
+                  >
+                    <v-radio-group
+                      v-model="formBody.marital_status"
+                      :error-messages="errors"
+                      row
+                      class="mt-0"
+                    >
+                      <v-radio
+                        label="Belum Menikah"
+                        value="Belum Menikah"
+                      />
+                      <v-radio
+                        label="Menikah"
+                        value="Menikah"
+                      />
+                    </v-radio-group>
+                  </validation-provider>
+                </v-col>
+              </v-row>
+            </v-col>
+            <v-col
+              cols="12"
+              md="6"
+              sm="12"
+            >
+              <v-row>
+                <v-col
+                  cols="12"
+                  md="4"
+                  sm="12"
+                  :class="{'center py-4': $vuetify.breakpoint. smAndDown}"
+                >
+                  <label>Agama</label>
+                </v-col>
+                <v-col
+                  cols="12"
+                  md="6"
+                  sm="12"
+                  :class="{'py-0 pb-3': $vuetify.breakpoint. smAndDown}"
+                >
+                  <validation-provider
+                    v-slot="{ errors }"
+                    name="Agama"
+                  >
+                    <v-select
+                      v-model="formBody.religion"
+                      :items="listReligion"
+                      :error-messages="errors"
+                      menu-props="auto"
+                      solo
+                    />
+                  </validation-provider>
+                </v-col>
+              </v-row>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col
+              cols="12"
+              md="2"
+              sm="12"
+              :class="{'center py-4': $vuetify.breakpoint. smAndDown}"
+            >
+              <label class="required">Pendidikan Terakhir</label>
+            </v-col>
+            <v-col
+              cols="12"
+              md="10"
+              sm="12"
+              :class="{'py-0 pb-3': $vuetify.breakpoint. smAndDown}"
+            >
+              <validation-provider
+                v-slot="{ errors }"
+                name="Pendidikan Terakhir"
+                rules="required"
+              >
+                <v-select
+                  v-model="formBody.last_education"
+                  :items="listEducation"
+                  :error-messages="errors"
+                  menu-props="auto"
+                  solo
+                />
+              </validation-provider>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col
+              cols="12"
               md="2"
               sm="12"
               :class="{'center py-4': $vuetify.breakpoint. smAndDown}"
@@ -542,7 +734,7 @@
 </template>
 <script>
   import { ValidationObserver, ValidationProvider } from 'vee-validate'
-  import { managerCategory } from '@/utils/constantVariable'
+  import { managerCategory, listEducation, listReligion, listBloodType } from '@/utils/constantVariable'
   export default {
     name: 'DialogFormUser',
     components: {
@@ -570,6 +762,9 @@
         jabatanList: [],
         typeMenuList: [],
         managerCategory: managerCategory,
+        listEducation: listEducation,
+        listReligion: listReligion,
+        listBloodType: listBloodType,
         formatDate: 'YYYY-MM-DD',
         formatDateTime: 'YYYY-MM-DD HH:MM:SS',
         allowSpaces: [
