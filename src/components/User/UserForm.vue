@@ -707,8 +707,12 @@
               </validation-provider>
             </v-col>
           </v-row>
-          <v-card-actions>
-            <v-col>
+          <v-row>
+            <v-col
+              cols="12"
+              md="6"
+              sm="12"
+            >
               <v-btn
                 class="mr-5"
                 block
@@ -717,7 +721,11 @@
                 Batal
               </v-btn>
             </v-col>
-            <v-col>
+            <v-col
+              cols="12"
+              md="6"
+              sm="12"
+            >
               <v-btn
                 color="primary"
                 block
@@ -726,7 +734,7 @@
                 Simpan
               </v-btn>
             </v-col>
-          </v-card-actions>
+          </v-row>
         </v-form>
       </validation-observer>
     </v-card>
