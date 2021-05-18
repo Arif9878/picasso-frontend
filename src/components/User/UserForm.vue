@@ -14,7 +14,7 @@
               cols="12"
               md="2"
               sm="12"
-              :class="{'center py-4': $vuetify.breakpoint. smAndDown}"
+              :class="{'center py-4': $vuetify.breakpoint.smAndDown}"
             >
               <label class="required">Email</label>
             </v-col>
@@ -22,7 +22,7 @@
               cols="12"
               md="10"
               sm="12"
-              :class="{'py-0 pb-3': $vuetify.breakpoint. smAndDown}"
+              :class="{'py-0 pb-3': $vuetify.breakpoint.smAndDown}"
             >
               <validation-provider
                 v-slot="{ errors }"
@@ -43,7 +43,7 @@
               cols="12"
               md="2"
               sm="12"
-              :class="{'center py-4': $vuetify.breakpoint. smAndDown}"
+              :class="{'center py-4': $vuetify.breakpoint.smAndDown}"
             >
               <label class="required">Username</label>
             </v-col>
@@ -51,7 +51,7 @@
               cols="12"
               md="10"
               sm="12"
-              :class="{'py-0 pb-3': $vuetify.breakpoint. smAndDown}"
+              :class="{'py-0 pb-3': $vuetify.breakpoint.smAndDown}"
             >
               <validation-provider
                 v-slot="{ errors }"
@@ -72,7 +72,7 @@
               cols="12"
               md="2"
               sm="12"
-              :class="{'center py-4': $vuetify.breakpoint. smAndDown}"
+              :class="{'center py-4': $vuetify.breakpoint.smAndDown}"
             >
               <label class="required">Nama</label>
             </v-col>
@@ -80,7 +80,7 @@
               cols="12"
               md="5"
               sm="12"
-              :class="{'py-0 pb-3': $vuetify.breakpoint. smAndDown}"
+              :class="{'py-0 pb-3': $vuetify.breakpoint.smAndDown}"
             >
               <validation-provider
                 v-slot="{ errors }"
@@ -150,7 +150,7 @@
               cols="12"
               md="5"
               sm="12"
-              :class="{'py-0 pb-3': $vuetify.breakpoint. smAndDown}"
+              :class="{'py-0 pb-3': $vuetify.breakpoint.smAndDown}"
             >
               <input-date-picker
                 :format-date="formatDate"
@@ -172,7 +172,7 @@
                   cols="12"
                   md="4"
                   sm="12"
-                  :class="{'center py-4': $vuetify.breakpoint. smAndDown}"
+                  :class="{'center py-4': $vuetify.breakpoint.smAndDown}"
                 >
                   <label class="required">Jenis Kelamin</label>
                 </v-col>
@@ -180,7 +180,7 @@
                   cols="12"
                   md="6"
                   sm="12"
-                  :class="{'py-0 pb-3': $vuetify.breakpoint. smAndDown}"
+                  :class="{'py-0 pb-3': $vuetify.breakpoint.smAndDown}"
                 >
                   <validation-provider
                     v-slot="{ errors }"
@@ -216,7 +216,7 @@
                   cols="12"
                   md="4"
                   sm="12"
-                  :class="{'center py-4': $vuetify.breakpoint. smAndDown}"
+                  :class="{'center py-4': $vuetify.breakpoint.smAndDown}"
                 >
                   <label>Golongan Darah</label>
                 </v-col>
@@ -224,7 +224,7 @@
                   cols="12"
                   md="6"
                   sm="12"
-                  :class="{'py-0 pb-3': $vuetify.breakpoint. smAndDown}"
+                  :class="{'py-0 pb-3': $vuetify.breakpoint.smAndDown}"
                 >
                   <validation-provider
                     v-slot="{ errors }"
@@ -253,7 +253,7 @@
                   cols="12"
                   md="4"
                   sm="12"
-                  :class="{'center py-4': $vuetify.breakpoint. smAndDown}"
+                  :class="{'center py-4': $vuetify.breakpoint.smAndDown}"
                 >
                   <label class="required">Status Pernikahan</label>
                 </v-col>
@@ -261,7 +261,7 @@
                   cols="12"
                   md="8"
                   sm="12"
-                  :class="{'py-0 pb-3': $vuetify.breakpoint. smAndDown}"
+                  :class="{'py-0 pb-3': $vuetify.breakpoint.smAndDown}"
                 >
                   <validation-provider
                     v-slot="{ errors }"
@@ -297,7 +297,7 @@
                   cols="12"
                   md="4"
                   sm="12"
-                  :class="{'center py-4': $vuetify.breakpoint. smAndDown}"
+                  :class="{'center py-4': $vuetify.breakpoint.smAndDown}"
                 >
                   <label>Agama</label>
                 </v-col>
@@ -305,7 +305,7 @@
                   cols="12"
                   md="6"
                   sm="12"
-                  :class="{'py-0 pb-3': $vuetify.breakpoint. smAndDown}"
+                  :class="{'py-0 pb-3': $vuetify.breakpoint.smAndDown}"
                 >
                   <validation-provider
                     v-slot="{ errors }"
@@ -328,7 +328,7 @@
               cols="12"
               md="2"
               sm="12"
-              :class="{'center py-4': $vuetify.breakpoint. smAndDown}"
+              :class="{'center py-4': $vuetify.breakpoint.smAndDown}"
             >
               <label class="required">Pendidikan Terakhir</label>
             </v-col>
@@ -336,7 +336,7 @@
               cols="12"
               md="10"
               sm="12"
-              :class="{'py-0 pb-3': $vuetify.breakpoint. smAndDown}"
+              :class="{'py-0 pb-3': $vuetify.breakpoint.smAndDown}"
             >
               <validation-provider
                 v-slot="{ errors }"
@@ -358,7 +358,7 @@
               cols="12"
               md="2"
               sm="12"
-              :class="{'center py-4': $vuetify.breakpoint. smAndDown}"
+              :class="{'center py-4': $vuetify.breakpoint.smAndDown}"
             >
               <label class="required">No. Telepon</label>
             </v-col>
@@ -366,7 +366,7 @@
               cols="12"
               md="10"
               sm="12"
-              :class="{'py-0 pb-3': $vuetify.breakpoint. smAndDown}"
+              :class="{'py-0 pb-3': $vuetify.breakpoint.smAndDown}"
             >
               <validation-provider
                 v-slot="{ errors }"
@@ -387,7 +387,7 @@
               cols="12"
               md="2"
               sm="12"
-              :class="{'center py-4': $vuetify.breakpoint. smAndDown}"
+              :class="{'center py-4': $vuetify.breakpoint.smAndDown}"
             >
               <label class="required">Divisi</label>
             </v-col>
@@ -395,7 +395,7 @@
               cols="12"
               md="10"
               sm="12"
-              :class="{'py-0 pb-3': $vuetify.breakpoint. smAndDown}"
+              :class="{'py-0 pb-3': $vuetify.breakpoint.smAndDown}"
             >
               <validation-provider
                 v-slot="{ errors }"
@@ -421,7 +421,7 @@
               cols="12"
               md="2"
               sm="12"
-              :class="{'center py-4': $vuetify.breakpoint. smAndDown}"
+              :class="{'center py-4': $vuetify.breakpoint.smAndDown}"
             >
               <label class="required">Jabatan</label>
             </v-col>
@@ -429,7 +429,7 @@
               cols="12"
               md="10"
               sm="12"
-              :class="{'py-0 pb-3': $vuetify.breakpoint. smAndDown}"
+              :class="{'py-0 pb-3': $vuetify.breakpoint.smAndDown}"
             >
               <validation-provider
                 v-slot="{ errors }"
@@ -455,7 +455,7 @@
               cols="12"
               md="2"
               sm="12"
-              :class="{'center py-4': $vuetify.breakpoint. smAndDown}"
+              :class="{'center py-4': $vuetify.breakpoint.smAndDown}"
             >
               <label>Kategori Pengelola</label>
             </v-col>
@@ -463,7 +463,7 @@
               cols="12"
               md="10"
               sm="12"
-              :class="{'py-0 pb-3': $vuetify.breakpoint. smAndDown}"
+              :class="{'py-0 pb-3': $vuetify.breakpoint.smAndDown}"
             >
               <validation-provider
                 v-slot="{ errors }"
@@ -484,7 +484,7 @@
               cols="12"
               md="2"
               sm="12"
-              :class="{'center py-4': $vuetify.breakpoint. smAndDown}"
+              :class="{'center py-4': $vuetify.breakpoint.smAndDown}"
             >
               <label>Tipe Menu</label>
             </v-col>
@@ -492,7 +492,7 @@
               cols="12"
               md="10"
               sm="12"
-              :class="{'py-0 pb-3': $vuetify.breakpoint. smAndDown}"
+              :class="{'py-0 pb-3': $vuetify.breakpoint.smAndDown}"
             >
               <validation-provider
                 v-slot="{ errors }"
@@ -516,7 +516,7 @@
               cols="12"
               md="2"
               sm="12"
-              :class="{'center py-4': $vuetify.breakpoint. smAndDown}"
+              :class="{'center py-4': $vuetify.breakpoint.smAndDown}"
             >
               <label>Alamat</label>
             </v-col>
@@ -524,7 +524,7 @@
               cols="12"
               md="10"
               sm="12"
-              :class="{'py-0 pb-3': $vuetify.breakpoint. smAndDown}"
+              :class="{'py-0 pb-3': $vuetify.breakpoint.smAndDown}"
             >
               <validation-provider
                 v-slot="{ errors }"
@@ -543,7 +543,7 @@
               cols="12"
               md="2"
               sm="12"
-              :class="{'center py-4': $vuetify.breakpoint. smAndDown}"
+              :class="{'center py-4': $vuetify.breakpoint.smAndDown}"
             >
               <label>Tanggal Bergabung</label>
             </v-col>
@@ -551,7 +551,7 @@
               cols="12"
               md="10"
               sm="12"
-              :class="{'py-0 pb-3': $vuetify.breakpoint. smAndDown}"
+              :class="{'py-0 pb-3': $vuetify.breakpoint.smAndDown}"
             >
               <validation-provider
                 name="Tanggal Bergabung"
@@ -570,7 +570,7 @@
               cols="12"
               md="2"
               sm="12"
-              :class="{'center py-4': $vuetify.breakpoint. smAndDown}"
+              :class="{'center py-4': $vuetify.breakpoint.smAndDown}"
             >
               <label>G-Drive Photo</label>
             </v-col>
@@ -578,7 +578,7 @@
               cols="12"
               md="10"
               sm="12"
-              :class="{'py-0 pb-3': $vuetify.breakpoint. smAndDown}"
+              :class="{'py-0 pb-3': $vuetify.breakpoint.smAndDown}"
             >
               <validation-provider
                 name="photo"
@@ -597,7 +597,7 @@
               cols="12"
               md="2"
               sm="12"
-              :class="{'center py-4': $vuetify.breakpoint. smAndDown}"
+              :class="{'center py-4': $vuetify.breakpoint.smAndDown}"
             >
               <label class="required">Apakah Admin ?</label>
             </v-col>
@@ -605,7 +605,7 @@
               cols="12"
               md="10"
               sm="12"
-              :class="{'py-0 pb-3': $vuetify.breakpoint. smAndDown}"
+              :class="{'py-0 pb-3': $vuetify.breakpoint.smAndDown}"
             >
               <validation-provider
                 v-slot="{ errors }"
@@ -625,7 +625,7 @@
               cols="12"
               md="2"
               sm="12"
-              :class="{'center py-4': $vuetify.breakpoint. smAndDown}"
+              :class="{'center py-4': $vuetify.breakpoint.smAndDown}"
             >
               <label class="required">Pegawai Aktif ?</label>
             </v-col>
@@ -633,7 +633,7 @@
               cols="12"
               md="10"
               sm="12"
-              :class="{'py-0 pb-3': $vuetify.breakpoint. smAndDown}"
+              :class="{'py-0 pb-3': $vuetify.breakpoint.smAndDown}"
             >
               <validation-provider
                 v-slot="{ errors }"
@@ -655,7 +655,7 @@
               cols="12"
               md="2"
               sm="12"
-              :class="{'center py-4': $vuetify.breakpoint. smAndDown}"
+              :class="{'center py-4': $vuetify.breakpoint.smAndDown}"
             >
               <label :class="formBody.is_active ? '':'required'">Tanggal Pengunduran Diri</label>
             </v-col>
@@ -663,7 +663,7 @@
               cols="12"
               md="10"
               sm="12"
-              :class="{'py-0 pb-3': $vuetify.breakpoint. smAndDown}"
+              :class="{'py-0 pb-3': $vuetify.breakpoint.smAndDown}"
             >
               <validation-provider
                 name="Tanggal Pengunduran Diri"
@@ -685,7 +685,7 @@
               cols="12"
               md="2"
               sm="12"
-              :class="{'center py-4': $vuetify.breakpoint. smAndDown}"
+              :class="{'center py-4': $vuetify.breakpoint.smAndDown}"
             >
               <label>Alasan Pengunduran Diri</label>
             </v-col>
@@ -693,7 +693,7 @@
               cols="12"
               md="10"
               sm="12"
-              :class="{'py-0 pb-3': $vuetify.breakpoint. smAndDown}"
+              :class="{'py-0 pb-3': $vuetify.breakpoint.smAndDown}"
             >
               <validation-provider
                 v-slot="{ errors }"
@@ -769,10 +769,10 @@
         divisiList: [],
         jabatanList: [],
         typeMenuList: [],
-        managerCategory: managerCategory,
-        listEducation: listEducation,
-        listReligion: listReligion,
-        listBloodType: listBloodType,
+        managerCategory,
+        listEducation,
+        listReligion,
+        listBloodType,
         formatDate: 'YYYY-MM-DD',
         formatDateTime: 'YYYY-MM-DD HH:MM:SS',
         allowSpaces: [
