@@ -16,6 +16,18 @@
         mdi-plus
       </v-icon>
     </v-avatar>
+    <v-avatar
+      v-if="onBack"
+      color="primary"
+      size="55"
+      class="float-right mr-8 flex-wrap"
+      style="margin: -30px auto 0;border-radius: 50%;"
+      @click="onBack"
+    >
+      <v-icon dark>
+        mdi-keyboard-backspace
+      </v-icon>
+    </v-avatar>
     <div class="d-flex grow flex-wrap">
       <v-avatar
         v-if="avatar"
@@ -126,6 +138,10 @@
         default: '',
       },
       onAdd: {
+        type: Function,
+        default: null,
+      },
+      onBack: {
         type: Function,
         default: null,
       },

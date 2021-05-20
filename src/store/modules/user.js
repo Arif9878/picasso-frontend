@@ -138,6 +138,14 @@ export const actions = {
             return error.response
         }
     },
+    async detailUser ({ commit }, id) {
+        try {
+            const response = await requestServer(`/user/${id}/`, 'GET')
+            return response
+        } catch (error) {
+            return error.response
+        }
+    },
     async updateUser ({ commit }, data) {
         try {
             const response = await requestServer(`/user/${data.id}/`, 'PUT', data.body)
