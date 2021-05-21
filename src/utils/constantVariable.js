@@ -21,7 +21,7 @@ export const managerCategory = [
     'Tim DPRD Jawa Barat',
 ]
 
-export const listEducation = [
+export const listEducationLevel = [
     'D3',
     'D4',
     'S1',

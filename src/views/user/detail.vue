@@ -2,39 +2,39 @@
   <div class="ma-3">
     <costume-card
       icon="mdi-clipboard-text"
-      title="Detail User"
+      :title="formPersonal.fullname"
       :on-back="handleBack"
     >
       <v-tabs
-        vertical
         background-color="#f7fafc"
         left
       >
         <v-tab>
-          Personal
+          Data Pegawai
         </v-tab>
         <v-tab>
-          Education
+          Pendidikan
         </v-tab>
         <v-tab>
-          Emergency Contact
+          Kontak Darurat
         </v-tab>
         <v-tab>
-          Other Information
+          Info Lain
         </v-tab>
         <v-tab>
-          Files
+          Berkas Pegawai
         </v-tab>
         <!-- Tab Item -->
         <v-tab-item>
           <v-card
-            class="px-2 mt-0"
+            flat
+            class="pl-6"
           >
             <personal-form :form-body="formPersonal" />
           </v-card>
         </v-tab-item>
         <v-tab-item>
-          <v-card>
+          <v-card flat>
             <education-user />
           </v-card>
         </v-tab-item>
@@ -45,7 +45,12 @@
         </v-tab-item>
         <v-tab-item>
           <v-card flat>
-            Other file
+            <other-information-user-form :form-body="formOtherPersonal" />
+          </v-card>
+        </v-tab-item>
+        <v-tab-item>
+          <v-card flat>
+            <files-user />
           </v-card>
         </v-tab-item>
       </v-tabs>
@@ -58,11 +63,15 @@
     data () {
       return {
         formPersonal: {},
+        formOtherPersonal: {},
       }
     },
     async mounted () {
-      const resp = await this.$store.dispatch('user/detailUser', this.$route.params.id)
-      this.formPersonal = resp
+      const respUser = await this.$store.dispatch('user/detailUser', this.$route.params.id)
+      this.formPersonal = respUser
+
+      const respOtherInformation = await this.$store.dispatch('userOtherInformation/getUserOtherInformation', this.$route.params.id)
+      this.formOtherPersonal = respOtherInformation
     },
     methods: {
       handleBack () {

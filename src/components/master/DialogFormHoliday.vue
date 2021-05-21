@@ -151,7 +151,7 @@
     data () {
       return {
         show: this.showDialog,
-        formatDateTime: 'DD/MM/YYYYTHH:MM:SSZ',
+        formatDateTime: 'YYYY/MM/DDTHH:MM:SSZ',
         holidayType: holidayType,
       }
     },

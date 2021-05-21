@@ -395,7 +395,7 @@
 </template>
 <script>
   import { ValidationObserver, ValidationProvider } from 'vee-validate'
-  import { managerCategory, listEducation, listReligion, listBloodType } from '@/utils/constantVariable'
+  import { managerCategory } from '@/utils/constantVariable'
   export default {
     name: 'DialogCreateFormUser',
     components: {
@@ -423,19 +423,16 @@
         jabatanList: [],
         typeMenuList: [],
         managerCategory,
-        listEducation,
-        listReligion,
-        listBloodType,
         isLoading: false,
-        formatDate: 'DD/MM/YYYY',
-        formatDateTime: 'DD/MM/YYYY HH:MM:SS',
+        formatDate: 'YYYY/MM/DD',
+        formatDateTime: 'YYYY/MM/DD HH:MM:SS',
         allowSpaces: [
           v => (v || '').indexOf(' ') < 0 || 'No spaces are allowed',
         ],
       }
     },
     computed: {
-      dialshowgPopup: {
+      dialogShowPopUp: {
         get () {
           return this.showDialog
         },

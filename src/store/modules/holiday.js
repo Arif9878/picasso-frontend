@@ -3,8 +3,8 @@ import requestServer from '@/api'
 export const actions = {
     async getListHolidayDate ({ commit }, params) {
         try {
-            const responseHoliday = await requestServer('/holiday-date/list', 'GET', params)
-            return responseHoliday
+            const response = await requestServer('/holiday-date/list', 'GET', params)
+            return response
         } catch (error) {
             return error.response
         }

@@ -23,7 +23,7 @@
         </v-btn>
       </v-col>
     </v-row>
-    <dialog-form-emergency-contact
+    <dialog-form-file-user
       :show-dialog="showForm"
       :show.sync="showForm"
       :refresh-page.sync="isRefresh"
@@ -35,14 +35,14 @@
       :show-dialog="showDelete"
       :show.sync="showDelete"
       :refresh-page.sync="isRefresh"
-      :store-path-delete="'userEmergencyContact/deleteEmergencyContact'"
+      :store-path-delete="'userFiles/deleteUserFiles'"
       :id-data="idData"
     />
   </div>
 </template>
 <script>
   export default {
-    name: 'EmergencyContactUser',
+    name: 'FilesUser',
     data () {
       return {
         list: [],
@@ -53,9 +53,10 @@
         isEdit: false,
         idData: null,
         tableHeader: [
-          { text: 'Nama kontak darurat', value: 'emergency_contact_name', sortable: false },
-          { text: 'Hubungan dengan kontak darurat', value: 'relationship_emergency_contacts' },
-          { text: 'Nomor kontak darurat', value: 'emergency_contact_number' },
+          { text: 'Nama Berkas', value: 'file.file_name', sortable: false },
+          { text: 'Nomor Berkas', value: 'file.file_number' },
+          { text: 'Catatan', value: 'file.note' },
+          { text: 'Link File', value: 'file' },
           { text: 'Aksi', width: 200, value: 'actions' },
         ],
       }
@@ -73,7 +74,7 @@
     },
     methods: {
       async handleGetList () {
-        const resp = await this.$store.dispatch('userEmergencyContact/getListEmergencyContact', this.$route.params.id)
+        const resp = await this.$store.dispatch('userFiles/getListUserFiles', this.$route.params.id)
         this.list = resp.results
       },
       handleAdd () {
@@ -83,7 +84,13 @@
       },
       handleUpdate (item) {
         this.isEdit = true
-        this.form = item
+        this.form = {
+          id: item.id,
+          file_name: item.file.file_name,
+          file_number: item.file.file_number,
+          note: item.file.note,
+          file: item.file,
+        }
         this.showForm = true
       },
       handleDelete (item) {

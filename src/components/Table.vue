@@ -85,6 +85,15 @@
           </v-icon>
         </v-btn>
       </template>
+      <template v-slot:item.file="props">
+        <v-icon
+          dark
+          color="primary"
+          @click="linkRedirect(props.item.file.file)"
+        >
+          mdi-link-variant
+        </v-icon>
+      </template>
       <template v-slot:item.precentage_logbook_data_filling="props">
         <v-avatar
           :color="colorPrecentage(props.item.precentage_logbook_data_filling)"
@@ -205,6 +214,9 @@
         } else {
           return 'green'
         }
+      },
+      linkRedirect (value) {
+        window.open(value, '_blank')
       },
     },
   }
