@@ -117,7 +117,7 @@
       selectedOpen: false,
       events: [],
       colors: ['red'],
-      formatDateTime: 'YYYY-MM-DDTHH:MM:SSZ',
+      formatDateTime: 'YYYY/MM/DDTHH:MM:SSZ',
     }),
     watch: {
       list (value) {

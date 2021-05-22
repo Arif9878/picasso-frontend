@@ -1,6 +1,6 @@
 import request from '@/utils/request'
 
-export function requestServer (url, method, data) {
+export function requestServer (url, method, data, headers) {
     if ((method === 'GET') || method === 'DELETE') {
         return request({
             url: url,
@@ -12,6 +12,7 @@ export function requestServer (url, method, data) {
             url: url,
             method: method,
             data,
+            headers,
         })
     }
 }

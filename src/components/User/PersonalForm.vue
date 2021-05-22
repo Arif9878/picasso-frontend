@@ -1,9 +1,9 @@
 <template>
-  <v-dialog
-    v-model="show"
-    max-width="70%"
-  >
-    <v-card class="pa-7">
+  <v-row>
+    <v-col
+      cols="12"
+      md="8"
+    >
       <validation-observer ref="observer">
         <v-form
           ref="form"
@@ -14,7 +14,7 @@
               cols="12"
               md="2"
               sm="12"
-              :class="{'center py-4': $vuetify.breakpoint. smAndDown}"
+              :class="{'center py-4': $vuetify.breakpoint.smAndDown}"
             >
               <label class="required">Email</label>
             </v-col>
@@ -22,7 +22,7 @@
               cols="12"
               md="10"
               sm="12"
-              :class="{'py-0 pb-3': $vuetify.breakpoint. smAndDown}"
+              :class="{'py-0 pb-3': $vuetify.breakpoint.smAndDown}"
             >
               <validation-provider
                 v-slot="{ errors }"
@@ -43,7 +43,7 @@
               cols="12"
               md="2"
               sm="12"
-              :class="{'center py-4': $vuetify.breakpoint. smAndDown}"
+              :class="{'center py-4': $vuetify.breakpoint.smAndDown}"
             >
               <label class="required">Username</label>
             </v-col>
@@ -51,7 +51,7 @@
               cols="12"
               md="10"
               sm="12"
-              :class="{'py-0 pb-3': $vuetify.breakpoint. smAndDown}"
+              :class="{'py-0 pb-3': $vuetify.breakpoint.smAndDown}"
             >
               <validation-provider
                 v-slot="{ errors }"
@@ -72,7 +72,7 @@
               cols="12"
               md="2"
               sm="12"
-              :class="{'center py-4': $vuetify.breakpoint. smAndDown}"
+              :class="{'center py-4': $vuetify.breakpoint.smAndDown}"
             >
               <label class="required">Nama</label>
             </v-col>
@@ -80,7 +80,7 @@
               cols="12"
               md="5"
               sm="12"
-              :class="{'py-0 pb-3': $vuetify.breakpoint. smAndDown}"
+              :class="{'py-0 pb-3': $vuetify.breakpoint.smAndDown}"
             >
               <validation-provider
                 v-slot="{ errors }"
@@ -150,7 +150,7 @@
               cols="12"
               md="5"
               sm="12"
-              :class="{'py-0 pb-3': $vuetify.breakpoint. smAndDown}"
+              :class="{'py-0 pb-3': $vuetify.breakpoint.smAndDown}"
             >
               <input-date-picker
                 :format-date="formatDate"
@@ -164,9 +164,200 @@
           <v-row>
             <v-col
               cols="12"
+              md="6"
+              sm="12"
+            >
+              <v-row>
+                <v-col
+                  cols="12"
+                  md="4"
+                  sm="12"
+                  :class="{'center py-4': $vuetify.breakpoint.smAndDown}"
+                >
+                  <label class="required">Jenis Kelamin</label>
+                </v-col>
+                <v-col
+                  cols="12"
+                  md="6"
+                  sm="12"
+                  :class="{'py-0 pb-3': $vuetify.breakpoint.smAndDown}"
+                >
+                  <validation-provider
+                    v-slot="{ errors }"
+                    name="Jenis Kelamin"
+                    rules="required"
+                  >
+                    <v-radio-group
+                      v-model="formBody.gender"
+                      :error-messages="errors"
+                      row
+                      class="mt-0"
+                    >
+                      <v-radio
+                        label="Pria"
+                        value="Pria"
+                      />
+                      <v-radio
+                        label="Wanita"
+                        value="Wanita"
+                      />
+                    </v-radio-group>
+                  </validation-provider>
+                </v-col>
+              </v-row>
+            </v-col>
+            <v-col
+              cols="12"
+              md="6"
+              sm="12"
+            >
+              <v-row>
+                <v-col
+                  cols="12"
+                  md="4"
+                  sm="12"
+                  :class="{'center py-4': $vuetify.breakpoint.smAndDown}"
+                >
+                  <label>Golongan Darah</label>
+                </v-col>
+                <v-col
+                  cols="12"
+                  md="6"
+                  sm="12"
+                  :class="{'py-0 pb-3': $vuetify.breakpoint.smAndDown}"
+                >
+                  <validation-provider
+                    v-slot="{ errors }"
+                    name="Golongan Darah"
+                  >
+                    <v-select
+                      v-model="formBody.blood_type"
+                      :items="listBloodType"
+                      :error-messages="errors"
+                      menu-props="auto"
+                      solo
+                    />
+                  </validation-provider>
+                </v-col>
+              </v-row>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col
+              cols="12"
+              md="6"
+              sm="12"
+            >
+              <v-row>
+                <v-col
+                  cols="12"
+                  md="4"
+                  sm="12"
+                  :class="{'center py-4': $vuetify.breakpoint.smAndDown}"
+                >
+                  <label class="required">Status Pernikahan</label>
+                </v-col>
+                <v-col
+                  cols="12"
+                  md="8"
+                  sm="12"
+                  :class="{'py-0 pb-3': $vuetify.breakpoint.smAndDown}"
+                >
+                  <validation-provider
+                    v-slot="{ errors }"
+                    name="Status Pernikahan"
+                    rules="required"
+                  >
+                    <v-radio-group
+                      v-model="formBody.marital_status"
+                      :error-messages="errors"
+                      row
+                      class="mt-0"
+                    >
+                      <v-radio
+                        label="Belum Menikah"
+                        value="Belum Menikah"
+                      />
+                      <v-radio
+                        label="Menikah"
+                        value="Menikah"
+                      />
+                    </v-radio-group>
+                  </validation-provider>
+                </v-col>
+              </v-row>
+            </v-col>
+            <v-col
+              cols="12"
+              md="6"
+              sm="12"
+            >
+              <v-row>
+                <v-col
+                  cols="12"
+                  md="4"
+                  sm="12"
+                  :class="{'center py-4': $vuetify.breakpoint.smAndDown}"
+                >
+                  <label>Agama</label>
+                </v-col>
+                <v-col
+                  cols="12"
+                  md="6"
+                  sm="12"
+                  :class="{'py-0 pb-3': $vuetify.breakpoint.smAndDown}"
+                >
+                  <validation-provider
+                    v-slot="{ errors }"
+                    name="Agama"
+                  >
+                    <v-select
+                      v-model="formBody.religion"
+                      :items="listReligion"
+                      :error-messages="errors"
+                      menu-props="auto"
+                      solo
+                    />
+                  </validation-provider>
+                </v-col>
+              </v-row>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col
+              cols="12"
               md="2"
               sm="12"
-              :class="{'center py-4': $vuetify.breakpoint. smAndDown}"
+              :class="{'center py-4': $vuetify.breakpoint.smAndDown}"
+            >
+              <label>NPWP</label>
+            </v-col>
+            <v-col
+              cols="12"
+              md="10"
+              sm="12"
+              :class="{'py-0 pb-3': $vuetify.breakpoint.smAndDown}"
+            >
+              <validation-provider
+                v-slot="{ errors }"
+                name="NPWP"
+                rules="numeric"
+              >
+                <v-text-field
+                  v-model="formBody.npwp"
+                  type="text"
+                  :error-messages="errors"
+                  solo
+                />
+              </validation-provider>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col
+              cols="12"
+              md="2"
+              sm="12"
+              :class="{'center py-4': $vuetify.breakpoint.smAndDown}"
             >
               <label class="required">No. Telepon</label>
             </v-col>
@@ -174,7 +365,7 @@
               cols="12"
               md="10"
               sm="12"
-              :class="{'py-0 pb-3': $vuetify.breakpoint. smAndDown}"
+              :class="{'py-0 pb-3': $vuetify.breakpoint.smAndDown}"
             >
               <validation-provider
                 v-slot="{ errors }"
@@ -195,7 +386,64 @@
               cols="12"
               md="2"
               sm="12"
-              :class="{'center py-4': $vuetify.breakpoint. smAndDown}"
+              :class="{'center py-4': $vuetify.breakpoint.smAndDown}"
+            >
+              <label>No. Rek Bank BJB</label>
+            </v-col>
+            <v-col
+              cols="12"
+              md="10"
+              sm="12"
+              :class="{'py-0 pb-3': $vuetify.breakpoint.smAndDown}"
+            >
+              <validation-provider
+                v-slot="{ errors }"
+                name="No. Rek Bank BJB"
+                rules="numeric"
+              >
+                <v-text-field
+                  v-model="formBody.bank_account_number"
+                  type="text"
+                  :error-messages="errors"
+                  solo
+                />
+              </validation-provider>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col
+              cols="12"
+              md="2"
+              sm="12"
+              :class="{'center py-4': $vuetify.breakpoint.smAndDown}"
+            >
+              <label>Cabang Bank BJB</label>
+            </v-col>
+            <v-col
+              cols="12"
+              md="10"
+              sm="12"
+              :class="{'py-0 pb-3': $vuetify.breakpoint.smAndDown}"
+            >
+              <validation-provider
+                v-slot="{ errors }"
+                name="Cabang Bank BJB"
+              >
+                <v-text-field
+                  v-model="formBody.bank_branch"
+                  type="text"
+                  :error-messages="errors"
+                  solo
+                />
+              </validation-provider>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col
+              cols="12"
+              md="2"
+              sm="12"
+              :class="{'center py-4': $vuetify.breakpoint.smAndDown}"
             >
               <label class="required">Divisi</label>
             </v-col>
@@ -203,7 +451,7 @@
               cols="12"
               md="10"
               sm="12"
-              :class="{'py-0 pb-3': $vuetify.breakpoint. smAndDown}"
+              :class="{'py-0 pb-3': $vuetify.breakpoint.smAndDown}"
             >
               <validation-provider
                 v-slot="{ errors }"
@@ -229,7 +477,7 @@
               cols="12"
               md="2"
               sm="12"
-              :class="{'center py-4': $vuetify.breakpoint. smAndDown}"
+              :class="{'center py-4': $vuetify.breakpoint.smAndDown}"
             >
               <label class="required">Jabatan</label>
             </v-col>
@@ -237,7 +485,7 @@
               cols="12"
               md="10"
               sm="12"
-              :class="{'py-0 pb-3': $vuetify.breakpoint. smAndDown}"
+              :class="{'py-0 pb-3': $vuetify.breakpoint.smAndDown}"
             >
               <validation-provider
                 v-slot="{ errors }"
@@ -263,7 +511,7 @@
               cols="12"
               md="2"
               sm="12"
-              :class="{'center py-4': $vuetify.breakpoint. smAndDown}"
+              :class="{'center py-4': $vuetify.breakpoint.smAndDown}"
             >
               <label>Kategori Pengelola</label>
             </v-col>
@@ -271,7 +519,7 @@
               cols="12"
               md="10"
               sm="12"
-              :class="{'py-0 pb-3': $vuetify.breakpoint. smAndDown}"
+              :class="{'py-0 pb-3': $vuetify.breakpoint.smAndDown}"
             >
               <validation-provider
                 v-slot="{ errors }"
@@ -292,7 +540,7 @@
               cols="12"
               md="2"
               sm="12"
-              :class="{'center py-4': $vuetify.breakpoint. smAndDown}"
+              :class="{'center py-4': $vuetify.breakpoint.smAndDown}"
             >
               <label>Tipe Menu</label>
             </v-col>
@@ -300,7 +548,7 @@
               cols="12"
               md="10"
               sm="12"
-              :class="{'py-0 pb-3': $vuetify.breakpoint. smAndDown}"
+              :class="{'py-0 pb-3': $vuetify.breakpoint.smAndDown}"
             >
               <validation-provider
                 v-slot="{ errors }"
@@ -324,7 +572,7 @@
               cols="12"
               md="2"
               sm="12"
-              :class="{'center py-4': $vuetify.breakpoint. smAndDown}"
+              :class="{'center py-4': $vuetify.breakpoint.smAndDown}"
             >
               <label>Alamat</label>
             </v-col>
@@ -332,7 +580,7 @@
               cols="12"
               md="10"
               sm="12"
-              :class="{'py-0 pb-3': $vuetify.breakpoint. smAndDown}"
+              :class="{'py-0 pb-3': $vuetify.breakpoint.smAndDown}"
             >
               <validation-provider
                 v-slot="{ errors }"
@@ -351,7 +599,7 @@
               cols="12"
               md="2"
               sm="12"
-              :class="{'center py-4': $vuetify.breakpoint. smAndDown}"
+              :class="{'center py-4': $vuetify.breakpoint.smAndDown}"
             >
               <label>Tanggal Bergabung</label>
             </v-col>
@@ -359,7 +607,7 @@
               cols="12"
               md="10"
               sm="12"
-              :class="{'py-0 pb-3': $vuetify.breakpoint. smAndDown}"
+              :class="{'py-0 pb-3': $vuetify.breakpoint.smAndDown}"
             >
               <validation-provider
                 name="Tanggal Bergabung"
@@ -376,44 +624,17 @@
           <v-row>
             <v-col
               cols="12"
-              md="2"
+              md="3"
               sm="12"
-              :class="{'center py-4': $vuetify.breakpoint. smAndDown}"
-            >
-              <label>G-Drive Photo</label>
-            </v-col>
-            <v-col
-              cols="12"
-              md="10"
-              sm="12"
-              :class="{'py-0 pb-3': $vuetify.breakpoint. smAndDown}"
-            >
-              <validation-provider
-                name="photo"
-              >
-                <v-text-field
-                  v-model="formBody.photo"
-                  :rules="urlRules"
-                  placeholder="https://"
-                  solo
-                />
-              </validation-provider>
-            </v-col>
-          </v-row>
-          <v-row>
-            <v-col
-              cols="12"
-              md="2"
-              sm="12"
-              :class="{'center py-4': $vuetify.breakpoint. smAndDown}"
+              :class="{'center py-4': $vuetify.breakpoint.smAndDown}"
             >
               <label class="required">Apakah Admin ?</label>
             </v-col>
             <v-col
               cols="12"
-              md="10"
+              md="9"
               sm="12"
-              :class="{'py-0 pb-3': $vuetify.breakpoint. smAndDown}"
+              :class="{'py-0 pb-3': $vuetify.breakpoint.smAndDown}"
             >
               <validation-provider
                 v-slot="{ errors }"
@@ -431,17 +652,17 @@
           <v-row>
             <v-col
               cols="12"
-              md="2"
+              md="3"
               sm="12"
-              :class="{'center py-4': $vuetify.breakpoint. smAndDown}"
+              :class="{'center py-4': $vuetify.breakpoint.smAndDown}"
             >
               <label class="required">Pegawai Aktif ?</label>
             </v-col>
             <v-col
               cols="12"
-              md="10"
+              md="9"
               sm="12"
-              :class="{'py-0 pb-3': $vuetify.breakpoint. smAndDown}"
+              :class="{'py-0 pb-3': $vuetify.breakpoint.smAndDown}"
             >
               <validation-provider
                 v-slot="{ errors }"
@@ -463,7 +684,7 @@
               cols="12"
               md="2"
               sm="12"
-              :class="{'center py-4': $vuetify.breakpoint. smAndDown}"
+              :class="{'center py-4': $vuetify.breakpoint.smAndDown}"
             >
               <label :class="formBody.is_active ? '':'required'">Tanggal Pengunduran Diri</label>
             </v-col>
@@ -471,7 +692,7 @@
               cols="12"
               md="10"
               sm="12"
-              :class="{'py-0 pb-3': $vuetify.breakpoint. smAndDown}"
+              :class="{'py-0 pb-3': $vuetify.breakpoint.smAndDown}"
             >
               <validation-provider
                 name="Tanggal Pengunduran Diri"
@@ -493,7 +714,7 @@
               cols="12"
               md="2"
               sm="12"
-              :class="{'center py-4': $vuetify.breakpoint. smAndDown}"
+              :class="{'center py-4': $vuetify.breakpoint.smAndDown}"
             >
               <label>Alasan Pengunduran Diri</label>
             </v-col>
@@ -501,7 +722,7 @@
               cols="12"
               md="10"
               sm="12"
-              :class="{'py-0 pb-3': $vuetify.breakpoint. smAndDown}"
+              :class="{'py-0 pb-3': $vuetify.breakpoint.smAndDown}"
             >
               <validation-provider
                 v-slot="{ errors }"
@@ -515,88 +736,68 @@
               </validation-provider>
             </v-col>
           </v-row>
-          <v-card-actions>
-            <v-col>
-              <v-btn
-                class="mr-5"
-                block
-                @click="handleCancel"
-              >
-                Batal
-              </v-btn>
-            </v-col>
-            <v-col>
+          <v-row>
+            <v-spacer />
+            <v-col
+              cols="12"
+              md="6"
+              sm="12"
+            >
               <v-btn
                 color="primary"
                 block
-                @click="handleSave"
+                :loading="isLoading"
+                @click="handleUpdate"
               >
                 Simpan
               </v-btn>
             </v-col>
-          </v-card-actions>
+          </v-row>
         </v-form>
       </validation-observer>
-    </v-card>
-  </v-dialog>
+    </v-col>
+    <v-col
+      cols="12"
+      md="4"
+      class="pt-0"
+    >
+      <foto-profile-user
+        :photo="formBody.photo"
+        :avatar-update.sync="formBody.photo"
+      />
+    </v-col>
+  </v-row>
 </template>
 <script>
   import { ValidationObserver, ValidationProvider } from 'vee-validate'
-  import { managerCategory } from '@/utils/constantVariable'
+  import { managerCategory, listReligion, listBloodType } from '@/utils/constantVariable'
   export default {
-    name: 'DialogFormUser',
-    components: {
-      ValidationObserver,
-      ValidationProvider,
-    },
+    name: 'PersonalForm',
+    components: { ValidationObserver, ValidationProvider },
     props: {
-      showDialog: {
-        type: Boolean,
-        default: false,
-      },
       formBody: {
         type: Object,
         default: null,
-      },
-      isEdit: {
-        type: Boolean,
-        default: false,
       },
     },
     data () {
       return {
         show: this.showDialog,
+        isLoading: false,
         divisiList: [],
         jabatanList: [],
         typeMenuList: [],
-        managerCategory: managerCategory,
-        formatDate: 'YYYY-MM-DD',
-        formatDateTime: 'YYYY-MM-DD HH:MM:SS',
+        managerCategory,
+        listReligion,
+        listBloodType,
+        formatDate: 'YYYY/MM/DD',
+        formatDateTime: 'YYYY/MM/DD HH:MM:SS',
         allowSpaces: [
           v => (v || '').indexOf(' ') < 0 || 'No spaces are allowed',
         ],
-        urlRules: [
-          v => (v !== undefined && this.isURL(v)) || 'URL is not valid',
-        ],
       }
     },
-    computed: {
-      dialshowgPopup: {
-        get () {
-          return this.showDialog
-        },
-        set (val) {
-          this.$emit('update:show', val)
-        },
-      },
-    },
     watch: {
-      showDialog (value) {
-        this.show = value
-      },
-      show (value) {
-        this.$emit('update:show', value)
-      },
       'formBody.id_divisi' (value) {
         if (value === undefined) return
         if (value) {
@@ -637,40 +838,21 @@
         const response = await this.$store.dispatch('menu/getListMenuType')
         this.typeMenuList = response.results
       },
-      isURL (str) {
-        let url
-        if (str.length === 0) return true
-        try {
-          url = new URL(str)
-        } catch (_) {
-          return false
-        }
-        return url.protocol === 'http:' || url.protocol === 'https:'
-      },
-      handleCancel () {
-        this.$emit('update:show', false)
-        this.$emit('update:form', {})
-        this.$refs.observer.reset()
-      },
-      async handleSave () {
+      async handleUpdate () {
         const valid = await this.$refs.observer.validate()
         if (!valid) {
           return
         }
-        if (!this.isEdit) {
-          await this.$store.dispatch('user/createUser', this.formBody)
-        } else {
-          delete this.formBody.divisiObject
-          delete this.formBody.jabatanObject
-          const data = {
-            id: this.formBody.id,
-            body: this.formBody,
-          }
-          await this.$store.dispatch('user/updateUser', data)
+        this.isLoading = true
+        const data = {
+          id: this.formBody.id,
+          body: this.formBody,
         }
-        this.$emit('update:show', false)
-        this.$emit('update:refreshPage', true)
-        this.$emit('update:form', {})
+        const resp = await this.$store.dispatch('user/updateUser', data)
+        if (resp) {
+          this.isLoading = false
+          await this.$store.dispatch('toast/successToast', 'Mengubah data berhasil')
+        }
       },
     },
   }

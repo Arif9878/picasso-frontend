@@ -35,6 +35,13 @@ const userRouter = {
 				noCache: true,
 			},
 		},
+		{
+			path: '/user/detail/:id',
+			component: () => import('@/views/user/detail'),
+			meta: {
+				noCache: true,
+			},
+		},
     ],
 }
 
