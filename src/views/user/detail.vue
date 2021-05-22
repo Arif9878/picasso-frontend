@@ -71,7 +71,7 @@
       this.formPersonal = respUser
 
       const respOtherInformation = await this.$store.dispatch('userOtherInformation/getUserOtherInformation', this.$route.params.id)
-      this.formOtherPersonal = respOtherInformation
+      this.formOtherPersonal = respOtherInformation || {}
     },
     methods: {
       handleBack () {

@@ -292,7 +292,6 @@
     methods: {
       async handleUpdate () {
         const valid = await this.$refs.observer.validate()
-        console.log(valid)
         if (!valid) {
           return
         }
