@@ -44,7 +44,7 @@
               sm="12"
               :class="{'center py-4': $vuetify.breakpoint.smAndDown}"
             >
-              <label class="required">Jurusan</label>
+              <label>Jurusan</label>
             </v-col>
             <v-col
               cols="12"
@@ -55,7 +55,6 @@
               <validation-provider
                 v-slot="{ errors }"
                 name="Jurusan"
-                rules="required"
               >
                 <v-text-field
                   v-model="formBody.majors"
