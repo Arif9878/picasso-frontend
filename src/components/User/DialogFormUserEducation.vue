@@ -158,7 +158,7 @@
               sm="12"
               :class="{'center py-4': $vuetify.breakpoint.smAndDown}"
             >
-              <label>File</label>
+              <label>File Ijazah</label>
             </v-col>
             <v-col
               cols="12"

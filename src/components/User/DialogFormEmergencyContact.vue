@@ -57,9 +57,11 @@
                 name="Hubungan Dengan Kontak Darurat"
                 rules="required"
               >
-                <v-text-field
+                <v-select
                   v-model="formBody.relationship_emergency_contacts"
+                  :items="listEmergencyContactType"
                   :error-messages="errors"
+                  menu-props="auto"
                   solo
                 />
               </validation-provider>
@@ -129,6 +131,7 @@
 </template>
 <script>
   import { ValidationObserver, ValidationProvider } from 'vee-validate'
+  import { listEmergencyContactType } from '@/utils/constantVariable'
   export default {
     name: 'DialogFormEmergencyContact',
     components: {
@@ -153,6 +156,7 @@
       return {
         show: this.showDialog,
         isLoading: false,
+        listEmergencyContactType,
       }
     },
     computed: {

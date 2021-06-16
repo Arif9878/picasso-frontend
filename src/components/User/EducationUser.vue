@@ -57,7 +57,7 @@
           { text: 'Jurusan', value: 'majors' },
           { text: 'Gelar Pendidikan', value: 'education_degree' },
           { text: 'Tahun Lulus', value: 'graduation_year' },
-          { text: 'Link File', value: 'file' },
+          { text: 'Link File Ijazah', value: 'file' },
           { text: 'Aksi', width: 200, value: 'actions' },
         ],
       }

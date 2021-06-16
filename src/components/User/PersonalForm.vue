@@ -74,6 +74,66 @@
               sm="12"
               :class="{'center py-4': $vuetify.breakpoint.smAndDown}"
             >
+              <label class="required">Jenis Nomor Identitas</label>
+            </v-col>
+            <v-col
+              cols="12"
+              md="3"
+              sm="12"
+              :class="{'py-0 pb-3': $vuetify.breakpoint.smAndDown}"
+            >
+              <validation-provider
+                v-slot="{ errors }"
+                name="Jenis Nomor Identitas"
+                rules="required"
+              >
+                <v-select
+                  v-model="formBody.account_identity.type_identity"
+                  :items="identityNumberTypeList"
+                  :error-messages="errors"
+                  item-value="id_number_type"
+                  item-text="id_number_type"
+                  menu-props="auto"
+                  solo
+                />
+              </validation-provider>
+            </v-col>
+            <v-col
+              cols="12"
+              md="1"
+              sm="12"
+              class="px-0 center py-6"
+            >
+              <label class="required">Nomor</label>
+            </v-col>
+            <v-col
+              cols="12"
+              md="6"
+              sm="12"
+              :class="{'py-0 pb-3': $vuetify.breakpoint.smAndDown}"
+            >
+              <validation-provider
+                v-slot="{ errors }"
+                name="Nomor Identitas"
+                rules="numeric|required"
+              >
+                <v-text-field
+                  v-model="formBody.account_identity.number"
+                  v-mask="'################'"
+                  placeholder="Nomor Identitas"
+                  :error-messages="errors"
+                  solo
+                />
+              </validation-provider>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col
+              cols="12"
+              md="2"
+              sm="12"
+              :class="{'center py-4': $vuetify.breakpoint.smAndDown}"
+            >
               <label class="required">Nama</label>
             </v-col>
             <v-col
@@ -341,11 +401,10 @@
               <validation-provider
                 v-slot="{ errors }"
                 name="NPWP"
-                rules="numeric"
               >
                 <v-text-field
                   v-model="formBody.npwp"
-                  type="text"
+                  v-mask="'##.###.###.#-###.###'"
                   :error-messages="errors"
                   solo
                 />
@@ -402,7 +461,35 @@
                 rules="numeric"
               >
                 <v-text-field
-                  v-model="formBody.bank_account_number"
+                  v-model="formBody.account_bank.bank_account_number"
+                  type="text"
+                  :error-messages="errors"
+                  solo
+                />
+              </validation-provider>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col
+              cols="12"
+              md="2"
+              sm="12"
+              :class="{'center py-4': $vuetify.breakpoint.smAndDown}"
+            >
+              <label>Nama Akun Bank BJB</label>
+            </v-col>
+            <v-col
+              cols="12"
+              md="10"
+              sm="12"
+              :class="{'py-0 pb-3': $vuetify.breakpoint.smAndDown}"
+            >
+              <validation-provider
+                v-slot="{ errors }"
+                name="Nama Akun Bank BJB"
+              >
+                <v-text-field
+                  v-model="formBody.account_bank.bank_account_name"
                   type="text"
                   :error-messages="errors"
                   solo
@@ -430,7 +517,7 @@
                 name="Cabang Bank BJB"
               >
                 <v-text-field
-                  v-model="formBody.bank_branch"
+                  v-model="formBody.account_bank.bank_branch"
                   type="text"
                   :error-messages="errors"
                   solo
@@ -456,7 +543,6 @@
               <validation-provider
                 v-slot="{ errors }"
                 name="Divisi"
-                rules="required"
               >
                 <v-select
                   v-model="formBody.divisiObject"
@@ -490,7 +576,6 @@
               <validation-provider
                 v-slot="{ errors }"
                 name="Jabatan"
-                rules="required"
               >
                 <v-select
                   v-model="formBody.jabatanObject"
@@ -574,7 +659,7 @@
               sm="12"
               :class="{'center py-4': $vuetify.breakpoint.smAndDown}"
             >
-              <label>Alamat</label>
+              <label>Alamat Sesuai KTP</label>
             </v-col>
             <v-col
               cols="12"
@@ -584,10 +669,37 @@
             >
               <validation-provider
                 v-slot="{ errors }"
-                name="Description"
+                name="Alamat Saat ini"
               >
                 <v-textarea
-                  v-model="formBody.address"
+                  v-model="formBody.id_card_address"
+                  :error-messages="errors"
+                  solo
+                />
+              </validation-provider>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col
+              cols="12"
+              md="2"
+              sm="12"
+              :class="{'center py-4': $vuetify.breakpoint.smAndDown}"
+            >
+              <label>Alamat Saat ini</label>
+            </v-col>
+            <v-col
+              cols="12"
+              md="10"
+              sm="12"
+              :class="{'py-0 pb-3': $vuetify.breakpoint.smAndDown}"
+            >
+              <validation-provider
+                v-slot="{ errors }"
+                name="Alamat Saat ini"
+              >
+                <v-textarea
+                  v-model="formBody.current_address"
                   :error-messages="errors"
                   solo
                 />
@@ -787,6 +899,7 @@
         divisiList: [],
         jabatanList: [],
         typeMenuList: [],
+        identityNumberTypeList: [],
         managerCategory,
         listReligion,
         listBloodType,
@@ -815,6 +928,7 @@
     async mounted () {
       await this.handleGetListDivisi()
       await this.getListMenuType()
+      await this.getListIdentityNumberType()
     },
     methods: {
       async handleGetListDivisi () {
@@ -838,6 +952,10 @@
         const response = await this.$store.dispatch('menu/getListMenuType')
         this.typeMenuList = response.results
       },
+      async getListIdentityNumberType () {
+        const response = await this.$store.dispatch('user/identityNumberType')
+        this.identityNumberTypeList = response.results
+      },
       async handleUpdate () {
         const valid = await this.$refs.observer.validate()
         if (!valid) {
@@ -849,10 +967,10 @@
           body: this.formBody,
         }
         const resp = await this.$store.dispatch('user/updateUser', data)
-        if (resp) {
-          this.isLoading = false
+        if (resp.status !== 500) {
           await this.$store.dispatch('toast/successToast', 'Mengubah data berhasil')
         }
+        this.isLoading = false
       },
     },
   }

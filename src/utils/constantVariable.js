@@ -48,3 +48,11 @@ export const listBloodType = [
     'AB−',
     'AB+',
 ]
+
+export const listEmergencyContactType = [
+    'Orang tua',
+    'Saudara',
+    'Suami',
+    'Istri',
+    'Lainnya',
+]

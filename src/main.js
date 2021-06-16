@@ -12,6 +12,8 @@ import i18n from './plugins/i18n'
 import moment from 'moment'
 import 'moment/locale/id'
 
+import { VueMaskDirective } from 'v-mask'
+
 import './permission' // permission control
 import VueMoment from 'vue-moment'
 import GoogleAuth from 'vue-google-authenticator'
@@ -37,6 +39,7 @@ Vue.googleAuth().load()
 Vue.use(VueMoment, {
   moment,
 })
+Vue.directive('mask', VueMaskDirective)
 Vue.config.productionTip = false
 
 new Vue({

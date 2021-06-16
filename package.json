@@ -30,6 +30,7 @@
     "file-saver": "^2.0.2",
     "js-cookie": "^2.2.1",
     "moment": "^2.27.0",
+    "v-mask": "^2.2.4",
     "vue": "^2.6.11",
     "vue-google-authenticator": "^1.0.3",
     "vue-i18n": "^8.15.3",

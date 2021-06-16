@@ -97,7 +97,7 @@ service.interceptors.response.use(
                     await store.dispatch('toast/errorToast', error.response.data.message)
                     break
                 case ResponseRequest.SERVERERROR:
-                    await store.dispatch('toast/errorToast', error.response.data.message)
+                    await store.dispatch('toast/errorToast', error.response.data?.message || error.response.statusText)
                     break
                 case ResponseRequest.UNPROCESSABLE:
                     await store.dispatch('toast/errorToast', error.response.data.message)
