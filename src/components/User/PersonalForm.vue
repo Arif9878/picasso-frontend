@@ -67,7 +67,10 @@
               </validation-provider>
             </v-col>
           </v-row>
-          <v-row>
+          <v-row
+            v-for="(item, index) in formBody.account_identity"
+            :key="index"
+          >
             <v-col
               cols="12"
               md="2"
@@ -88,7 +91,7 @@
                 rules="required"
               >
                 <v-select
-                  v-model="formBody.account_identity.type_identity"
+                  v-model="item.type_identity"
                   :items="identityNumberTypeList"
                   :error-messages="errors"
                   item-value="id_number_type"
@@ -118,8 +121,8 @@
                 rules="numeric|required"
               >
                 <v-text-field
-                  v-model="formBody.account_identity.number"
-                  v-mask="'################'"
+                  v-model="item.number"
+                  v-mask="'##################'"
                   placeholder="Nomor Identitas"
                   :error-messages="errors"
                   solo
@@ -405,6 +408,7 @@
                 <v-text-field
                   v-model="formBody.npwp"
                   v-mask="'##.###.###.#-###.###'"
+                  type="text"
                   :error-messages="errors"
                   solo
                 />
@@ -429,11 +433,11 @@
               <validation-provider
                 v-slot="{ errors }"
                 name="No. Telepon"
-                rules="required"
+                rules="required|numeric"
               >
                 <v-text-field
                   v-model="formBody.telephone"
-                  type="email"
+                  v-mask="'#############'"
                   :error-messages="errors"
                   solo
                 />

@@ -64,7 +64,6 @@
       return {
         formPersonal: {
           account_bank: {},
-          account_identity: {},
         },
         formOtherPersonal: {},
       }
@@ -77,9 +76,7 @@
         this.formPersonal.account_bank = {}
       }
 
-      if (respUser.account_identity !== null) {
-        this.formPersonal.account_identity = this.formPersonal.account_identity[0]
-      }
+      if (respUser.account_identity.length === 0) this.formPersonal.account_identity.push({ type_identity: '', number: '' })
 
       const respOtherInformation = await this.$store.dispatch('userOtherInformation/getUserOtherInformation', this.$route.params.id)
       this.formOtherPersonal = respOtherInformation || {}

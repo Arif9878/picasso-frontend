@@ -87,9 +87,30 @@
       </template>
       <template v-slot:item.file="props">
         <v-icon
+          v-if="props.item.file"
           dark
           color="primary"
           @click="linkRedirect(props.item.file.file)"
+        >
+          mdi-link-variant
+        </v-icon>
+      </template>
+      <template v-slot:item.file_diploma="props">
+        <v-icon
+          v-if="props.item.file_diploma"
+          dark
+          color="primary"
+          @click="linkRedirect(props.item.file_diploma.file)"
+        >
+          mdi-link-variant
+        </v-icon>
+      </template>
+      <template v-slot:item.file_grade_transcript="props">
+        <v-icon
+          v-if="props.item.file_grade_transcript"
+          dark
+          color="primary"
+          @click="linkRedirect(props.item.file_grade_transcript.file)"
         >
           mdi-link-variant
         </v-icon>

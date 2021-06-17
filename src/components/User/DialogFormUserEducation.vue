@@ -170,18 +170,53 @@
                 name="File"
               >
                 <v-btn
-                  v-if="linkFile"
+                  v-if="linkFileDiploma"
                   icon
-                  :href="linkFile"
+                  :href="linkFileDiploma"
                   target="_blank"
                   color="blue"
                 >
-                  <v-icon>mdi-link-variant</v-icon> {{ linkFile }}
+                  <v-icon>mdi-link-variant</v-icon> {{ linkFileDiploma }}
                 </v-btn>
                 <v-file-input
-                  v-model="formBody.file"
+                  v-model="formBody.file_diploma"
                   show-size
-                  label="File input"
+                  label="File Ijazah"
+                />
+              </validation-provider>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col
+              cols="12"
+              md="3"
+              sm="12"
+              :class="{'center py-4': $vuetify.breakpoint.smAndDown}"
+            >
+              <label>File Transkip Nilai</label>
+            </v-col>
+            <v-col
+              cols="12"
+              md="9"
+              sm="12"
+              :class="{'py-0 pb-3': $vuetify.breakpoint.smAndDown}"
+            >
+              <validation-provider
+                name="File"
+              >
+                <v-btn
+                  v-if="linkFileGradeTranscript"
+                  icon
+                  :href="linkFileGradeTranscript"
+                  target="_blank"
+                  color="blue"
+                >
+                  <v-icon>mdi-link-variant</v-icon> {{ linkFileGradeTranscript }}
+                </v-btn>
+                <v-file-input
+                  v-model="formBody.file_grade_transcript"
+                  show-size
+                  label="File Transkip Nilai"
                 />
               </validation-provider>
             </v-col>
@@ -259,9 +294,17 @@
           this.$emit('update:show', val)
         },
       },
-      linkFile: {
+      linkFileDiploma: {
         get () {
-          return this.formBody.file?.file || ''
+          return this.formBody.file_diploma?.file || ''
+        },
+        set () {
+          return null
+        },
+      },
+      linkFileGradeTranscript: {
+        get () {
+          return this.formBody.file_grade_transcript?.file || ''
         },
         set () {
           return null
@@ -274,8 +317,6 @@
       },
       show (value) {
         this.$emit('update:show', value)
-      },
-      'formBody.file' () {
       },
     },
     async mounted () {
@@ -300,7 +341,8 @@
           formData.append('educational_level', this.formBody.educational_level)
           formData.append('graduation_year', this.formBody.graduation_year)
           formData.append('majors', this.formBody.majors)
-          if (typeof this.formBody.file.file !== 'string') formData.append('file.file', this.formBody.file)
+          if (this.formBody.file_diploma instanceof File) formData.append('file_diploma.file', this.formBody.file_diploma)
+          if (this.formBody.file_grade_transcript instanceof File) formData.append('file_grade_transcript.file', this.formBody.file_grade_transcript)
           if (!this.isEdit) {
             await this.$store.dispatch('userEducation/createUserEducation', formData)
           } else {
