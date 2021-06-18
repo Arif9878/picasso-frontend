@@ -481,7 +481,7 @@
         this.formBody.jabatan = item.name_jabatan
       },
       async getListJabatanByDivisi (item) {
-        const response = await this.$store.dispatch('jabatan/getListJabatan', { satuan_kerja_id: item })
+        const response = await this.$store.dispatch('jabatan/getListJabatanByDivisi', item)
         this.jabatanList = response.results
       },
       async getListMenuType () {
