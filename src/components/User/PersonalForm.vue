@@ -970,8 +970,8 @@
           id: this.formBody.id,
           body: this.formBody,
         }
-        const resp = await this.$store.dispatch('user/updateUser', data)
-        if (resp.status >= 400) {
+        const res = await this.$store.dispatch('user/updateUser', data)
+        if (!(res.status >= 400)) {
           await this.$store.dispatch('toast/successToast', 'Mengubah data berhasil')
         }
         this.isLoading = false
