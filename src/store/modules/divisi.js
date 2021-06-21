@@ -1,10 +1,11 @@
+
 import requestServer from '@/api'
 
 export const actions = {
     async getListDivisi ({ commit }, params) {
         try {
-            const response = await requestServer('/satuan-kerja/list', 'GET', params)
-            return response
+            const responseDivisi = await requestServer('/satuan-kerja/list', 'GET', params)
+            return responseDivisi
         } catch (error) {
             return error.response
         }

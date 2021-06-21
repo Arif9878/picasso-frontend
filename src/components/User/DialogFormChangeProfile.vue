@@ -139,7 +139,7 @@
           formData.append('account', this.$route.params.id)
           formData.append('photo', this.formBody.file)
           this.formBody.account = this.$route.params.id
-          const resp = await this.$store.dispatch('user/updateProfile', formData)
+          const resp = await this.$store.dispatch('user/updatePhotoProfile', formData)
           this.$emit('update:photoUser', resp.photo)
         } finally {
           this.isLoading = false

@@ -56,6 +56,7 @@
           { text: 'Nama kontak darurat', value: 'emergency_contact_name', sortable: false },
           { text: 'Hubungan dengan kontak darurat', value: 'relationship_emergency_contacts' },
           { text: 'Nomor kontak darurat', value: 'emergency_contact_number' },
+          { text: 'Keterangan', value: 'note' },
           { text: 'Aksi', width: 200, value: 'actions' },
         ],
       }

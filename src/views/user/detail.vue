@@ -62,13 +62,21 @@
     name: 'DetailUser',
     data () {
       return {
-        formPersonal: {},
+        formPersonal: {
+          account_bank: {},
+        },
         formOtherPersonal: {},
       }
     },
     async mounted () {
       const respUser = await this.$store.dispatch('user/detailUser', this.$route.params.id)
       this.formPersonal = respUser
+
+      if (respUser.account_bank === null) {
+        this.formPersonal.account_bank = {}
+      }
+
+      if (respUser.account_identity.length === 0) this.formPersonal.account_identity.push({ type_identity: '', number: '' })
 
       const respOtherInformation = await this.$store.dispatch('userOtherInformation/getUserOtherInformation', this.$route.params.id)
       this.formOtherPersonal = respOtherInformation || {}

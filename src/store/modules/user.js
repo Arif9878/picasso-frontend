@@ -192,10 +192,18 @@ export const actions = {
             resolve()
         })
     },
-    async updateProfile ({ commit }, data) {
+    async updatePhotoProfile ({ commit }, data) {
         const headers = { 'Content-Type': 'multipart/form-data' }
         try {
             const response = await requestServer('/user/photo/profile/', 'PUT', data, headers)
+            return response
+        } catch (error) {
+            return error.response
+        }
+    },
+    async identityNumberType ({ commit }, id) {
+        try {
+            const response = await requestServer('/user/identity-number/type/', 'GET')
             return response
         } catch (error) {
             return error.response

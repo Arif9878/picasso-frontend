@@ -57,8 +57,40 @@
                 name="Hubungan Dengan Kontak Darurat"
                 rules="required"
               >
-                <v-text-field
+                <v-select
                   v-model="formBody.relationship_emergency_contacts"
+                  :items="listEmergencyContactType"
+                  :error-messages="errors"
+                  menu-props="auto"
+                  solo
+                />
+              </validation-provider>
+            </v-col>
+          </v-row>
+          <v-row
+            v-if="formBody.relationship_emergency_contacts === 'Lainnya'"
+          >
+            <v-col
+              cols="12"
+              md="4"
+              sm="12"
+              :class="{'center py-4': $vuetify.breakpoint.smAndDown}"
+            >
+              <label class="required">Keterangan</label>
+            </v-col>
+            <v-col
+              cols="12"
+              md="8"
+              sm="12"
+              :class="{'py-0 pb-3': $vuetify.breakpoint.smAndDown}"
+            >
+              <validation-provider
+                v-slot="{ errors }"
+                name="Keterangan"
+                rules="required"
+              >
+                <v-text-field
+                  v-model="formBody.note"
                   :error-messages="errors"
                   solo
                 />
@@ -83,7 +115,7 @@
               <validation-provider
                 v-slot="{ errors }"
                 name="Nomor Kontak Darurat"
-                rules="required"
+                rules="required|numeric"
               >
                 <v-text-field
                   v-model="formBody.emergency_contact_number"
@@ -129,6 +161,7 @@
 </template>
 <script>
   import { ValidationObserver, ValidationProvider } from 'vee-validate'
+  import { listEmergencyContactType } from '@/utils/constantVariable'
   export default {
     name: 'DialogFormEmergencyContact',
     components: {
@@ -153,6 +186,7 @@
       return {
         show: this.showDialog,
         isLoading: false,
+        listEmergencyContactType,
       }
     },
     computed: {
