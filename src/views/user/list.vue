@@ -10,7 +10,7 @@
     </v-row>
     <costume-card
       icon="mdi-clipboard-text"
-      title="Non ASN"
+      title="Users"
       class="px-5 py-0"
       :on-add="handleAdd"
     >
