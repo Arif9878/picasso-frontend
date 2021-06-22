@@ -30,7 +30,7 @@
         :on-next="onNext"
       />
     </costume-card>
-    <dialog-form-user
+    <dialog-create-form-user
       :show-dialog="showForm"
       :show.sync="showForm"
       :refresh-page.sync="isRefresh"
@@ -157,9 +157,8 @@
         this.showForm = true
       },
       handleUpdate (item) {
-        this.showForm = true
-        this.form = item
-        this.isEdit = true
+        const path = `/user/detail/${item.id}`
+        if (this.$route.path !== path) this.$router.push(path)
       },
       handlePassword (item) {
         this.showChangePassword = true

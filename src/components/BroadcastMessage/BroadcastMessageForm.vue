@@ -125,7 +125,7 @@
       }
     },
     computed: {
-      dialshowgPopup: {
+      dialogShowPopUp: {
         get () {
           return this.showDialog
         },

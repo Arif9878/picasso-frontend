@@ -14,8 +14,45 @@ export const holidayType = [
 ]
 
 export const managerCategory = [
+    'ASN',
     'Gugus Tugas',
     'Tim Pengelola Layanan Digital',
     'Tenaga Teknis',
     'Tim DPRD Jawa Barat',
+]
+
+export const listEducationLevel = [
+    'D3',
+    'D4',
+    'S1',
+    'S2',
+    'S3',
+]
+
+export const listReligion = [
+    'Islam',
+    'Kristen Protestan',
+    'Kristen Katolik',
+    'Hindu',
+    'Buddha',
+    'Konghucu',
+]
+
+export const listBloodType = [
+    'O−',
+    'O+',
+    'A−',
+    'A+',
+    'B−',
+    'B+',
+    'AB−',
+    'AB+',
+]
+
+export const listEmergencyContactType = [
+    'Orang tua',
+    'Saudara',
+    'Suami',
+    'Istri',
+    'Lainnya',
 ]

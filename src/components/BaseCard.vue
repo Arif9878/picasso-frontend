@@ -1,39 +1,17 @@
+
 <template>
   <v-card
     v-bind="$attrs"
     :class="classes"
     class="v-card--material pa-3"
   >
-    <v-avatar
-      v-if="onAdd"
-      color="primary"
-      size="55"
-      class="float-right mr-8 flex-wrap"
-      style="margin: -30px auto 0;border-radius: 50%;"
-      @click="onAdd"
-    >
-      <v-icon dark>
-        mdi-plus
-      </v-icon>
-    </v-avatar>
-    <v-avatar
-      v-if="onBack"
-      color="primary"
-      size="55"
-      class="float-right mr-8 flex-wrap white--text"
-      style="margin: -30px auto 0;border-radius: 50%;"
-      @click="onBack"
-    >
-      <v-icon dark>
-        mdi-keyboard-backspace
-      </v-icon>
-    </v-avatar>
     <div class="d-flex grow flex-wrap">
       <v-avatar
         v-if="avatar"
         size="128"
         class="mx-auto v-card--material__avatar elevation-6"
         color="grey"
+        @click="updateProfile"
       >
         <v-img :src="avatar" />
       </v-avatar>
@@ -102,6 +80,7 @@
 
     <template v-if="$slots.actions">
       <v-divider class="mt-2" />
+
       <v-card-actions class="pb-0">
         <slot name="actions" />
       </v-card-actions>
@@ -111,7 +90,7 @@
 
 <script>
   export default {
-    name: 'CostumeCard',
+    name: 'BaseCard',
     props: {
       avatar: {
         type: String,
@@ -137,16 +116,11 @@
         type: String,
         default: '',
       },
-      onAdd: {
-        type: Function,
-        default: null,
-      },
-      onBack: {
+      updateProfile: {
         type: Function,
         default: null,
       },
     },
-
     computed: {
       classes () {
         return {
@@ -169,10 +143,9 @@
       position: relative
       top: -64px
       margin-bottom: -32px
-
     &__heading
       position: relative
       top: -40px
       transition: .3s ease
-      z-index: 0
+      z-index: 1
 </style>
