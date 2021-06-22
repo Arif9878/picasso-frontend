@@ -98,6 +98,7 @@
       },
       handleAdd () {
         this.isEdit = false
+        this.form = {}
         this.showForm = true
       },
       handleUpdate (item) {

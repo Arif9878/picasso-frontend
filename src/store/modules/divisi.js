@@ -4,7 +4,15 @@ import requestServer from '@/api'
 export const actions = {
     async getListDivisi ({ commit }, params) {
         try {
-            const responseDivisi = await requestServer('/satuan-kerja/list', 'GET', params)
+            const responseDivisi = await requestServer('/satuan-kerja/', 'GET', params)
+            return responseDivisi
+        } catch (error) {
+            return error.response
+        }
+    },
+    async getListDivisiOneUnit ({ commit }, params) {
+        try {
+            const responseDivisi = await requestServer('/satuan-kerja/one-unit', 'GET')
             return responseDivisi
         } catch (error) {
             return error.response
@@ -12,7 +20,7 @@ export const actions = {
     },
     async createDivisi ({ commit }, data) {
         try {
-            const response = await requestServer('/satuan-kerja/create', 'POST', data)
+            const response = await requestServer('/satuan-kerja/', 'POST', data)
             return response
         } catch (error) {
             return error.response
@@ -20,7 +28,7 @@ export const actions = {
     },
     async updateDivisi ({ commit }, data) {
         try {
-            const response = await requestServer(`/satuan-kerja/update/${data.id}`, 'PUT', data.body)
+            const response = await requestServer(`/satuan-kerja/${data.id}`, 'PUT', data.body)
             return response
         } catch (error) {
             return error.response
@@ -28,7 +36,7 @@ export const actions = {
     },
     async deleteDivisi ({ commit }, id) {
         try {
-            const response = await requestServer(`/satuan-kerja/delete/${id}`, 'DELETE')
+            const response = await requestServer(`/satuan-kerja/${id}`, 'DELETE')
             return response
         } catch (error) {
             return error.response
