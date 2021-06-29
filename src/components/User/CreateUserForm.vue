@@ -27,7 +27,7 @@
               <validation-provider
                 v-slot="{ errors }"
                 name="Email"
-                rules="required"
+                rules="required|email"
               >
                 <v-text-field
                   v-model="formBody.email"
@@ -299,6 +299,7 @@
                   :items="managerCategory"
                   :error-messages="errors"
                   menu-props="auto"
+                  clearable
                   solo
                 />
               </validation-provider>
@@ -451,7 +452,6 @@
       'formBody.id_divisi' (value) {
         if (value === undefined) return
         if (value) {
-          this.getListJabatanByDivisi(value)
           this.formBody.divisiObject = value
         }
       },

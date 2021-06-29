@@ -35,6 +35,7 @@
                   item-value="id"
                   item-text="name_satuan_kerja"
                   menu-props="auto"
+                  clearable
                   solo
                 />
               </validation-provider>

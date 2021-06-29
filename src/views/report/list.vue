@@ -180,7 +180,6 @@
           manager_category: null,
           page_size: 100,
         },
-        listQueryDivisi: {},
         tableHeader: [
           { text: 'Nama Lengkap', value: 'fullname' },
           { text: 'Divisi', value: 'divisi' },
@@ -209,9 +208,11 @@
         this.handleSearchUser()
       },
       async '$route.params' (value) {
-        this.listQueryDivisi.divisi = ''
         if (value.koorMonthly === 'koorMonthly') {
-          this.listQueryDivisi.search = this.detailUser.divisi
+          this.listDivisiTab = [{
+            id: this.detailUser.id_divisi,
+            name_satuan_kerja: this.detailUser.divisi,
+          }]
         }
         await this.handleGetDivisi()
       },
@@ -230,10 +231,14 @@
       },
       async handleGetDivisi () {
         if (this.$route.params.koorMonthly === 'koorMonthly') {
-          this.listQueryDivisi.search = this.detailUser.divisi
+          this.listDivisiTab = [{
+            id: this.detailUser.id_divisi,
+            name_satuan_kerja: this.detailUser.divisi,
+          }]
+        } else {
+          const response = await this.$store.dispatch('divisi/getListDivisiOneUnit')
+          this.listDivisiTab = response.results
         }
-        const response = await this.$store.dispatch('divisi/getListDivisi', this.listQueryDivisi)
-        this.listDivisiTab = response.results
       },
       async handleSearchUser () {
         this.isLoading = true

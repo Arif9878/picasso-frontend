@@ -26,7 +26,7 @@
             >
               <validation-provider
                 v-slot="{ errors }"
-                name="Induk Divisi"
+                name="Divisi"
                 rules="required"
               >
                 <v-select

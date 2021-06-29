@@ -27,7 +27,7 @@
               <validation-provider
                 v-slot="{ errors }"
                 name="Email"
-                rules="required"
+                rules="required|email"
               >
                 <v-text-field
                   v-model="formBody.email"
@@ -619,6 +619,7 @@
                   :items="managerCategory"
                   :error-messages="errors"
                   menu-props="auto"
+                  clearable
                   solo
                 />
               </validation-provider>
@@ -814,7 +815,7 @@
                 name="Tanggal Pengunduran Diri"
               >
                 <input-date-picker
-                  :format-date="formatDateTime"
+                  :format-date="'YYYY-MM-DD HH:MM:SS'"
                   :date-value="formBody.resign_date"
                   :value-date.sync="formBody.resign_date"
                   :required="formBody.is_active ? false:true"
@@ -918,7 +919,6 @@
       'formBody.id_divisi' (value) {
         if (value === undefined) return
         if (value) {
-          this.getListJabatanByDivisi(value)
           this.formBody.divisiObject = value
         }
       },
@@ -930,9 +930,10 @@
       },
     },
     async mounted () {
-      await this.handleGetListDivisi()
       await this.getListMenuType()
       await this.getListIdentityNumberType()
+      await this.handleGetListDivisi()
+      if (this.formBody.id_divisi) await this.getListJabatanByDivisi(this.formBody.id_divisi)
     },
     methods: {
       async handleGetListDivisi () {
