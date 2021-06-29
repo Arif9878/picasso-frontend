@@ -13,6 +13,7 @@
         :list="list"
         :query="listQuery"
         :limit="listQuery.limit"
+        :is-loading="isLoading"
         :table-headers="tableHeader"
         :on-delete-click="handleDelete"
         :on-update-click="handleUpdate"
@@ -73,6 +74,7 @@
         isEdit: false,
         form: {},
         showDelete: false,
+        isLoading: false,
         isRefresh: false,
         idData: null,
         listQuery: {
@@ -112,6 +114,8 @@
     },
     methods: {
       async handleSearch (idJabatan) {
+        this.isLoading = true
+        this.list = []
         this.listQuery.jabatan_id = idJabatan
         this.form.jabatan_id = idJabatan
         const response = await this.$store.dispatch('tupoksiJabatan/getListTupoksiJabatan', this.listQuery)
@@ -119,6 +123,7 @@
         if (response.results) {
           this.list = response.results
         }
+        this.isLoading = false
       },
       handleAdd () {
         this.form.jabatan_id = this.detailJabatan.id

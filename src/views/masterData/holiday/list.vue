@@ -63,6 +63,7 @@
               :list="list"
               :query="listQuery"
               :limit="listQuery.limit"
+              :is-loading="isLoading"
               :table-headers="tableHeader"
               :on-delete-click="handleDelete"
               :on-update-click="handleUpdate"
@@ -104,6 +105,7 @@
       showForm: false,
       showDelete: false,
       isRefresh: false,
+      isLoading: false,
       isEdit: false,
       idData: null,
       form: {},
@@ -147,6 +149,9 @@
         this.showForm = true
         this.isEdit = true
       },
+      'form' (value) {
+        console.log(value)
+      },
     },
     async mounted () {
       const d = new Date()
@@ -155,12 +160,14 @@
     },
     methods: {
       async handleSearch () {
+        this.isLoading = true
         if (this.tab === 'tab-1') {
           this.listQuery.limit = 100
         }
         const response = await this.$store.dispatch('holiday/getListHolidayDate', this.listQuery)
         this.totalPage = response._meta.totalPage
         this.list = []
+        this.isLoading = false
         if (response.results) {
           this.list = response.results
         }
@@ -176,6 +183,7 @@
         this.showForm = true
       },
       handleUpdate (item) {
+        console.log(item)
         this.showForm = true
         this.form = item
         this.isEdit = true
