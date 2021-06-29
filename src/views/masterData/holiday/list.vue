@@ -149,9 +149,6 @@
         this.showForm = true
         this.isEdit = true
       },
-      'form' (value) {
-        console.log(value)
-      },
     },
     async mounted () {
       const d = new Date()
@@ -183,7 +180,6 @@
         this.showForm = true
       },
       handleUpdate (item) {
-        console.log(item)
         this.showForm = true
         this.form = item
         this.isEdit = true
