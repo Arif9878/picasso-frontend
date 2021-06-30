@@ -85,9 +85,16 @@
       title="Laporan"
       class="px-5 py-0"
     >
+      <v-progress-linear
+        v-if="listDivisiTab.length === 0"
+        indeterminate
+        color="green"
+      />
       <v-tabs
+        v-else
         v-model="tab"
         background-color="primary"
+        :loading="isLoading"
         dark
       >
         <v-tab
@@ -108,6 +115,7 @@
               :list="listUser"
               :query="listQueryUser"
               :limit="listQueryUser.page_size"
+              :is-loading="isLoading"
               :table-headers="tableHeader"
               :on-preview-pdf-click="handlePreviewPdf"
               :on-download-pdf-click="handleDownloadPdf"
@@ -118,8 +126,8 @@
       </v-tabs-items>
     </costume-card>
     <loading-bar
-      :loading="isLoading"
-      :loading-modal.sync="isLoading"
+      :loading="isLoadingBar"
+      :loading-modal.sync="isLoadingBar"
     />
     <dialog-download-excel
       :show-dialog="isDownloadExecl"
@@ -154,6 +162,7 @@
         listDivisiTab: [],
         tab: null,
         isLoading: false,
+        isLoadingBar: false,
         formatDate: 'DD-MM-YYYY',
         isDownloadExecl: false,
         isPreviewPdf: false,
@@ -232,12 +241,15 @@
         }
       },
       async handleSearchUser () {
+        this.isLoading = true
+        this.listUser = []
         const response = await this.$store.dispatch('report/getListReportByUser', this.listQueryUser)
         if (!response) return
         if (this.listQueryUser.end_date.length > 1 && this.tableHeader.length === 6) {
           this.tableHeader.push({ text: 'Keterisian Laporan', value: 'precentage_logbook_data_filling' })
         }
         this.listUser = response
+        this.isLoading = false
       },
       async onSearch () {
         await this.handleSearchUser()
@@ -254,10 +266,10 @@
         }
       },
       async handleDownloadPdf (item) {
-        this.isLoading = true
+        this.isLoadingBar = true
         if ((this.listQueryUser.start_date.length < 1) || (this.listQueryUser.end_date.length < 1)) {
           this.$store.dispatch('toast/errorToast', 'Masukkan rentang laporan yang akan di print')
-          this.isLoading = false
+          this.isLoadingBar = false
           return
         }
         const query = {
@@ -268,16 +280,16 @@
           },
         }
         const response = await this.$store.dispatch('report/downloadReportPdf', query)
-        if (response) this.isLoading = false
+        if (response) this.isLoadingBar = false
         const year = new Date().getFullYear()
         const fileName = `LaporanPLD_${year}_${item.fullname.split(' ').join('_')}_${item.jabatan.split(' ').join('_')}.pdf`
         FileSaver.saveAs(response, fileName)
       },
       async handlePreviewPdf (item) {
-        this.isLoading = true
+        this.isLoadingBar = true
         if ((this.listQueryUser.start_date.length < 1) || (this.listQueryUser.end_date.length < 1)) {
           this.$store.dispatch('toast/errorToast', 'Masukkan rentang laporan yang akan di print')
-          this.isLoading = false
+          this.isLoadingBar = false
           return
         }
         const query = {
@@ -289,7 +301,7 @@
         }
         const response = await this.$store.dispatch('report/viewReportPdf', query)
         if (response) {
-          this.isLoading = false
+          this.isLoadingBar = false
           this.isPreviewPdf = true
           this.previewPdf = response
         }
@@ -306,10 +318,10 @@
         }
       },
       async handleDownloadExcelDivisi (idDivisi, nameDivisi) {
-        this.isLoading = true
+        this.isLoadingBar = true
         if ((this.listQueryUser.start_date.length < 1) || (this.listQueryUser.end_date.length < 1)) {
           this.$store.dispatch('toast/errorToast', 'Masukkan rentang laporan yang akan di print')
-          this.isLoading = false
+          this.isLoadingBar = false
           return
         }
         const params = {
@@ -320,15 +332,15 @@
         }
         const response = await this.$store.dispatch('report/exportExcelByCategory', params)
         this.onReset()
-        if (response) this.isLoading = false
+        if (response) this.isLoadingBar = false
         const fileName = `${nameDivisi.split(' ').join('_')}.xlsx`
         FileSaver.saveAs(response, fileName)
       },
       async handleDownloadExcelManagerCategory (managerCategory) {
-        this.isLoading = true
+        this.isLoadingBar = true
         if ((this.listQueryUser.start_date.length < 1) || (this.listQueryUser.end_date.length < 1)) {
           this.$store.dispatch('toast/errorToast', 'Masukkan rentang laporan yang akan di print')
-          this.isLoading = false
+          this.isLoadingBar = false
           return
         }
         const params = {
@@ -339,7 +351,7 @@
         }
         const response = await this.$store.dispatch('report/exportExcelByCategory', params)
         this.onReset()
-        if (response) this.isLoading = false
+        if (response) this.isLoadingBar = false
         const fileName = `${managerCategory.split(' ').join('_')}.xlsx`
         FileSaver.saveAs(response, fileName)
       },

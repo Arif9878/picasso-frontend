@@ -1,18 +1,9 @@
 import requestServer from '@/api'
 
 export const actions = {
-    async sendNotificationAll ({ commit }, data) {
+    async sendNotification ({ commit }, body) {
         try {
-            const response = await requestServer('/notification/send/all/', 'POST', data)
-            return response
-        } catch (error) {
-            return error.response
-        }
-    },
-    async sendNotificationGroup ({ commit }, data) {
-        const { id, body } = data
-        try {
-            const response = await requestServer(`/notification/send/group/${id}`, 'POST', body)
+            const response = await requestServer('/notification/message/', 'POST', body)
             return response
         } catch (error) {
             return error.response
@@ -20,7 +11,7 @@ export const actions = {
     },
     async getListNotificationMessage ({ commit }, params) {
         try {
-            const response = await requestServer('/notification-message/list', 'GET', params)
+            const response = await requestServer('/notification/message/', 'GET', params)
             return response
         } catch (error) {
             return error.response
@@ -28,7 +19,7 @@ export const actions = {
     },
     async detailNotificationMessage ({ commit }, id) {
         try {
-            const response = await requestServer(`/notification-message/detail/${id}`, 'GET')
+            const response = await requestServer(`/notification/message/${id}`, 'GET')
             return response
         } catch (error) {
             return error.response
@@ -36,7 +27,7 @@ export const actions = {
     },
     async deleteNotificationMessage ({ commit }, id) {
         try {
-            const response = await requestServer(`/notification-message/delete/${id}`, 'DELETE')
+            const response = await requestServer(`/notification/message/${id}`, 'DELETE')
             return response
         } catch (error) {
             return error.response

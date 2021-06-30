@@ -3,7 +3,7 @@ import requestServer from '@/api'
 export const actions = {
     async getListHolidayDate ({ commit }, params) {
         try {
-            const response = await requestServer('/holiday-date/list', 'GET', params)
+            const response = await requestServer('/holiday-date/', 'GET', params)
             return response
         } catch (error) {
             return error.response
@@ -11,7 +11,7 @@ export const actions = {
     },
     async createHolidayDate ({ commit }, data) {
         try {
-            const response = await requestServer('/holiday-date/create', 'POST', data)
+            const response = await requestServer('/holiday-date/', 'POST', data)
             return response
         } catch (error) {
             return error.response
@@ -19,7 +19,7 @@ export const actions = {
     },
     async updateHolidayDate ({ commit }, data) {
         try {
-            const response = await requestServer(`/holiday-date/update/${data.id}`, 'PUT', data.body)
+            const response = await requestServer(`/holiday-date/${data.id}`, 'PUT', data.body)
             return response
         } catch (error) {
             return error.response
@@ -27,7 +27,7 @@ export const actions = {
     },
     async deleteHolidayDate ({ commit }, id) {
         try {
-            const response = await requestServer(`/holiday-date/delete/${id}`, 'DELETE')
+            const response = await requestServer(`/holiday-date/${id}`, 'DELETE')
             return response
         } catch (error) {
             return error.response

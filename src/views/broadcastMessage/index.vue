@@ -10,6 +10,7 @@
         :list="list"
         :query="listQuery"
         :limit="listQuery.limit"
+        :is-loading="isLoading"
         :table-headers="tableHeader"
         :on-delete-click="handleDelete"
       />
@@ -47,6 +48,7 @@
         totalPage: 0,
         showForm: false,
         isEdit: false,
+        isLoading: false,
         isRefresh: false,
         showDelete: false,
         idData: null,
@@ -83,6 +85,7 @@
     },
     methods: {
       async handleSearch () {
+        this.isLoading = true
         const response = await this.$store.dispatch('broadcastMessage/getListNotificationMessage', this.listQuery)
         this.totalPage = response._meta.totalPage
         if (response.results) {
@@ -90,6 +93,7 @@
         } else {
           this.list = []
         }
+        this.isLoading = false
       },
       async onNext () {
         await this.handleSearch()

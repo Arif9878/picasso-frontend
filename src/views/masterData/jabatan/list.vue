@@ -18,6 +18,7 @@
         :list="list"
         :query="listQuery"
         :limit="listQuery.limit"
+        :is-loading="isLoading"
         :table-headers="tableHeader"
         :on-delete-click="handleDelete"
         :on-update-click="handleUpdate"
@@ -62,6 +63,7 @@
       totalPage: 0,
       showForm: false,
       showDelete: false,
+      isLoading: false,
       isRefresh: false,
       isEdit: false,
       showDialogTupoksi: false,
@@ -97,11 +99,13 @@
     },
     methods: {
       async handleSearch () {
+        this.isLoading = true
         const response = await this.$store.dispatch('jabatan/getListJabatan', this.listQuery)
         this.totalPage = response._meta.totalPage
         if (response.results) {
           this.list = response.results
         }
+        this.isLoading = false
       },
       async onNext () {
         await this.handleSearch()
