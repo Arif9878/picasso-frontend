@@ -54,6 +54,7 @@
               <v-btn
                 color="primary"
                 block
+                :loading="isLoading"
                 @click="handleChangePassword"
               >
                 Simpan
@@ -87,6 +88,7 @@
     data () {
       return {
         show: this.showDialog,
+        isLoading: false,
         typePassword: String,
         typeRepeatPassword: String,
         passwordRules: [
@@ -128,7 +130,7 @@
           body: this.formBody,
         }
         if (this.$refs.form.validate()) {
-          this.loading = true
+          this.isLoading = true
           this.$store.dispatch('user/changePasswordUser', data)
             .then(async (response) => {
               this.$store.dispatch('toast/successToast', response.message)
@@ -139,6 +141,7 @@
             .catch((e) => {
               this.$store.dispatch('toast/errorToast', 'Ganti password gagal')
             })
+          this.isLoading = false
         }
       },
     },

@@ -40,6 +40,7 @@
               <v-btn
                 color="#16A75C"
                 class="btn solid"
+                :loading="isLoading"
                 @click="handleLogin"
               >
                 Login
@@ -82,7 +83,7 @@
       return {
         valid: true,
         typePassword: String,
-        loading: false,
+        isLoading: false,
         loginForm: {
           username: '',
           password: '',
@@ -99,14 +100,14 @@
     methods: {
       handleLogin () {
         if (this.$refs.form.validate()) {
-          this.loading = true
+          this.isLoading = true
           this.$store.dispatch('user/login', this.loginForm)
             .then(async (response) => {
               await this.$router.push({ path: '/' })
-              this.loading = false
+              this.isLoading = false
             })
             .catch((e) => {
-              this.loading = false
+              this.isLoading = false
               // this.$refs.form.reset()
             })
         }
@@ -120,10 +121,10 @@
         }
         this.$store.dispatch('user/loginSocialOauth', data).then(() => {
           this.$router.push({ path: this.redirect || '/', query: this.otherQuery })
-          this.loading = false
+          this.isLoading = false
         }).catch(() => {
           this.$store.dispatch('toast/errorToast', 'Login dengan google gagal')
-          this.loading = false
+          this.isLoading = false
         })
       },
       onSignInError: function () {

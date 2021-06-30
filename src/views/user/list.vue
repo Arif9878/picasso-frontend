@@ -10,7 +10,7 @@
     </v-row>
     <costume-card
       icon="mdi-clipboard-text"
-      title="Non ASN"
+      title="Users"
       class="px-5 py-0"
       :on-add="handleAdd"
     >
@@ -18,6 +18,7 @@
         :list="list"
         :query="listQuery"
         :limit="listQuery.page_size"
+        :is-loading="isLoading"
         :table-headers="tableHeader"
         :on-delete-click="handleDelete"
         :on-update-click="handleUpdate"
@@ -67,6 +68,7 @@
         totalPage: 0,
         showForm: false,
         isEdit: false,
+        isLoading: false,
         isRefresh: false,
         showDelete: false,
         showChangePassword: false,
@@ -128,6 +130,7 @@
     },
     methods: {
       async handleSearch () {
+        this.isLoading = true
         this.listQuery.struktural = ''
         if (this.$route.params.asn === 'asn') {
           this.listQuery.struktural = true
@@ -142,6 +145,7 @@
         if (response.results) {
           this.list = response.results
         }
+        this.isLoading = false
       },
       async onNext () {
         await this.handleSearch()

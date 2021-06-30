@@ -147,6 +147,10 @@
     },
     methods: {
       async handleChangePurpose (item) {
+        this.formBody.group_id = null
+        if (item.id !== 'all') {
+          this.formBody.group_id = item.id
+        }
         this.formBody.purpose_message = item.name_satuan_kerja
       },
       async handleGetListDivisi () {
@@ -163,19 +167,12 @@
         if (!valid) {
           return
         }
-        if (this.formBody.broadcaseObject.id === 'all') {
-          delete this.formBody.broadcaseObject
-          await this.$store.dispatch('broadcastMessage/sendNotificationAll', this.formBody)
-        } else {
-          const data = {
-            id: this.formBody.broadcaseObject.id,
-            body: {
-              purpose_message: this.formBody.purpose_message,
-              message: this.formBody.message,
-            },
-          }
-          await this.$store.dispatch('broadcastMessage/sendNotificationGroup', data)
+        const data = {
+          group_id: this.formBody.group_id,
+          purpose_message: this.formBody.purpose_message,
+          message: this.formBody.message,
         }
+        await this.$store.dispatch('broadcastMessage/sendNotification', data)
         this.$emit('update:show', false)
         this.$emit('update:refreshPage', true)
         this.$emit('update:form', {})

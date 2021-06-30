@@ -26,7 +26,7 @@
             >
               <validation-provider
                 v-slot="{ errors }"
-                name="Induk Divisi"
+                name="Divisi"
                 rules="required"
               >
                 <v-select
@@ -110,6 +110,7 @@
               <v-btn
                 color="primary"
                 block
+                :loading="isLoading"
                 @click="handleSave"
               >
                 Simpan
@@ -146,6 +147,7 @@
     data () {
       return {
         show: this.showDialog,
+        isLoading: false,
         divisiList: [],
       }
     },
@@ -172,6 +174,7 @@
       },
       async handleSave () {
         const valid = await this.$refs.observer.validate()
+        this.isLoading = true
         if (!valid) {
           return
         }
@@ -187,6 +190,7 @@
         this.$emit('update:show', false)
         this.$emit('update:refreshPage', true)
         this.$emit('update:form', {})
+        this.isLoading = false
       },
     },
   }
