@@ -424,8 +424,8 @@
         typeMenuList: [],
         managerCategory,
         isLoading: false,
-        formatDate: 'YYYY/MM/DD',
-        formatDateTime: 'YYYY/MM/DD HH:MM:SS',
+        formatDate: 'YYYY-MM-DD',
+        formatDateTime: 'YYYY-MM-DD HH:MM:SS',
         allowSpaces: [
           v => (v || '').indexOf(' ') < 0 || 'No spaces are allowed',
         ],
